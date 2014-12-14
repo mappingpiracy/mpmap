@@ -1,0 +1,20 @@
+idea
+run
+debug
+help
+reload
+compile
+run
+debug run
+exit
+help
+clean
+help
+run
+compile
+-jvm-debug 9999 run
+compile
+run
+clean
+help
+compile

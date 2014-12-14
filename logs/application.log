@@ -1,0 +1,63 @@
+2014-12-14 18:09:25,973 - [INFO] - from play in pool-4-thread-4 
+Listening for HTTP on /0:0:0:0:0:0:0:0:9000
+
+2014-12-14 18:09:43,363 - [INFO] - from play in play-internal-execution-context-1 
+database [default] connected at jdbc:postgresql://localhost:5432/mpmap_dev
+
+2014-12-14 18:09:43,467 - [INFO] - from play in play-internal-execution-context-1 
+Application started (Dev)
+
+2014-12-14 18:11:34,527 - [INFO] - from play in play-internal-execution-context-1 
+database [default] connected at jdbc:postgresql://localhost:5432/mpmap_dev
+
+2014-12-14 18:11:34,546 - [INFO] - from play in play-internal-execution-context-1 
+Application started (Dev)
+
+2014-12-14 18:13:15,858 - [INFO] - from play in play-internal-execution-context-1 
+database [default] connected at jdbc:postgresql://localhost:5432/mpmap_dev
+
+2014-12-14 18:13:15,872 - [INFO] - from play in play-internal-execution-context-1 
+Application started (Dev)
+
+2014-12-14 18:20:29,775 - [INFO] - from play in play-internal-execution-context-1 
+database [default] connected at jdbc:postgresql://localhost:5432/mpmap_dev
+
+2014-12-14 18:20:29,790 - [INFO] - from play in play-internal-execution-context-1 
+Application started (Dev)
+
+2014-12-14 18:21:02,680 - [INFO] - from play in play-internal-execution-context-1 
+database [default] connected at jdbc:postgresql://localhost:5432/mpmap_dev
+
+2014-12-14 18:21:02,693 - [INFO] - from play in play-internal-execution-context-1 
+Application started (Dev)
+
+2014-12-14 18:21:29,496 - [INFO] - from play in play-internal-execution-context-1 
+database [default] connected at jdbc:postgresql://localhost:5432/mpmap_dev
+
+2014-12-14 18:21:29,504 - [INFO] - from play in play-internal-execution-context-1 
+Application started (Dev)
+
+2014-12-14 18:22:10,066 - [INFO] - from play in play-internal-execution-context-5 
+database [default] connected at jdbc:postgresql://localhost:5432/mpmap_dev
+
+2014-12-14 18:22:10,081 - [INFO] - from play in play-internal-execution-context-5 
+Application started (Dev)
+
+2014-12-14 18:24:33,626 - [INFO] - from play in play-internal-execution-context-5 
+database [default] connected at jdbc:postgresql://localhost:5432/mpmap_dev
+
+2014-12-14 18:24:33,638 - [INFO] - from play in play-internal-execution-context-5 
+Application started (Dev)
+
+2014-12-14 18:25:08,642 - [INFO] - from play in play-internal-execution-context-5 
+database [default] connected at jdbc:postgresql://localhost:5432/mpmap_dev
+
+2014-12-14 18:25:08,656 - [INFO] - from play in play-internal-execution-context-5 
+Application started (Dev)
+
+2014-12-14 18:26:01,203 - [INFO] - from play in play-internal-execution-context-5 
+database [default] connected at jdbc:postgresql://localhost:5432/mpmap_dev
+
+2014-12-14 18:26:01,219 - [INFO] - from play in play-internal-execution-context-5 
+Application started (Dev)
+
