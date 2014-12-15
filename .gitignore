@@ -3,6 +3,7 @@
 .idea_modules
 .idea_modules/*
 .settings
+projectFilesBackup*
 logs
 project/project
 project/target

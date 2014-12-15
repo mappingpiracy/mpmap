@@ -85,13 +85,6 @@ function initializeMap() {
 
 }
 
-
-function onEachFeature(feature, layer) {
-    popupOptions = {maxWidth: 200};
-    popupContent = JSON.stringify(feature);
-    layer.bindPopup(popupContent, popupOptions);
-}
-
 /*
  * populateEvents()
  * call updateEventFilters(), removes all of the current events from the map,
@@ -118,12 +111,46 @@ function populateEvents() {
             console.log(response);
             events = response;
             eventLayer = L.geoJson(events, {
-                 onEachFeature: onEachFeature
+                 onEachFeature: createPopup,
+                 pointToLayer: createCustomMarker,
              }).addTo(map);
         }
     });
 
 }
+
+/*
+    createPopup
+    initializes the leaflet popup for the passed feature
+*/
+function createPopup(feature, layer) {
+    popupOptions = {maxWidth: 300};
+
+    var occurredOnDate = feature.properties["occurredOnDate"];
+    //var occurredOnTime = feature.properties["occurredOnTime"];
+    var popupContent;
+    popupContent = '<strong>Event Information</strong>';
+    popupContent += '<p>Id: ' + feature.properties['id'] + '</p>';
+    popupContent += '<p>Date: ' + feature.properties['occurredOnDate'] + '</p>';
+
+    layer.bindPopup(popupContent, popupOptions);
+}
+
+/*
+    createCustomMarker
+    creates a marker for the passed feature
+*/
+function createCustomMarker(feature, coordinates) {
+    return L.circleMarker(coordinates, {
+        radius: 8,
+        fillColor: "#ff7800",
+        color: "#000",
+        weight: 1,
+        opacity: 1,
+        fillOpacity: 0.8
+    });
+}
+
 
 /*
  * exportEvents()

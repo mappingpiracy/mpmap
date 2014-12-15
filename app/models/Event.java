@@ -87,7 +87,8 @@ public class Event {
         geometry.put("coordinates", coordinates);
 
         properties.put("id", this.id);
-        properties.put("occurredOn", this.occurredOn.toString());
+        properties.put("occurredOnDate", this.occurredOn.getMonthOfYear() + "/" + this.occurredOn.getDayOfMonth() + "/" + this.occurredOn.getYear());
+        properties.put("occurredOnTime", this.occurredOn.getHourOfDay() + ":" + this.occurredOn.getMinuteOfHour());
 
         feature.put("geometry", geometry);
         feature.put("properties", properties);
