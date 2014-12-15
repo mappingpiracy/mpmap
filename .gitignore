@@ -3,3 +3,9 @@
 .idea_modules
 .idea_modules/*
 .settings
+logs
+project/project
+project/target
+target
+tmp
+*~

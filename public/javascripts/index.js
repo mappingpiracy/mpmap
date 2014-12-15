@@ -22,7 +22,6 @@ $(document).ready(function() {
  * Event handlers
  */
 $('#filter-events-update').click(function(){
-    alert(JSON.stringify(eventFilters));
     populateEvents();
 });
 
@@ -86,6 +85,13 @@ function initializeMap() {
 
 }
 
+
+function onEachFeature(feature, layer) {
+    popupOptions = {maxWidth: 200};
+    popupContent = JSON.stringify(feature);
+    layer.bindPopup(popupContent, popupOptions);
+}
+
 /*
  * populateEvents()
  * call updateEventFilters(), removes all of the current events from the map,
@@ -107,12 +113,13 @@ function populateEvents() {
         dataType: 'json',
         data: JSON.stringify(eventFilters),
         url: '/mapdata/events',
-        success: function(json) {
+        success: function(response) {
             console.log('/mapdata/events POST successful.');
-            console.log(json);
-            events = json;
-            eventLayer = L.geoJson().addTo(map);
-            eventLayer.addData(events);
+            console.log(response);
+            events = response;
+            eventLayer = L.geoJson(events, {
+                 onEachFeature: onEachFeature
+             }).addTo(map);
         }
     });
 
