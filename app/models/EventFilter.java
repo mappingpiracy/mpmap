@@ -11,17 +11,17 @@ import java.util.List;
  * Created by alex on 12/14/14.
  */
 public class EventFilter {
-    public DateTime beginDate;
-    public DateTime endDate;
+    public String beginDate;
+    public String endDate;
     public List<Integer> territorialWaterStatus;
     public List<Integer> closestCoastalState;
     public List<Integer> vesselCountry;
-    private DateTimeFormatter dateTimeFormatter = DateTimeFormat.forPattern("dd/MM/yyyy");
+    private DateTimeFormatter dateTimeFormatter = DateTimeFormat.forPattern("yyyy-MM-dd");
 
     //TODO: create enums for filter names, figure out how to use them in the scala views
     public EventFilter(JsonNode jsonNode){
-        this.beginDate = dateTimeFormatter.parseDateTime(jsonNode.findPath("beginDate").toString());
-        this.endDate = dateTimeFormatter.parseDateTime(jsonNode.findPath("endDate").toString());
+        this.beginDate = jsonNode.get("beginDate").asText();
+        this.endDate = jsonNode.get("endDate").asText();
     }
 
     /*

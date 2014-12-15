@@ -6,6 +6,8 @@ import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.joda.time.DateTime;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 import play.db.DB;
 import play.libs.Json;
 import play.libs.Json.*;
@@ -122,15 +124,16 @@ public class Event {
         Connection conn = DB.getConnection();
         ResultSet rs;
         Statement statement;
-        String query = "SELECT id, occurred_on, ST_X(location) AS longitude, ST_Y(location) AS latitude FROM event where id > 6000;";
+        String query = "SELECT id, occurred_on, ST_X(location) AS longitude, ST_Y(location) AS latitude FROM event";
         Event event;
+        DateTimeFormatter dateTimeFormatter = DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss");
         try{
             statement = conn.createStatement();
             rs = statement.executeQuery(query);
 
             while(rs.next()) {
                 event = new Event(Integer.parseInt(rs.getString("id")),
-                        new DateTime(),
+                        dateTimeFormatter.parseDateTime(rs.getString("occurred_on")),
                         Double.parseDouble(rs.getString("latitude")),
                         Double.parseDouble(rs.getString("longitude"))
                 );
@@ -145,7 +148,32 @@ public class Event {
     }
 
     public static List<Event> getByFilter(EventFilter eventFilter) {
-        return Event.getAll();
+        List<Event> events = new ArrayList<>();
+        Connection conn = DB.getConnection();
+        ResultSet rs;
+        Statement statement;
+        String query = "SELECT id, occurred_on, ST_X(location) AS longitude, ST_Y(location) AS latitude FROM event WHERE occurred_on > to_timestamp('" + eventFilter.beginDate + "', 'YYYY-MM-dd') AND occurred_on <= to_timestamp('" + eventFilter.endDate + "', 'YYYY-MM-dd');";
+        Event event;
+        DateTimeFormatter dateTimeFormatter = DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss");
+        try{
+            statement = conn.createStatement();
+            rs = statement.executeQuery(query);
+
+            while(rs.next()) {
+                event = new Event(Integer.parseInt(rs.getString("id")),
+                        dateTimeFormatter.parseDateTime(rs.getString("occurred_on")),
+                        Double.parseDouble(rs.getString("latitude")),
+                        Double.parseDouble(rs.getString("longitude"))
+                );
+                events.add(event);
+            }
+
+        } catch(SQLException e) {
+            e.printStackTrace();
+        }
+
+        return events;
+
     }
 
 
