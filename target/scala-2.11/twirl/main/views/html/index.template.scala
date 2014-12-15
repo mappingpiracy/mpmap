@@ -68,9 +68,9 @@ Seq[Any](_display_(/*1.2*/main(title = "Home")/*1.22*/ {_display_(Seq[Any](forma
 
                                 <div class="col-md-8">
                                     <select class="form-control" id="territorial-water-status" multiple>
-                                        <option value="country-1">Country 1</option>
-                                        <option value="country-2">Country 2</option>
-                                        <option value="country-3">Country 3</option>
+                                        <option value="1">Country 1</option>
+                                        <option value="2">Country 2</option>
+                                        <option value="3">Country 3</option>
                                     </select>
                                 </div>
                             </div>
@@ -83,9 +83,9 @@ Seq[Any](_display_(/*1.2*/main(title = "Home")/*1.22*/ {_display_(Seq[Any](forma
 
                                 <div class="col-md-8">
                                     <select class="form-control" id="closest-coastal-state" multiple>
-                                        <option value="country-1">Country 1</option>
-                                        <option value="country-2">Country 2</option>
-                                        <option value="country-3">Country 3</option>
+                                        <option value="1">Country 1</option>
+                                        <option value="2">Country 2</option>
+                                        <option value="3">Country 3</option>
                                     </select>
                                 </div>
                             </div>
@@ -98,9 +98,9 @@ Seq[Any](_display_(/*1.2*/main(title = "Home")/*1.22*/ {_display_(Seq[Any](forma
 
                                 <div class="col-md-8">
                                     <select class="form-control" id="vessel-country" multiple>
-                                        <option value="country-1">Country 1</option>
-                                        <option value="country-2">Country 2</option>
-                                        <option value="country-3">Country 3</option>
+                                        <option value="1">Country 1</option>
+                                        <option value="2">Country 2</option>
+                                        <option value="3">Country 3</option>
                                     </select>
                                 </div>
                             </div>
@@ -158,10 +158,10 @@ Seq[Any](_display_(/*1.2*/main(title = "Home")/*1.22*/ {_display_(Seq[Any](forma
 }
               /*
                   -- GENERATED --
-                  DATE: Wed Dec 10 01:00:35 EST 2014
+                  DATE: Sun Dec 14 18:39:20 EST 2014
                   SOURCE: /media/data/Users/Alex/Documents/Development/Web/mpmap/www/mpmap-play/app/views/index.scala.html
-                  HASH: 4456d891b6ac1fae8955aa5431e18d9cca86b968
-                  MATRIX: 798->1|826->21|865->23|892->24|6342->5443
+                  HASH: 84eb3055aac4bce3c17712cf58b0d2b67f423da0
+                  MATRIX: 798->1|826->21|865->23|892->24|6270->5371
                   LINES: 29->1|29->1|29->1|30->2|148->120
                   -- GENERATED --
               */

@@ -3,10 +3,12 @@ package controllers;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import models.Event;
+import models.EventFilter;
 import play.data.DynamicForm;
 import play.mvc.BodyParser;
 import play.mvc.Controller;
 import play.mvc.Result;
+import scala.util.parsing.json.JSONArray$;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,18 +27,22 @@ public class MapData extends Controller {
     }
 
     /*
-        Should return events based on passed filtering variables.
+        Checks for posted event filters.
+        Returns either filtered events, or all events if there are no filters.
      */
     @BodyParser.Of(BodyParser.Json.class)
     public static Result events() {
-        JsonNode json = request().body().asJson();
-        String beginDate, endDate;
+        JsonNode jsonEventFilter = request().body().asJson();
+        EventFilter eventFilter;
+        List<Event> events;
 
-        beginDate = json.findPath("beginDate").toString();
-        endDate = json.findPath("endDate").toString();
-        //territorialWaterStatus = json.findPath("territorialWaterStatus").to
+        if(jsonEventFilter != null && EventFilter.validate(jsonEventFilter)) {
+            eventFilter = new EventFilter(jsonEventFilter);
+            events = Event.getByFilter(eventFilter);
+        } else {
+            events = Event.getAll();
+        }
 
-        List<Event> events = Event.getAll();
         List<JsonNode> jsonEvents = new ArrayList<>();
 
         for(int i = 0; i < events.size(); i++) {

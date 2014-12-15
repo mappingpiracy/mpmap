@@ -144,5 +144,9 @@ public class Event {
         return events;
     }
 
+    public static List<Event> getByFilter(EventFilter eventFilter) {
+        return Event.getAll();
+    }
+
 
 }
