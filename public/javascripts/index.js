@@ -32,6 +32,14 @@ $('#filter-incidents-advanced-toggle').click(function(){
     });
 });
 
+$('#export-events').click(function(){
+    exportEvents();
+});
+
+
+
+
+
 /*
  * udpateEventFilters() 
  * stores values from the event filter form in the eventFilters global variable.
@@ -132,7 +140,7 @@ function createPopup(feature, layer) {
     popupContent = '<strong>Event Information</strong>';
     popupContent += '<p>Id: ' + feature.properties['id'] + '</p>';
     popupContent += '<p>Date: ' + feature.properties['occurredOnDate'] + '</p>';
-
+    popupContent += '<p>Closest Coastal State: ' + feature.properties['closestCoastalState'] + '</p>';
     layer.bindPopup(popupContent, popupOptions);
 }
 
@@ -156,7 +164,18 @@ function createCustomMarker(feature, coordinates) {
  * exportEvents()
  */
 function exportEvents(){
-    
+    //  Post filters to mapdata api; if successfull, populate map with responding data
+    $.ajax({
+        type:  'POST',
+        contentType: 'application/json',
+        dataType: 'json',
+        data: JSON.stringify(events),
+        url: '/mapdata/export',
+        success: function(response) {
+            console.log('/mapdata/export POST successful.');
+            console.log(response);
+        }
+    });
 }
 /*
  * ajax post that returns the data posted

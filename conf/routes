@@ -9,7 +9,8 @@ GET     /                           controllers.Application.index()
 GET     /mapdata                    controllers.MapData.index()
 POST    /mapdata/events             controllers.MapData.events()
 GET     /mapdata/events             controllers.MapData.events()
-
+GET     /mapdata/export             controllers.MapData.export()
+POST    /mapdata/export             controllers.MapData.export()
 
 # Static pages
 GET     /about                      controllers.Application.about()
