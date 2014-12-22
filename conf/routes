@@ -12,6 +12,8 @@ GET     /mapdata/events             controllers.MapData.events()
 GET     /mapdata/export             controllers.MapData.export()
 POST    /mapdata/export             controllers.MapData.export()
 
+GET     /mybatistest                @controllers.Application.mybatistest()
+
 # Static pages
 GET     /about                      controllers.Application.about()
 GET     /help                       controllers.Application.help()

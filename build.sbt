@@ -16,5 +16,12 @@ libraryDependencies ++= Seq(
   "joda-time" % "joda-time" % "2.5",
   "postgresql" % "postgresql" % "9.1-901.jdbc4",
   "org.mybatis" % "mybatis" % "3.1.1",
-  "org.mybatis" % "mybatis-guice" % "3.3"
+  "org.mybatis" % "mybatis-guice" % "3.3",
+  javaCore, javaJdbc
 )
+
+// Add app folder as resource directory so that mapper xml files are in the classpath
+unmanagedResourceDirectories in Compile <+= baseDirectory( _ / "app" )
+
+// but filter out java and html files that would then also be copied to the classpath
+excludeFilter in Compile in unmanagedResources := "*.java" || "*.html"

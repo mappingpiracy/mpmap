@@ -1,14 +1,24 @@
 package controllers;
 
+import org.apache.ibatis.mapping.Environment;
 import play.*;
 import play.mvc.*;
 
 import views.html.*;
 
+import javax.inject.Inject;
+
 public class Application extends Controller {
 
     public static Result index() {
         return ok(index.render());
+    }
+
+    @Inject
+    private Environment myBatisEnv;
+
+    public Result mybatistest() {
+        return ok("Your app is running with ds " + myBatisEnv.getDataSource());
     }
 
     public static Result about() {
