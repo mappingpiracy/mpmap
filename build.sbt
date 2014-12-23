@@ -20,10 +20,5 @@ libraryDependencies ++= Seq(
   javaCore, javaJdbc
 )
 
-// "Add mapper xml files to classpath" -- blank line necessary for SBT
-unmanagedResourceDirectories in Compile <+= baseDirectory( _ / "app" )
-
-unmanagedResourceDirectories in Compile <+= baseDirectory( _ / "app/dao" )
-
-// but filter out java and html files that would then also be copied to the classpath
-excludeFilter in Compile in unmanagedResources := "*.java" || "*.html"
+// Add mappers to classpath
+unmanagedResourceDirectories in Compile <+= baseDirectory( _ / "app/dao/mappers" )

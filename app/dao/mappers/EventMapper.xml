@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="app.dao.EventMapper">
+<mapper namespace="dao.EventMapper">
     
     <resultMap id="EventResult" type="Event">
         <id property='id' column='id'/>
@@ -12,11 +12,15 @@
         <result property='latitude' column='latitude'/>
     </resultMap>
 
-    <select id="selectEvents" resultType="Event" resultMap="EventResult">
+    <select id="getEvents" resultType="Event" resultMap="EventResult">
         SELECT id, to_char(occurred_on, 'YYYY-MM-DD') AS occurred_on_date,
             to_char(occurred_on, 'HH24:MI:SS') AS occurred_on_time,
             ST_X(location) AS longitude, ST_Y(location) AS latitude
             FROM event;
+    </select>
+
+    <select id="selectEventsFiltered" resultType="Event" resultMap="EventResult">
+
     </select>
 
     <select id="selectEvent" resultType="Event" resultMap="EventResult" parameterType="Integer">

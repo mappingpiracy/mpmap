@@ -13,7 +13,7 @@ import java.io.InputStream;
  */
 public class MybatisMapper {
 
-    private String resource = "mybatis-config.xml";
+    private String resource = "mybatis.xml";
     private InputStream inputStream;
     private SqlSessionFactory sqlSessionFactory;
     private SqlSession session;
@@ -22,13 +22,14 @@ public class MybatisMapper {
         try {
             this.inputStream = Resources.getResourceAsStream(resource);
             this.sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+            this.session = sqlSessionFactory.openSession();
         } catch (Exception e) {
 
         }
     }
 
     public SqlSession getSession() {
-        return this.session = sqlSessionFactory.openSession();
+        return session;
     }
 
     public void closeSession() {

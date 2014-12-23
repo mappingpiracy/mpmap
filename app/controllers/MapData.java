@@ -43,53 +43,27 @@ public class MapData extends Controller {
      */
     @BodyParser.Of(BodyParser.Json.class)
     public static Result events() {
-//        JsonNode jsonEventFilter = request().body().asJson();
-//        EventFilter eventFilter;
-//        List<Event> events;
-//
+        JsonNode jsonEventFilter = request().body().asJson();
+        EventFilter eventFilter;
+        List<Event> events;
+
 //        if(jsonEventFilter != null && EventFilter.validate(jsonEventFilter)) {
 //            eventFilter = new EventFilter(jsonEventFilter);
 //            events = Event.getByFilter(eventFilter);
 //        } else {
 //            events = Event.getAll();
 //        }
-//
-//        List<JsonNode> jsonEvents = new ArrayList<>();
-//
-//        for(int i = 0; i < events.size(); i++) {
-//            jsonEvents.add(events.get(i).toGeoJsonFeature());
-//        }
-//
-//        return ok(toJson(Event.toGeoJsonFeatureCollection(jsonEvents)));
 
-        MybatisMapper mapper = new MybatisMapper();
-        SqlSession session = mapper.getSession();
-        List<Event> events;
+        events = Event.getAll();
 
-        try {
-            events = session.selectList("app.dao.EventMapper.selectEvents");
-        } finally {
-            session.close();
+        List<JsonNode> jsonEvents = new ArrayList<>();
+
+        for(int i = 0; i < events.size(); i++) {
+            jsonEvents.add(events.get(i).toGeoJsonFeature());
         }
 
+        return ok(toJson(Event.toGeoJsonFeatureCollection(jsonEvents)));
 
-
-        return ok(toJson(events));
-    }
-
-    public static Result singleEvent() {
-        MybatisMapper mapper = new MybatisMapper();
-        SqlSession session = mapper.getSession();
-        Event event;
-
-        try {
-            event = session.selectOne("app.dao.EventMapper.selectEvent", 100);
-
-        } finally {
-            session.close();
-        }
-
-        return ok(toJson(event));
     }
 
     /*

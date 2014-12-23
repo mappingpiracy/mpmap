@@ -5,6 +5,12 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import dao.EventMapper;
+import dao.MybatisMapper;
+import org.apache.ibatis.io.Resources;
+import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactory;
+import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
@@ -12,6 +18,8 @@ import play.db.DB;
 import play.libs.Json;
 import play.libs.Json.*;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -128,59 +136,35 @@ public class Event {
         Data Access Methods
      */
 
-    public static List<Event> getAll(){
-        List<Event> events = new ArrayList<>();
-        Connection conn = DB.getConnection();
-        ResultSet rs;
-        Statement statement;
-        String query = "select e.id, e.occurred_on, ST_X(e.location) AS longitude, ST_Y(e.location) AS latitude, c.name as closest_coastal_state, c.abbreviation as closest_coastal_state_abbreviation from event as e join country as c on e.closest_coastal_state = c.cow_id;";
-        Event event;
-        DateTimeFormatter dateTimeFormatter = DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss");
-        try{
-            statement = conn.createStatement();
-            rs = statement.executeQuery(query);
+    public static List<Event> getAll() {
+        MybatisMapper mapper = new MybatisMapper();
+        SqlSession session = mapper.getSession();
 
-//            while(rs.next()) {
-//                event = new Event(Integer.parseInt(rs.getString("id")),
-//                        dateTimeFormatter.parseDateTime(rs.getString("occurred_on")),
-//                        Double.parseDouble(rs.getString("latitude")),
-//                        Double.parseDouble(rs.getString("longitude"))
-//                        //rs.getString("closest_coastal_state")
-//                );
-//                events.add(event);
-//            }
+//        InputStream inputStream = Resources.getResourceAsStream("mybatis.xml");
+//        SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+//        SqlSession session = sqlSessionFactory.openSession();
 
-        } catch(SQLException e) {
-            e.printStackTrace();
+        EventMapper eventMapper = session.getMapper(EventMapper.class);
+        List<Event> events;
+
+        try {
+            events = eventMapper.getEvents();
+        } finally {
+            session.close();
         }
 
         return events;
     }
 
     public static List<Event> getByFilter(EventFilter eventFilter) {
-        List<Event> events = new ArrayList<>();
-        Connection conn = DB.getConnection();
-        ResultSet rs;
-        Statement statement;
-        String query = "SELECT e.id, e.occurred_on, e.ST_X(location) AS longitude, e.ST_Y(location) AS latitude, c.name as closest_coastal_state, c.abbreviation as closest_coastal_state_abbreviation FROM event as e JOIN country AS c on e.closest_coastal_state = c.cow_id WHERE e.occurred_on > to_timestamp('" + eventFilter.beginDate + "', 'YYYY-MM-dd') AND e.occurred_on <= to_timestamp('" + eventFilter.endDate + "', 'YYYY-MM-dd');";
-        Event event;
-        DateTimeFormatter dateTimeFormatter = DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss");
-        try{
-            statement = conn.createStatement();
-            rs = statement.executeQuery(query);
+        MybatisMapper mapper = new MybatisMapper();
+        SqlSession session = mapper.getSession();
+        List<Event> events;
 
-//            while(rs.next()) {
-//                event = new Event(Integer.parseInt(rs.getString("id")),
-//                        dateTimeFormatter.parseDateTime(rs.getString("occurred_on")),
-//                        Double.parseDouble(rs.getString("latitude")),
-//                        Double.parseDouble(rs.getString("longitude"))
-//                        //rs.getString("closest_coastal_state")
-//                );
-//                events.add(event);
-//            }
-
-        } catch(SQLException e) {
-            e.printStackTrace();
+        try {
+            events = session.selectList("app.dao.EventMapper.selectEvents");
+        } finally {
+            session.close();
         }
 
         return events;
