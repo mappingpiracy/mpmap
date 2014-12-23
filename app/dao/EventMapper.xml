@@ -11,12 +11,19 @@
         <result property='longitude' column='longitude'/>
         <result property='latitude' column='latitude'/>
     </resultMap>
-    
-    <select id="selectEvent" resultType="models.Event" resultMap="EventResult" parameterType="Integer">
-        select id, to_char(occurred_on, 'YYYY-MM-DD') as occurred_on_date,
-            to_char(occurred_on, 'HH24:MI:SS') as occurred_on_time,
+
+    <select id="selectEvents" resultType="Event" resultMap="EventResult">
+        SELECT id, to_char(occurred_on, 'YYYY-MM-DD') AS occurred_on_date,
+            to_char(occurred_on, 'HH24:MI:SS') AS occurred_on_time,
             ST_X(location) AS longitude, ST_Y(location) AS latitude
-            from event where reference_id = #{id}
+            FROM event;
+    </select>
+
+    <select id="selectEvent" resultType="Event" resultMap="EventResult" parameterType="Integer">
+        SELECT id, to_char(occurred_on, 'YYYY-MM-DD') AS occurred_on_date,
+            to_char(occurred_on, 'HH24:MI:SS') AS occurred_on_time,
+            ST_X(location) AS longitude, ST_Y(location) AS latitude
+            FROM event WHERE id = #{id}
     </select>
     <select id="selectCount" resultType="Event">
         SELECT COUNT(*) FROM event;

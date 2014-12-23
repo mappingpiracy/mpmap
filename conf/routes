@@ -7,10 +7,12 @@ GET     /                           controllers.Application.index()
 
 # Mapdata index method -- doesn't really return anything yet.
 GET     /mapdata                    controllers.MapData.index()
-POST    /mapdata/events             controllers.MapData.events()
 GET     /mapdata/events             controllers.MapData.events()
+POST    /mapdata/events             controllers.MapData.events()
 GET     /mapdata/export             controllers.MapData.export()
 POST    /mapdata/export             controllers.MapData.export()
+
+# For mybatis testing:
 GET     /mapdata/single             controllers.MapData.singleEvent()
 
 # Static pages

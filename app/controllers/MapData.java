@@ -2,6 +2,7 @@ package controllers;
 
 
 import com.fasterxml.jackson.databind.JsonNode;
+import dao.MybatisMapper;
 import models.Event;
 import models.EventFilter;
 import org.apache.ibatis.io.Resources;
@@ -60,37 +61,35 @@ public class MapData extends Controller {
 //        }
 //
 //        return ok(toJson(Event.toGeoJsonFeatureCollection(jsonEvents)));
-        return ok();
+
+        MybatisMapper mapper = new MybatisMapper();
+        SqlSession session = mapper.getSession();
+        List<Event> events;
+
+        try {
+            events = session.selectList("app.dao.EventMapper.selectEvents");
+        } finally {
+            session.close();
+        }
+
+
+
+        return ok(toJson(events));
     }
 
-    public static Result singleEvent() throws IOException {
-
-        String resource = "mybatis-config.xml";
-        InputStream inputStream = Resources.getResourceAsStream(resource);
-        SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
-        SqlSession session = sqlSessionFactory.openSession();
+    public static Result singleEvent() {
+        MybatisMapper mapper = new MybatisMapper();
+        SqlSession session = mapper.getSession();
         Event event;
-        Integer count;
 
         try {
             event = session.selectOne("app.dao.EventMapper.selectEvent", 100);
-            //count = session.selectOne("conf.EventMapper.selectCount");
+
         } finally {
             session.close();
         }
 
         return ok(toJson(event));
-    }
-
-    //@Inject
-    //private Environment myBatisEnv;
-
-    public static Result singleEvent2() {
-
-
-
-
-        return ok();
     }
 
     /*

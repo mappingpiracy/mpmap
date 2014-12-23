@@ -27,7 +27,6 @@ import java.util.List;
 public class Event {
 
     private Integer id;
-    //private DateTime occurredOn;
     private Date occurredOnDate;
     private Time occurredOnTime;
     private double latitude;
