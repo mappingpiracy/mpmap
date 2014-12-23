@@ -10,13 +10,26 @@
         <result property='occurredOnTime' column='occurred_on_time' javaType="java.sql.Time"/>
         <result property='longitude' column='longitude'/>
         <result property='latitude' column='latitude'/>
+        <result property="closestCoastalState" column="closest_country"/>
+        <result property="territorialWaterStatus" column="territorial_water_status"/>
+        <result property="vesselFlagCountry" column="vessel_flag_country"/>
     </resultMap>
 
     <select id="getEvents" resultType="Event" resultMap="EventResult">
-        SELECT id, to_char(occurred_on, 'YYYY-MM-DD') AS occurred_on_date,
-            to_char(occurred_on, 'HH24:MI:SS') AS occurred_on_time,
-            ST_X(location) AS longitude, ST_Y(location) AS latitude
-            FROM event;
+        SELECT ev.id, to_char(ev.occurred_on, 'YYYY-MM-DD') AS occurred_on_date,
+            to_char(ev.occurred_on, 'HH24:MI:SS') AS occurred_on_time,
+            ST_X(ev.location) AS longitude, ST_Y(ev.location) AS latitude,
+            COALESCE(co01.name, 'Unspecified') AS closest_country,
+            COALESCE(co02.name, 'Unspecified') AS territorial_water_status,
+            COALESCE(co03.name, 'Unspecified') AS vessel_flag_country
+        FROM event AS ev
+        LEFT JOIN country AS co01
+            ON co01.cow_id = ev.location_closest_country_id
+        LEFT JOIN country AS co02
+            ON co02.cow_id = ev.location_water_status_country_id
+        LEFT JOIN country AS co03
+            ON co03.cow_id = ev.vessel_flag_country_id
+        ORDER BY occurred_on ASC;
     </select>
 
     <select id="selectEventsFiltered" resultType="Event" resultMap="EventResult">

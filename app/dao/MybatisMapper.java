@@ -1,5 +1,6 @@
 package dao;
 
+import models.Event;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -22,13 +23,13 @@ public class MybatisMapper {
         try {
             this.inputStream = Resources.getResourceAsStream(resource);
             this.sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
-            this.session = sqlSessionFactory.openSession();
         } catch (Exception e) {
-
+            return;
         }
     }
 
     public SqlSession getSession() {
+        this.session = sqlSessionFactory.openSession();
         return session;
     }
 

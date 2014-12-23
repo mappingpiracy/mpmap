@@ -40,39 +40,33 @@ public class Event {
     private double latitude;
     private double longitude;
     private String closestCoastalState;
+    private String territorialWaterStatus;
+    private String vesselFlagCountry;
 
     public Event() { }
 
-    public Event(Integer id, DateTime occurredOn, Double latitude, Double longitude) {
-        this.id = id;
-        //this.occurredOn = occurredOn;
-        this.latitude = latitude;
-        this.longitude = longitude;
-        //this.closestCoastalState = closestCoastalState;
+    public Integer getId() {
+        return id;
     }
 
-    public int getId() {
-        return this.id;
-    }
-
-    public void setId(int id){
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public Date getOccurredOnDate() { return occurredOnDate; }
-
-    public void setOccurredOnDate(Date occurredOnDate) { this.occurredOnDate = occurredOnDate; }
-
-    public Time getOccurredOnTime() { return occurredOnTime; }
-
-    public void setOccurredOnTime(Time occurredOnTime) { this.occurredOnTime = occurredOnTime; }
-
-    public double getLongitude() {
-        return longitude;
+    public Date getOccurredOnDate() {
+        return occurredOnDate;
     }
 
-    public void setLongitude(double longitude) {
-        this.longitude = longitude;
+    public void setOccurredOnDate(Date occurredOnDate) {
+        this.occurredOnDate = occurredOnDate;
+    }
+
+    public Time getOccurredOnTime() {
+        return occurredOnTime;
+    }
+
+    public void setOccurredOnTime(Time occurredOnTime) {
+        this.occurredOnTime = occurredOnTime;
     }
 
     public double getLatitude() {
@@ -83,9 +77,41 @@ public class Event {
         this.latitude = latitude;
     }
 
+    public double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
+    }
+
+    public String getClosestCoastalState() {
+        return closestCoastalState;
+    }
+
+    public void setClosestCoastalState(String closestCoastalState) {
+        this.closestCoastalState = closestCoastalState;
+    }
+
+    public String getTerritorialWaterStatus() {
+        return territorialWaterStatus;
+    }
+
+    public void setTerritorialWaterStatus(String territorialWaterStatus) {
+        this.territorialWaterStatus = territorialWaterStatus;
+    }
+
+    public String getVesselFlagCountry() {
+        return vesselFlagCountry;
+    }
+
+    public void setVesselFlagCountry(String vesselFlagCountry) {
+        this.vesselFlagCountry = vesselFlagCountry;
+    }
+
     /*
-        Converts the event object to a geoJson feature compatible with leaflet mapping.
-     */
+            Converts the event object to a geoJson feature compatible with leaflet mapping.
+         */
     public JsonNode toGeoJsonFeature(){
         JsonNodeFactory nodeFactory;
         nodeFactory = new ObjectMapper().getNodeFactory();
@@ -102,9 +128,11 @@ public class Event {
         geometry.put("coordinates", coordinates);
 
         properties.put("id", this.id);
-        //properties.put("occurredOnDate", this.occurredOn.getMonthOfYear() + "/" + this.occurredOn.getDayOfMonth() + "/" + this.occurredOn.getYear());
-        //properties.put("occurredOnTime", this.occurredOn.getHourOfDay() + ":" + this.occurredOn.getMinuteOfHour());
+        properties.put("occurredOnDate", this.occurredOnDate.toString());
+        properties.put("occurredOnTime", this.occurredOnTime.toString());
         properties.put("closestCoastalState", this.closestCoastalState);
+        properties.put("territorialWaterStatus", this.territorialWaterStatus);
+        properties.put("vesselFlagCountry", this.vesselFlagCountry);
 
         feature.put("geometry", geometry);
         feature.put("properties", properties);
@@ -139,12 +167,8 @@ public class Event {
     public static List<Event> getAll() {
         MybatisMapper mapper = new MybatisMapper();
         SqlSession session = mapper.getSession();
-
-//        InputStream inputStream = Resources.getResourceAsStream("mybatis.xml");
-//        SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
-//        SqlSession session = sqlSessionFactory.openSession();
-
         EventMapper eventMapper = session.getMapper(EventMapper.class);
+
         List<Event> events;
 
         try {
