@@ -30,12 +30,14 @@ public class Event {
     private double longitude;
     private String closestCoastalState;
 
-    public Event(int id, DateTime occurredOn, Double latitude, Double longitude, String closestCoastalState) {
+    public Event() { }
+
+    public Event(int id, DateTime occurredOn, Double latitude, Double longitude) {
         this.id = id;
         this.occurredOn = occurredOn;
         this.latitude = latitude;
         this.longitude = longitude;
-        this.closestCoastalState = closestCoastalState;
+        //this.closestCoastalState = closestCoastalState;
     }
 
     public int getId() {
@@ -139,8 +141,8 @@ public class Event {
                 event = new Event(Integer.parseInt(rs.getString("id")),
                         dateTimeFormatter.parseDateTime(rs.getString("occurred_on")),
                         Double.parseDouble(rs.getString("latitude")),
-                        Double.parseDouble(rs.getString("longitude")),
-                        rs.getString("closest_coastal_state")
+                        Double.parseDouble(rs.getString("longitude"))
+                        //rs.getString("closest_coastal_state")
                 );
                 events.add(event);
             }
@@ -168,8 +170,8 @@ public class Event {
                 event = new Event(Integer.parseInt(rs.getString("id")),
                         dateTimeFormatter.parseDateTime(rs.getString("occurred_on")),
                         Double.parseDouble(rs.getString("latitude")),
-                        Double.parseDouble(rs.getString("longitude")),
-                        rs.getString("closest_coastal_state")
+                        Double.parseDouble(rs.getString("longitude"))
+                        //rs.getString("closest_coastal_state")
                 );
                 events.add(event);
             }

@@ -6,7 +6,7 @@ import play.mvc.*;
 
 import views.html.*;
 
-import javax.inject.Inject;
+//import javax.inject.Inject;
 
 public class Application extends Controller {
 
@@ -14,12 +14,12 @@ public class Application extends Controller {
         return ok(index.render());
     }
 
-    @Inject
-    private Environment myBatisEnv;
+    //@Inject
+    //private Environment myBatisEnv;
 
-    public Result mybatistest() {
-        return ok("Your app is running with ds " + myBatisEnv.getDataSource());
-    }
+    //public Result mybatistest() {
+        //return ok("Your app is running with ds " + myBatisEnv.getDataSource());
+    //}
 
     public static Result about() {
         return ok(about.render());

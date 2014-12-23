@@ -4,12 +4,21 @@ package controllers;
 import com.fasterxml.jackson.databind.JsonNode;
 import models.Event;
 import models.EventFilter;
+import org.apache.ibatis.io.Resources;
+import org.apache.ibatis.mapping.Environment;
+import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactory;
+import org.apache.ibatis.session.SqlSessionFactoryBuilder;
+import play.api.Play;
 import play.data.DynamicForm;
 import play.mvc.BodyParser;
 import play.mvc.Controller;
 import play.mvc.Result;
 import scala.util.parsing.json.JSONArray$;
 
+//import javax.inject.Inject;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -51,6 +60,36 @@ public class MapData extends Controller {
         }
 
         return ok(toJson(Event.toGeoJsonFeatureCollection(jsonEvents)));
+    }
+
+    public static Result singleEvent() throws IOException {
+
+        String resource = "mybatis-config.xml";
+        InputStream inputStream = Resources.getResourceAsStream(resource);
+        SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+        SqlSession session = sqlSessionFactory.openSession();
+        Event event;
+        Integer count;
+
+        try {
+            event = session.selectOne("app.dao.EventMapper.selectEvent", 100);
+            //count = session.selectOne("conf.EventMapper.selectCount");
+        } finally {
+            session.close();
+        }
+
+        return ok(toJson(event));
+    }
+
+    //@Inject
+    //private Environment myBatisEnv;
+
+    public static Result singleEvent2() {
+
+
+
+
+        return ok();
     }
 
     /*
