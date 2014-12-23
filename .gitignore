@@ -11,5 +11,3 @@ target
 tmp
 *~
 misc
-app/dao/mybatis-config.xml
-conf/application.conf
