@@ -42,24 +42,25 @@ public class MapData extends Controller {
      */
     @BodyParser.Of(BodyParser.Json.class)
     public static Result events() {
-        JsonNode jsonEventFilter = request().body().asJson();
-        EventFilter eventFilter;
-        List<Event> events;
-
-        if(jsonEventFilter != null && EventFilter.validate(jsonEventFilter)) {
-            eventFilter = new EventFilter(jsonEventFilter);
-            events = Event.getByFilter(eventFilter);
-        } else {
-            events = Event.getAll();
-        }
-
-        List<JsonNode> jsonEvents = new ArrayList<>();
-
-        for(int i = 0; i < events.size(); i++) {
-            jsonEvents.add(events.get(i).toGeoJsonFeature());
-        }
-
-        return ok(toJson(Event.toGeoJsonFeatureCollection(jsonEvents)));
+//        JsonNode jsonEventFilter = request().body().asJson();
+//        EventFilter eventFilter;
+//        List<Event> events;
+//
+//        if(jsonEventFilter != null && EventFilter.validate(jsonEventFilter)) {
+//            eventFilter = new EventFilter(jsonEventFilter);
+//            events = Event.getByFilter(eventFilter);
+//        } else {
+//            events = Event.getAll();
+//        }
+//
+//        List<JsonNode> jsonEvents = new ArrayList<>();
+//
+//        for(int i = 0; i < events.size(); i++) {
+//            jsonEvents.add(events.get(i).toGeoJsonFeature());
+//        }
+//
+//        return ok(toJson(Event.toGeoJsonFeatureCollection(jsonEvents)));
+        return ok();
     }
 
     public static Result singleEvent() throws IOException {

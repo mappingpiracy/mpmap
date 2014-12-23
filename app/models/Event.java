@@ -17,6 +17,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.sql.Date;
+import java.sql.Time;
 import java.util.List;
 
 /**
@@ -24,17 +26,19 @@ import java.util.List;
  */
 public class Event {
 
-    private int id;
-    private DateTime occurredOn;
+    private Integer id;
+    //private DateTime occurredOn;
+    private Date occurredOnDate;
+    private Time occurredOnTime;
     private double latitude;
     private double longitude;
     private String closestCoastalState;
 
     public Event() { }
 
-    public Event(int id, DateTime occurredOn, Double latitude, Double longitude) {
+    public Event(Integer id, DateTime occurredOn, Double latitude, Double longitude) {
         this.id = id;
-        this.occurredOn = occurredOn;
+        //this.occurredOn = occurredOn;
         this.latitude = latitude;
         this.longitude = longitude;
         //this.closestCoastalState = closestCoastalState;
@@ -48,13 +52,13 @@ public class Event {
         this.id = id;
     }
 
-    public DateTime getOccurredOn(){
-        return this.occurredOn;
-    }
+    public Date getOccurredOnDate() { return occurredOnDate; }
 
-    public void setOccurredOn(DateTime occurredOn) {
-        this.occurredOn = occurredOn;
-    }
+    public void setOccurredOnDate(Date occurredOnDate) { this.occurredOnDate = occurredOnDate; }
+
+    public Time getOccurredOnTime() { return occurredOnTime; }
+
+    public void setOccurredOnTime(Time occurredOnTime) { this.occurredOnTime = occurredOnTime; }
 
     public double getLongitude() {
         return longitude;
@@ -91,8 +95,8 @@ public class Event {
         geometry.put("coordinates", coordinates);
 
         properties.put("id", this.id);
-        properties.put("occurredOnDate", this.occurredOn.getMonthOfYear() + "/" + this.occurredOn.getDayOfMonth() + "/" + this.occurredOn.getYear());
-        properties.put("occurredOnTime", this.occurredOn.getHourOfDay() + ":" + this.occurredOn.getMinuteOfHour());
+        //properties.put("occurredOnDate", this.occurredOn.getMonthOfYear() + "/" + this.occurredOn.getDayOfMonth() + "/" + this.occurredOn.getYear());
+        //properties.put("occurredOnTime", this.occurredOn.getHourOfDay() + ":" + this.occurredOn.getMinuteOfHour());
         properties.put("closestCoastalState", this.closestCoastalState);
 
         feature.put("geometry", geometry);
@@ -137,15 +141,15 @@ public class Event {
             statement = conn.createStatement();
             rs = statement.executeQuery(query);
 
-            while(rs.next()) {
-                event = new Event(Integer.parseInt(rs.getString("id")),
-                        dateTimeFormatter.parseDateTime(rs.getString("occurred_on")),
-                        Double.parseDouble(rs.getString("latitude")),
-                        Double.parseDouble(rs.getString("longitude"))
-                        //rs.getString("closest_coastal_state")
-                );
-                events.add(event);
-            }
+//            while(rs.next()) {
+//                event = new Event(Integer.parseInt(rs.getString("id")),
+//                        dateTimeFormatter.parseDateTime(rs.getString("occurred_on")),
+//                        Double.parseDouble(rs.getString("latitude")),
+//                        Double.parseDouble(rs.getString("longitude"))
+//                        //rs.getString("closest_coastal_state")
+//                );
+//                events.add(event);
+//            }
 
         } catch(SQLException e) {
             e.printStackTrace();
@@ -166,15 +170,15 @@ public class Event {
             statement = conn.createStatement();
             rs = statement.executeQuery(query);
 
-            while(rs.next()) {
-                event = new Event(Integer.parseInt(rs.getString("id")),
-                        dateTimeFormatter.parseDateTime(rs.getString("occurred_on")),
-                        Double.parseDouble(rs.getString("latitude")),
-                        Double.parseDouble(rs.getString("longitude"))
-                        //rs.getString("closest_coastal_state")
-                );
-                events.add(event);
-            }
+//            while(rs.next()) {
+//                event = new Event(Integer.parseInt(rs.getString("id")),
+//                        dateTimeFormatter.parseDateTime(rs.getString("occurred_on")),
+//                        Double.parseDouble(rs.getString("latitude")),
+//                        Double.parseDouble(rs.getString("longitude"))
+//                        //rs.getString("closest_coastal_state")
+//                );
+//                events.add(event);
+//            }
 
         } catch(SQLException e) {
             e.printStackTrace();
