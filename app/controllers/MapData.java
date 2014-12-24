@@ -2,6 +2,7 @@ package controllers;
 
 
 import com.fasterxml.jackson.databind.JsonNode;
+import gis.GeoJsonHelper;
 import models.Event;
 import models.EventFilter;
 import play.mvc.BodyParser;
@@ -40,14 +41,7 @@ public class MapData extends Controller {
             events = Event.getEvents();
         }
 
-        List<JsonNode> jsonEvents = new ArrayList<>();
-
-        for(int i = 0; i < events.size(); i++) {
-            jsonEvents.add(events.get(i).toGeoJsonFeature());
-        }
-
-        return ok(toJson(Event.toGeoJsonFeatureCollection(jsonEvents)));
-
+        return ok(toJson(GeoJsonHelper.eventsToFeatureCollection(events)));
     }
 
     /*

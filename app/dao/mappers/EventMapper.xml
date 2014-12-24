@@ -10,7 +10,7 @@
         <result property='occurredOnTime' column='occurred_on_time' javaType="java.sql.Time"/>
         <result property='longitude' column='longitude'/>
         <result property='latitude' column='latitude'/>
-        <result property="closestCoastalState" column="closest_country"/>
+        <result property="closestCountry" column="closest_country"/>
         <result property="territorialWaterStatus" column="territorial_water_status"/>
         <result property="vesselFlagCountry" column="vessel_flag_country"/>
     </resultMap>
@@ -52,13 +52,10 @@
         ORDER BY ev.occurred_on ASC;
     </select>
 
-    <select id="selectEvent" resultType="Event" resultMap="EventResult" parameterType="Integer">
-        SELECT id, to_char(occurred_on, 'YYYY-MM-DD') AS occurred_on_date,
-            to_char(occurred_on, 'HH24:MI:SS') AS occurred_on_time,
-            ST_X(location) AS longitude, ST_Y(location) AS latitude
-            FROM event WHERE id = #{id}
+    <select id="getCountries" resultType="java.util.Map">
+        SELECT cow_id, name
+        FROM country
+        ORDER BY name ASC;
     </select>
-    <select id="selectCount" resultType="Event">
-        SELECT COUNT(*) FROM event;
-    </select>
+
 </mapper>

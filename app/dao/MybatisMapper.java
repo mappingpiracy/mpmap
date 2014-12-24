@@ -18,6 +18,7 @@ public class MybatisMapper {
     private InputStream inputStream;
     private SqlSessionFactory sqlSessionFactory;
     private SqlSession session;
+    //private EventMapper eventMapper;
 
     public MybatisMapper() {
         try {

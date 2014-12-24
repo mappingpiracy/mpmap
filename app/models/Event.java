@@ -7,24 +7,8 @@ import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import dao.EventMapper;
 import dao.MybatisMapper;
-import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
-import org.apache.ibatis.session.SqlSessionFactory;
-import org.apache.ibatis.session.SqlSessionFactoryBuilder;
-import org.joda.time.DateTime;
-import org.joda.time.format.DateTimeFormat;
-import org.joda.time.format.DateTimeFormatter;
-import play.db.DB;
-import play.libs.Json;
-import play.libs.Json.*;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
 import java.sql.Date;
 import java.sql.Time;
 import java.util.List;
@@ -39,7 +23,7 @@ public class Event {
     private Time occurredOnTime;
     private double latitude;
     private double longitude;
-    private String closestCoastalState;
+    private String closestCountry;
     private String territorialWaterStatus;
     private String vesselFlagCountry;
 
@@ -85,12 +69,12 @@ public class Event {
         this.longitude = longitude;
     }
 
-    public String getClosestCoastalState() {
-        return closestCoastalState;
+    public String getClosestCountry() {
+        return closestCountry;
     }
 
-    public void setClosestCoastalState(String closestCoastalState) {
-        this.closestCoastalState = closestCoastalState;
+    public void setClosestCountry(String closestCountry) {
+        this.closestCountry = closestCountry;
     }
 
     public String getTerritorialWaterStatus() {
@@ -144,57 +128,5 @@ public class Event {
 
         return events;
     }
-
-    /*
-            Converts the event object to a geoJson feature compatible with leaflet mapping.
-         */
-    public JsonNode toGeoJsonFeature(){
-        JsonNodeFactory nodeFactory;
-        nodeFactory = new ObjectMapper().getNodeFactory();
-        ObjectNode feature = nodeFactory.objectNode();
-        ObjectNode geometry = nodeFactory.objectNode();
-        ArrayNode coordinates = nodeFactory.arrayNode();
-        ObjectNode properties = nodeFactory.objectNode();
-
-        feature.put("type", "Feature");
-
-        geometry.put("type", "Point");
-        coordinates.add(this.longitude);
-        coordinates.add(this.latitude);
-        geometry.put("coordinates", coordinates);
-
-        properties.put("id", this.id);
-        properties.put("occurredOnDate", this.occurredOnDate.toString());
-        properties.put("occurredOnTime", this.occurredOnTime.toString());
-        properties.put("closestCoastalState", this.closestCoastalState);
-        properties.put("territorialWaterStatus", this.territorialWaterStatus);
-        properties.put("vesselFlagCountry", this.vesselFlagCountry);
-
-        feature.put("geometry", geometry);
-        feature.put("properties", properties);
-
-        return feature;
-    }
-
-    /*
-        Takes a list of GeoJson features and returns a featureCollection GeoJson object.
-     */
-    public static JsonNode toGeoJsonFeatureCollection(List<JsonNode> events) {
-        JsonNodeFactory nodeFactory;
-        nodeFactory = new ObjectMapper().getNodeFactory();
-        ObjectNode featureCollection = nodeFactory.objectNode();
-        ArrayNode featureArray = nodeFactory.arrayNode();
-
-        featureCollection.put("type", "FeatureCollection");
-
-        for(int i = 0; i < events.size(); i++) {
-            featureArray.add(events.get(i));
-        }
-
-        featureCollection.put("features", featureArray);
-
-        return featureCollection;
-    }
-
 
 }
