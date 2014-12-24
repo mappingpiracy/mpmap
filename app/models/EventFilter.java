@@ -1,23 +1,24 @@
 package models;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import org.joda.time.DateTime;
+import com.fasterxml.jackson.databind.node.ArrayNode;
+import helpers.JsonHelper;
+import org.apache.commons.lang3.StringUtils;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
+import play.Logger;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by alex on 12/14/14.
  */
 public class EventFilter {
-    public String beginDate;
-    public String endDate;
-    public List<Integer> territorialWaterStatus;
-    public List<Integer> closestCoastalState;
-    public List<Integer> vesselCountry;
+    private String beginDate;
+    private String endDate;
+    private List<Integer> closestCountry;
+    private List<Integer> territorialWaterStatus;
+    private List<Integer> vesselCountry;
 
     public EventFilter() { }
 
@@ -25,6 +26,17 @@ public class EventFilter {
     public EventFilter(JsonNode jsonNode){
         this.beginDate = jsonNode.get("beginDate").asText();
         this.endDate = jsonNode.get("endDate").asText();
+        this.closestCountry = JsonHelper.arrayNodeToIntegerList((ArrayNode) jsonNode.get("closestCountry"));
+        this.territorialWaterStatus = JsonHelper.arrayNodeToIntegerList((ArrayNode) jsonNode.get("territorialWaterStatus"));
+        this.vesselCountry = JsonHelper.arrayNodeToIntegerList((ArrayNode) jsonNode.get("vesselCountry"));
+
+        Logger.debug("New EventFilter created.");
+        Logger.debug("beginDate: " + this.beginDate);
+        Logger.debug("endDate: " + this.endDate);
+        Logger.debug("closestCountry: " + this.closestCountry.toString());
+        Logger.debug("territorialWaterStatus: " + this.territorialWaterStatus.toString());
+        Logger.debug("vesselCountry: " + this.vesselCountry.toString());
+
     }
 
     public String getBeginDate() {
@@ -44,30 +56,40 @@ public class EventFilter {
     }
 
     public List<Integer> getTerritorialWaterStatus() {
-        return territorialWaterStatus;
+        if(this.territorialWaterStatus.size() > 0) {
+            return territorialWaterStatus;
+        } else {
+            return null;
+        }
     }
 
     public void setTerritorialWaterStatus(List<Integer> territorialWaterStatus) {
         this.territorialWaterStatus = territorialWaterStatus;
     }
 
-    public List<Integer> getClosestCoastalState() {
-        return closestCoastalState;
+    public List<Integer> getClosestCountry() {
+        if(this.closestCountry.size() > 0) {
+            return closestCountry;
+        } else {
+            return null;
+        }
     }
 
-    public void setClosestCoastalState(List<Integer> closestCoastalState) {
-        this.closestCoastalState = closestCoastalState;
+    public void setClosestCountry(List<Integer> closestCountry) {
+        this.closestCountry = closestCountry;
     }
 
     public List<Integer> getVesselCountry() {
-        return vesselCountry;
+        if(this.vesselCountry.size() > 0) {
+            return vesselCountry;
+        } else {
+            return null;
+        }
     }
 
     public void setVesselCountry(List<Integer> vesselCountry) {
         this.vesselCountry = vesselCountry;
     }
-
-    private DateTimeFormatter dateTimeFormatter = DateTimeFormat.forPattern("yyyy-MM-dd");
 
     /*
         Check the passed json to make sure begindate and enddate are present

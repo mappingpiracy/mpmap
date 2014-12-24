@@ -58,10 +58,10 @@ function updateEventFilters(){
        eventFilters.territorialWaterStatus[i] = $(selected).val(); 
     });
     
-    eventFilters.closestCoastalState = [];
+    eventFilters.closestCountry = [];
     
     $('#closest-country :selected').each(function(i, selected){
-       eventFilters.closestCoastalState[i] = $(selected).val(); 
+       eventFilters.closestCountry[i] = $(selected).val();
     });
     
     eventFilters.vesselCountry = [];

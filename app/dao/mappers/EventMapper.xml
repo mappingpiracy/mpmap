@@ -22,7 +22,7 @@
         <result property="abbreviation" column="abbreviation"/>
     </resultMap>
 
-    <select id="getEventsWithFilter" resultType="Event" resultMap="EventResult">
+    <select id="getEventsWithFilter" resultType="Event" resultMap="EventResult" parameterType="EventFilter">
         SELECT ev.id, to_char(ev.occurred_on, 'YYYY-MM-DD') AS occurred_on_date,
             to_char(ev.occurred_on, 'HH24:MI:SS') AS occurred_on_time,
             ST_X(ev.location) AS longitude, ST_Y(ev.location) AS latitude,
@@ -36,9 +36,29 @@
             ON co02.cow_id = ev.location_water_status_country_id
         LEFT JOIN country AS co03
             ON co03.cow_id = ev.vessel_flag_country_id
-        <if test="#{eventFilter.beginDate} != null and #{eventFilter.endDate} != null">
-            WHERE ev.occurred_on &gt; #{eventFilter.beginDate}::timestamp AND ev.occurred_on &lt; #{eventFilter.endDate}::timestamp
-        </if>
+        <where>
+            <if test="#{eventFilter.beginDate} != null and #{eventFilter.endDate} != null">
+                ev.occurred_on &gt;= #{eventFilter.beginDate}::timestamp AND ev.occurred_on &lt;= #{eventFilter.endDate}::timestamp
+            </if>
+            <if test="#{eventFilter.closestCountry} != null">
+                AND ev.location_closest_country_id IN
+                <foreach item="id" index="index" collection="#{eventFilter.closestCountry}" open="(" separator="," close=")">
+                    #{id}
+                </foreach>
+            </if>
+            <if test="#{eventFilter.territorialWaterStatus} != null">
+                AND ev.location_water_status_country_id IN
+                <foreach item="id" index="index" collection="#{eventFilter.territorialWaterStatus}" open="(" separator="," close=")">
+                    #{id}
+                </foreach>
+            </if>
+            <if test="#{eventFilter.vesselCountry} != null">
+                AND ev.vessel_flag_country_id IN
+                <foreach item="id" index="index" collection="#{eventFilter.vesselCountry}" open="(" separator="," close=")">
+                    #{id}
+                </foreach>
+           </if>
+        </where>
         ORDER BY ev.occurred_on ASC;
     </select>
 

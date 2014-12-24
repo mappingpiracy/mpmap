@@ -120,6 +120,8 @@ public class Event {
 
         List<Event> events;
 
+        List<Integer> li = eventFilter.getClosestCountry();
+
         try {
             events = eventMapper.getEventsWithFilter(eventFilter);
         } finally {

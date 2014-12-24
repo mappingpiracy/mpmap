@@ -2,9 +2,10 @@ package controllers;
 
 
 import com.fasterxml.jackson.databind.JsonNode;
-import gis.GeoJsonHelper;
+import helpers.GeoJsonHelper;
 import models.Event;
 import models.EventFilter;
+import play.Logger;
 import play.mvc.BodyParser;
 import play.mvc.Controller;
 import play.mvc.Result;
@@ -40,7 +41,6 @@ public class MapData extends Controller {
         } else {
             events = Event.getEvents();
         }
-
         return ok(toJson(GeoJsonHelper.eventsToFeatureCollection(events)));
     }
 
@@ -57,10 +57,6 @@ public class MapData extends Controller {
         }
 
         return ok(toJson(jsonEvents));
-    }
-
-    public static Result export2(){
-        return ok("should work..");
     }
 
 }
