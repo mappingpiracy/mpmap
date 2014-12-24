@@ -2,15 +2,15 @@ package controllers;
 
 import dao.EventMapper;
 import dao.MybatisMapper;
-import org.apache.ibatis.mapping.Environment;
+import models.Country;
 import org.apache.ibatis.session.SqlSession;
-import play.*;
-import play.mvc.*;
-
-import views.html.*;
+import play.mvc.Controller;
+import play.mvc.Result;
+import views.html.about;
+import views.html.help;
+import views.html.index;
 
 import java.util.List;
-import java.util.Map;
 
 //import javax.inject.Inject;
 
@@ -21,10 +21,10 @@ public class Application extends Controller {
         SqlSession session = mapper.getSession();
         EventMapper eventMapper = session.getMapper(EventMapper.class);
 
-        List<Map<Integer, String>> countries = eventMapper.getCountries();
+        List<Country> countries = eventMapper.getCountries();
 
 
-        return ok(index.render());
+        return ok(index.render(countries));
     }
 
     public static Result about() {

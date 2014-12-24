@@ -37,7 +37,7 @@ public class GeoJsonHelper {
         properties.put("id", event.getId());
         properties.put("occurredOnDate", event.getOccurredOnDate().toString());
         properties.put("occurredOnTime", event.getOccurredOnTime().toString());
-        properties.put("closestCoastalState", event.getClosestCountry());
+        properties.put("closestCountry", event.getClosestCountry());
         properties.put("territorialWaterStatus", event.getTerritorialWaterStatus());
         properties.put("vesselFlagCountry", event.getVesselFlagCountry());
 

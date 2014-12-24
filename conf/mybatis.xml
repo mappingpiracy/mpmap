@@ -7,6 +7,7 @@
     <typeAliases>
         <typeAlias type="models.Event" alias="Event"/>
         <typeAlias type="models.EventFilter" alias="EventFilter"/>
+        <typeAlias type="models.Country" alias="Country"/>
     </typeAliases>
 
     <environments default="development">

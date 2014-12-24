@@ -60,7 +60,7 @@ function updateEventFilters(){
     
     eventFilters.closestCoastalState = [];
     
-    $('#closest-coastal-state :selected').each(function(i, selected){
+    $('#closest-country :selected').each(function(i, selected){
        eventFilters.closestCoastalState[i] = $(selected).val(); 
     });
     
@@ -141,7 +141,7 @@ function createPopup(feature, layer) {
     popupContent += '<p>Id: ' + feature.properties['id'] + '</p>';
     popupContent += '<p>Date: ' + feature.properties['occurredOnDate'] + '</p>';
     popupContent += '<p>Date: ' + feature.properties['occurredOnTime'] + '</p>';
-    popupContent += '<p>Closest Coastal State: ' + feature.properties['closestCoastalState'] + '</p>';
+    popupContent += '<p>Closest Country: ' + feature.properties['closestCountry'] + '</p>';
     popupContent += '<p>Territorial Water Status: ' + feature.properties['territorialWaterStatus'] + '</p>';
     popupContent += '<p>Vessel Flag Country: ' + feature.properties['vesselFlagCountry'] + '</p>';
     layer.bindPopup(popupContent, popupOptions);
