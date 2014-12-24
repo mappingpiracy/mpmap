@@ -2,26 +2,14 @@ package controllers;
 
 
 import com.fasterxml.jackson.databind.JsonNode;
-import dao.MybatisMapper;
 import models.Event;
 import models.EventFilter;
-import org.apache.ibatis.io.Resources;
-import org.apache.ibatis.mapping.Environment;
-import org.apache.ibatis.session.SqlSession;
-import org.apache.ibatis.session.SqlSessionFactory;
-import org.apache.ibatis.session.SqlSessionFactoryBuilder;
-import play.api.Play;
-import play.data.DynamicForm;
 import play.mvc.BodyParser;
 import play.mvc.Controller;
 import play.mvc.Result;
-import scala.util.parsing.json.JSONArray$;
 
 //import javax.inject.Inject;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 import static play.data.Form.form;
 import static play.libs.Json.toJson;
@@ -44,17 +32,13 @@ public class MapData extends Controller {
     @BodyParser.Of(BodyParser.Json.class)
     public static Result events() {
         JsonNode jsonEventFilter = request().body().asJson();
-        EventFilter eventFilter;
         List<Event> events;
 
-//        if(jsonEventFilter != null && EventFilter.validate(jsonEventFilter)) {
-//            eventFilter = new EventFilter(jsonEventFilter);
-//            events = Event.getByFilter(eventFilter);
-//        } else {
-//            events = Event.getAll();
-//        }
-
-        events = Event.getAll();
+        if(jsonEventFilter != null && EventFilter.validate(jsonEventFilter)) {
+            events = Event.getEvents(new EventFilter(jsonEventFilter));
+        } else {
+            events = Event.getEvents();
+        }
 
         List<JsonNode> jsonEvents = new ArrayList<>();
 

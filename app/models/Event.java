@@ -109,6 +109,42 @@ public class Event {
         this.vesselFlagCountry = vesselFlagCountry;
     }
 
+     /*
+        Data Access Methods
+     */
+
+    public static List<Event> getEvents() {
+        MybatisMapper mapper = new MybatisMapper();
+        SqlSession session = mapper.getSession();
+        EventMapper eventMapper = session.getMapper(EventMapper.class);
+
+        List<Event> events;
+
+        try {
+            events = eventMapper.getEvents();
+        } finally {
+            session.close();
+        }
+
+        return events;
+    }
+
+    public static List<Event> getEvents(EventFilter eventFilter) {
+        MybatisMapper mapper = new MybatisMapper();
+        SqlSession session = mapper.getSession();
+        EventMapper eventMapper = session.getMapper(EventMapper.class);
+
+        List<Event> events;
+
+        try {
+            events = eventMapper.getEvents(eventFilter.toMap());
+        } finally {
+            session.close();
+        }
+
+        return events;
+    }
+
     /*
             Converts the event object to a geoJson feature compatible with leaflet mapping.
          */
@@ -158,41 +194,6 @@ public class Event {
         featureCollection.put("features", featureArray);
 
         return featureCollection;
-    }
-
-    /*
-        Data Access Methods
-     */
-
-    public static List<Event> getAll() {
-        MybatisMapper mapper = new MybatisMapper();
-        SqlSession session = mapper.getSession();
-        EventMapper eventMapper = session.getMapper(EventMapper.class);
-
-        List<Event> events;
-
-        try {
-            events = eventMapper.getEvents();
-        } finally {
-            session.close();
-        }
-
-        return events;
-    }
-
-    public static List<Event> getByFilter(EventFilter eventFilter) {
-        MybatisMapper mapper = new MybatisMapper();
-        SqlSession session = mapper.getSession();
-        List<Event> events;
-
-        try {
-            events = session.selectList("app.dao.EventMapper.selectEvents");
-        } finally {
-            session.close();
-        }
-
-        return events;
-
     }
 
 

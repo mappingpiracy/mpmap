@@ -5,7 +5,8 @@
 <configuration>
 
     <typeAliases>
-        <typeAlias alias="Event" type="models.Event"/>
+        <typeAlias type="models.Event" alias="Event"/>
+        <typeAlias type="models.EventFilter" alias="EventFilter"/>
     </typeAliases>
 
     <environments default="development">
