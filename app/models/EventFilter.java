@@ -19,6 +19,8 @@ public class EventFilter {
     public List<Integer> closestCoastalState;
     public List<Integer> vesselCountry;
 
+    public EventFilter() { }
+
     //TODO: create enums for filter names, figure out how to use them in the scala views
     public EventFilter(JsonNode jsonNode){
         this.beginDate = jsonNode.get("beginDate").asText();
@@ -77,17 +79,5 @@ public class EventFilter {
         } else {
             return false;
         }
-    }
-
-    /*
-        Convert to map for use in mybatis mapping.
-     */
-    public Map<String, Object> toMap() {
-        Map<String, Object> eventFilterMap = new HashMap<>();
-
-        eventFilterMap.put("beginDate", "2012-01-01");
-        eventFilterMap.put("endDate", "2014-01-01");
-
-        return eventFilterMap;
     }
 }

@@ -137,7 +137,7 @@ public class Event {
         List<Event> events;
 
         try {
-            events = eventMapper.getEvents(eventFilter);
+            events = eventMapper.getEventsWithFilter(eventFilter);
         } finally {
             session.close();
         }
