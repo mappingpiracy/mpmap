@@ -12,5 +12,6 @@ import java.util.Map;
  */
 public interface EventMapper {
     public List<Event> getEvents();
-    public List<Event> getEvents(@Param("filterMap") Map<String, Object> filterMap);
+    //public List<Event> getEvents(@Param("filterMap") Map<String, Object> filterMap);
+    public List<Event> getEvents(@Param("eventFilter") EventFilter eventFilter);
 }
