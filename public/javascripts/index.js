@@ -99,6 +99,9 @@ function initializeMap() {
  * populates the map with events returned from api based on filters.
  */
 function populateEvents() {
+    //  Display loading message
+    displayOverlayMessage("Loading events, please wait.");
+
     //  Update event filters
     updateEventFilters();
     
@@ -121,7 +124,8 @@ function populateEvents() {
             eventLayer = L.geoJson(events, {
                  onEachFeature: createPopup,
                  pointToLayer: createCustomMarker,
-             }).addTo(map);
+            }).addTo(map);
+            hideOverlayMessage();
         }
     });
 
@@ -160,6 +164,18 @@ function createCustomMarker(feature, coordinates) {
         opacity: 1,
         fillOpacity: 0.8
     });
+}
+
+function displayOverlayMessage(message) {
+    var overlayMessage = $("#overlay-message");
+    overlayMessage.append("<p>" + message + "</p>");
+    overlayMessage.fadeIn();
+}
+
+function hideOverlayMessage() {
+    var overlayMessage = $("#overlay-message");
+    overlayMessage.fadeOut();
+    overlayMessage.empty();
 }
 
 
