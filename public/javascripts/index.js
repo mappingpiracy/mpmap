@@ -36,6 +36,10 @@ $('#export-events').click(function(){
     exportEvents();
 });
 
+$('#overlay-message > .message-dismiss').click(function() {
+    hideOverlayMessage();
+});
+
 
 
 
@@ -168,14 +172,16 @@ function createCustomMarker(feature, coordinates) {
 
 function displayOverlayMessage(message) {
     var overlayMessage = $("#overlay-message");
-    overlayMessage.append("<p>" + message + "</p>");
+    var overlayMessageContent = $("#overlay-message > .message-content");
+    overlayMessageContent.append("<p>" + message + "</p>");
     overlayMessage.fadeIn();
 }
 
 function hideOverlayMessage() {
     var overlayMessage = $("#overlay-message");
+    var overlayMessageContent = $("#overlay-message > .message-content");
     overlayMessage.fadeOut();
-    overlayMessage.empty();
+    overlayMessageContent.empty();
 }
 
 
