@@ -37,24 +37,24 @@
         LEFT JOIN country AS co03
             ON co03.cow_id = ev.vessel_flag_country_id
         <where>
-            <if test="#{eventFilter.beginDate} != null and #{eventFilter.endDate} != null">
+            <if test="eventFilter.beginDate != null and eventFilter.endDate != null">
                 ev.occurred_on &gt;= #{eventFilter.beginDate}::timestamp AND ev.occurred_on &lt;= #{eventFilter.endDate}::timestamp
             </if>
-            <if test="#{eventFilter.closestCountry} != null">
+            <if test="eventFilter.closestCountry != null">
                 AND ev.location_closest_country_id IN
-                <foreach item="id" index="index" collection="#{eventFilter.closestCountry}" open="(" separator="," close=")">
+                <foreach item="id" index="index" collection="eventFilter.closestCountry" open="(" separator="," close=")">
                     #{id}
                 </foreach>
             </if>
-            <if test="#{eventFilter.territorialWaterStatus} != null">
+            <if test="eventFilter.territorialWaterStatus != null">
                 AND ev.location_water_status_country_id IN
-                <foreach item="id" index="index" collection="#{eventFilter.territorialWaterStatus}" open="(" separator="," close=")">
+                <foreach item="id" index="index" collection="eventFilter.territorialWaterStatus" open="(" separator="," close=")">
                     #{id}
                 </foreach>
             </if>
-            <if test="#{eventFilter.vesselCountry} != null">
+            <if test="eventFilter.vesselCountry != null">
                 AND ev.vessel_flag_country_id IN
-                <foreach item="id" index="index" collection="#{eventFilter.vesselCountry}" open="(" separator="," close=")">
+                <foreach item="id" index="index" collection="eventFilter.vesselCountry" open="(" separator="," close=")">
                     #{id}
                 </foreach>
            </if>

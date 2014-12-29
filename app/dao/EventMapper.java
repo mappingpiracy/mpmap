@@ -15,6 +15,7 @@ public interface EventMapper {
     //TODO: Figure out if there is a way to combine or overload the two event methods
 
     public List<Event> getEvents();
-    public List<Event> getEventsWithFilter(@Param("eventFilter") EventFilter eventFilter);
+    public List<Event> getEventsWithFilter(@Param("eventFilter") EventFilter eventFilter,
+                                           @Param("closestCountry") List<Integer> closestCountry);
     public List<Country> getCountries();
 }

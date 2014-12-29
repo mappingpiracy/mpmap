@@ -29,14 +29,6 @@ public class EventFilter {
         this.closestCountry = JsonHelper.arrayNodeToIntegerList((ArrayNode) jsonNode.get("closestCountry"));
         this.territorialWaterStatus = JsonHelper.arrayNodeToIntegerList((ArrayNode) jsonNode.get("territorialWaterStatus"));
         this.vesselCountry = JsonHelper.arrayNodeToIntegerList((ArrayNode) jsonNode.get("vesselCountry"));
-
-        Logger.debug("New EventFilter created.");
-        Logger.debug("beginDate: " + this.beginDate);
-        Logger.debug("endDate: " + this.endDate);
-        Logger.debug("closestCountry: " + this.closestCountry.toString());
-        Logger.debug("territorialWaterStatus: " + this.territorialWaterStatus.toString());
-        Logger.debug("vesselCountry: " + this.vesselCountry.toString());
-
     }
 
     public String getBeginDate() {

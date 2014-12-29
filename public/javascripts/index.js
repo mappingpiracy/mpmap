@@ -140,7 +140,7 @@ function createPopup(feature, layer) {
     popupContent = '<strong>Event Information</strong>';
     popupContent += '<p>Id: ' + feature.properties['id'] + '</p>';
     popupContent += '<p>Date: ' + feature.properties['occurredOnDate'] + '</p>';
-    popupContent += '<p>Date: ' + feature.properties['occurredOnTime'] + '</p>';
+    popupContent += '<p>Time: ' + feature.properties['occurredOnTime'] + '</p>';
     popupContent += '<p>Closest Country: ' + feature.properties['closestCountry'] + '</p>';
     popupContent += '<p>Territorial Water Status: ' + feature.properties['territorialWaterStatus'] + '</p>';
     popupContent += '<p>Vessel Flag Country: ' + feature.properties['vesselFlagCountry'] + '</p>';
