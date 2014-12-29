@@ -47,7 +47,7 @@
                 </foreach>
             </if>
             <if test="eventFilter.territorialWaterStatus != null">
-                AND ev.locatio_water_status_country_id IN
+                AND ev.location_water_status_country_id IN
                 <foreach item="id" index="index" collection="eventFilter.territorialWaterStatus" open="(" separator="," close=")">
                     #{id}
                 </foreach>
