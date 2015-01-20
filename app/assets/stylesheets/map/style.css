@@ -1,0 +1,87 @@
+.ui-splitbar {
+  background-color: #999 !important;
+}
+
+#wrap-outer {
+  top: 50px;
+}
+
+#wrap-left {
+  overflow: hidden;
+}
+
+#wrap-right {
+}
+
+#filters,
+#analysis {
+  margin: 10px;
+}
+
+#map {
+  width: 100%;
+  height: 100%;
+}
+
+#event-filter-scroll-wrapper {
+  width: 100%;
+  height: 85%%;
+  overflow-y: scroll;
+  display: block;
+  padding: 5px;
+  padding-bottom:100px;
+}
+
+#event-filter .panel .panel-body .row {
+  padding: 10px;
+}
+
+#event-filter-bottom {
+  position: absolute;
+  bottom: 0;
+  background-color: white;
+  padding: 15px;
+  border-top: 5px solid #999;
+  width: 100%;
+}
+
+.popup-content {
+  padding: 5px;
+}
+
+.popup-content ul {
+  list-style: none;
+  padding-left: 0px;
+}
+
+.popup-content ul li {
+  padding: 5px;
+}
+
+.popup-content ul li:nth-child(even) {
+  background-color: LightBlue;
+}
+
+.multi-select-list {
+  border: 1px solid #999;
+  border-radius: 5px;
+  overflow-y: scroll;
+  width: 100%;
+  height: 150px;
+}
+
+.multi-select-list ul {
+  list-style: none;
+  padding-left: 0px;
+}
+
+.multi-select-list ul li {
+  width: 100%;
+  padding: 4px;
+  padding-left: 8px;
+  border-bottom: 1px dotted #CFCFCF;
+}
+
+.multi-select-list ul li a:hover {
+  text-decoration: none;
+}

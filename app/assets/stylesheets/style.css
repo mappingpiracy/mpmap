@@ -1,0 +1,18 @@
+.navbar a {
+  color: #73b5e5 !important;
+}
+
+main {
+  margin-top: 50px;
+}
+
+main .wrapper {
+  min-height: 100%;
+  margin-top: -60px;
+  padding-top: 60px;
+}
+
+label.large {
+  font-size: large;
+  border-bottom: 1px solid #999;
+}
