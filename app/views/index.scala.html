@@ -1,5 +1,74 @@
-@main(title = "Home") {
+@()<!DOCTYPE html>
+<html lang="en" ng-app="mpmap">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="MPMAP, Maritime Piracy Mapping Analysis Portal">
+    <meta name="author" content="MappingPiracy.net, Alex Klibisz">
+
+    <title>MPMAP</title>
+
+    <!-- CSS: Bootstrap core -->
+    <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/lib/bootstrap/bootstrap.min.css")">
+    <!-- CSS: Main styles -->
+    <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/style.css")">
+    <!-- CSS: Map styles -->
+    <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/map/style.css")">
+    <!-- CSS: Angular-UI styles -->
+    <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/lib/angular-ui/ui-layout.css")">
+    <!-- CSS: Leaflet styles -->
+    <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/lib/leaflet/leaflet.css")">
+
+
+    <!--&lt;!&ndash; HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries &ndash;&gt;-->
+    <!--&lt;!&ndash;[if lt IE 9]>-->
+    <!--<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>-->
+    <!--<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>-->
+    <![endif]-->
+</head>
+
+<body>
+
+<nav ng-include="'assets/partials/nav.html'"></nav>
 
     <main ng-view></main>
 
-}
+<!-- JS: Angular -->
+<script src="@routes.Assets.at("javascripts/lib/angular/angular.min.js")"></script>
+<script src="@routes.Assets.at("javascripts/lib/angular/angular-route.min.js")"></script>
+<script src="@routes.Assets.at("javascripts/lib/angular/angular-animate.min.js")"></script>
+
+<!-- JS: Angular App -->
+<script src="@routes.Assets.at("javacripts/app.js")"></script>
+
+<!-- JS: Angular Services -->
+<script src="@routes.Assets.at("javacripts/services/mapdata.js")"></script>
+<!-- JS: Angular Controllers -->
+<script src="@routes.Assets.at("javacripts/controllers/map.js")"></script>
+<script src="@routes.Assets.at("javacripts/controllers/staticpage.js")"></script>
+
+<!-- JS: Angular Custom Directives -->
+<script src="@routes.Assets.at("javascripts/lib/angular-ui/ui-layout.min.js")"></script>
+<script src="@routes.Assets.at("javascripts/lib/angular/angular-leaflet-directive.min.js")"></script>
+
+<!-- JS: jQuery and Bootstrap -->
+<script src="@routes.Assets.at("javascripts/lib/ui-bootstrap/ui-bootstrap-tpls-0.12.0.min.js")"></script>
+<script src="@routes.Assets.at("javascripts/lib/jquery/jquery.min.js")"></script>
+<script src="@routes.Assets.at("javascripts/lib/bootstrap/bootstrap.min.js")"></script>
+
+<!-- JS: IE10 viewport hack for Surface/desktop Windows 8 bug -->
+<script src="@routes.Assets.at("javascripts/lib/bootstrap/ie10-viewport-bug-workaround.js")"></script>
+
+<!-- JS: Mapping -->
+<script src="@routes.Assets.at("javascripts/lib/mapping/leaflet.min.js")"></script>
+<script src="@routes.Assets.at("javascripts/lib/mapping/mapbox.min.js")"></script>
+
+<!-- JS: Other libraries -->
+<script src="@routes.Assets.at("javascripts/lib/other/date.js")"></script>
+
+
+</body>
+</html>
+
+
