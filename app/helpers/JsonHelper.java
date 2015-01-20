@@ -11,7 +11,7 @@ import java.util.List;
 public class JsonHelper {
 
     public static List<Integer> arrayNodeToIntegerList(ArrayNode arrayNode) {
-        List<Integer> integerList = new ArrayList<>();
+        List<Integer> integerList = new ArrayList<Integer>();
         for(int i = 0; i < arrayNode.size(); i++) {
             integerList.add(arrayNode.get(i).asInt());
         }

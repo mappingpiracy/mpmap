@@ -56,7 +56,7 @@ public class GeoJsonHelper {
         nodeFactory = new ObjectMapper().getNodeFactory();
         ObjectNode featureCollection = nodeFactory.objectNode();
         ArrayNode featureArray = nodeFactory.arrayNode();
-        List<JsonNode> jsonEvents = new ArrayList<>();
+        List<JsonNode> jsonEvents = new ArrayList<JsonNode>();
 
         for(int i = 0; i < events.size(); i++){
             jsonEvents.add(GeoJsonHelper.eventToFeature(events.get(i)));
