@@ -13,15 +13,9 @@ POST    /mapdata/events             controllers.MapData.events()
 # POST    /mapdata/export             controllers.MapData.export()
 
 # Static pages
-# GET     /about                      controllers.Application.about()
-# GET     /help                       controllers.Application.help()
+# GET     /about                    controllers.Application.about()
+# GET     /help                     controllers.Application.help()
 
 
 # Map static resources from the /public folder to the /assets URL path
-GET     /assets/*file               controllers.Assets.at(path="/public", file)
-
-
-#GET     /public/javascripts/*file       controllers.Assets.at(path="/public/javascripts", file)
-#GET     /public/stylesheets/*file       controllers.Assets.at(path="/public/stylesheets", file)
-#GET     /app/assets/javascripts/*file   controllers.Assets.at(path="/app/assets/javascripts", file)
-#GET     /app/assets/stylesheets/*file   controllers.Assets.at(path="/app/assets/stylesheets", file)
+GET  /assets/*file        controllers.Assets.at(path="/public", file)

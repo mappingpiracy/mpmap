@@ -17,7 +17,6 @@ libraryDependencies ++= Seq(
   "postgresql" % "postgresql" % "9.1-901.jdbc4",
   "org.mybatis" % "mybatis" % "3.2.8",
   "commons-io" % "commons-io" % "2.3",
-  //"org.mybatis" % "mybatis-guice" % "3.3",
   javaCore,
   javaJdbc
 )
