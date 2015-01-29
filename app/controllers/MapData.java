@@ -9,6 +9,7 @@ import play.Logger;
 import play.mvc.BodyParser;
 import play.mvc.Controller;
 import play.mvc.Result;
+import models.Country;
 
 //import javax.inject.Inject;
 import java.util.*;
@@ -26,7 +27,6 @@ public class MapData extends Controller {
         return ok("this controller method doesn't really do anything :*(");
     }
 
-
     /*
         Checks for posted event filters.
         Returns either filtered events, or all events if there are no filters.
@@ -42,6 +42,15 @@ public class MapData extends Controller {
             events = Event.getEvents();
         }
         return ok(toJson(GeoJsonHelper.eventsToFeatureCollection(events)));
+    }
+
+    /*
+        Return JSON list of countries
+     */
+    public static Result countries() {
+        List<Country> countries = Country.getCountries();
+
+        return ok(toJson(countries));
     }
 
     /*

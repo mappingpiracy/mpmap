@@ -9,6 +9,7 @@ GET     /                           controllers.Application.index()
 GET     /mapdata                    controllers.MapData.index()
 GET     /mapdata/events             controllers.MapData.events()
 POST    /mapdata/events             controllers.MapData.events()
+GET     /mapdata/countries          controllers.MapData.countries()
 
 # Static pages
 

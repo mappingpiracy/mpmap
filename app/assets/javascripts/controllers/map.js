@@ -37,7 +37,7 @@ mpmap.controller('MapController', ['$scope', '$location', '$document', '$http', 
 
       fields: {
         dateRange: {
-          years: ["2015", "2014", "2013", "2012", "2011", "2010"],
+          years: MapData.getYears(),
           selectedYear: Date.today().getFullYear(),
           beginDate: {
             value: new Date(Date.today().getFullYear(), 0, 1).toString("yyyy-MM-dd"),
@@ -58,8 +58,8 @@ mpmap.controller('MapController', ['$scope', '$location', '$document', '$http', 
             }
           },
           update: function() {
-            $scope.filter.dateRange.beginDate.value = $scope.filter.dateRange.selectedYear + "-01-01";
-            $scope.filter.dateRange.endDate.value = $scope.filter.dateRange.selectedYear + "-12-31";
+            $scope.filterForm.fields.dateRange.beginDate.value = $scope.filterForm.fields.dateRange.selectedYear + "-01-01";
+            $scope.filterForm.fields.dateRange.endDate.value = $scope.filterForm.fields.dateRange.selectedYear + "-12-31";
           }
         },
         locationInformation: {
@@ -110,18 +110,36 @@ mpmap.controller('MapController', ['$scope', '$location', '$document', '$http', 
         };
 
         angular.forEach($scope.filterForm.fields.locationInformation.territorialWaterStatus.selected, function(value, key) {
+          value.id = value.cowId;
           finalFilter.territorialWaterStatus.push(value.id);
         });
 
         angular.forEach($scope.filterForm.fields.locationInformation.closestCountry.selected, function(value, key) {
+          value.id = value.cowId;
           finalFilter.closestCountry.push(value.id);
         });
 
         angular.forEach($scope.filterForm.fields.vesselInformation.vesselCountry.selected, function(value, key) {
+          value.id = value.cowId;
           finalFilter.vesselCountry.push(value.id);
         });
 
         return finalFilter;
+      },
+      /*
+      - get the current filters
+      - retrieve the events via the mapdata service with the given filters
+      - replace the map's geojson with the new events
+      */
+      updateEvents: function() {
+        MapData.getEvents($scope.filterForm.getFilter()).success(function(data, status) {
+          $scope.map.geojson = {
+            data: data,
+            pointToLayer: $scope.map.createMarker,
+            onEachFeature: $scope.map.createPopup
+          };
+          console.log('Events updated.');
+        });
       }
 
     };
@@ -173,12 +191,12 @@ mpmap.controller('MapController', ['$scope', '$location', '$document', '$http', 
 
     MapData.getEvents($scope.filterForm.getFilter()).success(function(data, status) {
       $scope.map.geojson = {
-            data: data,
-            pointToLayer: $scope.map.createMarker,
-            onEachFeature: $scope.map.createPopup
-          };
-          //console.log(JSON.stringify($scope.filterForm.getFilter()));
-        });
+        data: data,
+        pointToLayer: $scope.map.createMarker,
+        onEachFeature: $scope.map.createPopup
+      };
+      console.log('Initial events loaded.');
+    });
 
 
   }
