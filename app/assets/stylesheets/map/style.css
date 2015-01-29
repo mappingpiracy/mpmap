@@ -3,11 +3,17 @@
 }
 
 #wrap-outer {
-  top: 50px;
+  position: absolute;
+  width:100%;
+  height:99%;
+  padding-top: 50px;
 }
 
 #wrap-left {
+  position: absolute;
+  height: 99%;
   overflow: hidden;
+  padding-top:50px;
 }
 
 #wrap-right {
@@ -18,18 +24,22 @@
   margin: 10px;
 }
 
+#map-wrapper {
+  padding-top: 50px;
+}
+
 #map {
   width: 100%;
   height: 100%;
 }
 
 #event-filter-scroll-wrapper {
-  width: 100%;
-  height: 85%%;
+  position: absolute;
   overflow-y: scroll;
-  display: block;
+  height: 95%;
+  width: 95%;
   padding: 5px;
-  padding-bottom:100px;
+  padding-bottom:500px;
 }
 
 #event-filter .panel .panel-body .row {
