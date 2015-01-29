@@ -9,13 +9,8 @@ GET     /                           controllers.Application.index()
 GET     /mapdata                    controllers.MapData.index()
 GET     /mapdata/events             controllers.MapData.events()
 POST    /mapdata/events             controllers.MapData.events()
-# GET     /mapdata/export             controllers.MapData.export()
-# POST    /mapdata/export             controllers.MapData.export()
 
 # Static pages
-# GET     /about                    controllers.Application.about()
-# GET     /help                     controllers.Application.help()
-
 
 # Map static resources from the /public folder to the /assets URL path
 GET  /assets/*file        controllers.Assets.at(path="/public", file)
