@@ -1,9 +1,12 @@
-<h2>Event Filters</h2>
-<div class="alert alert-info">
-  <p>Use the filters below to control which events are presented on the map.</p>
+
+<div id="event-filter-top">
+  <h2>Event Filters</h2>
+  <div class="alert alert-info" style="display: inline-block;">
+    <p>Use the filters below to control which events are presented on the map.</p>
+  </div>
 </div>
 
-<div id="event-filter-scroll-wrapper">
+<!--<div id="event-filter-scroll-wrapper">-->
 
   <form id="event-filter" class="form form-horizontal" novalidate>
 
@@ -249,9 +252,10 @@
       </div>
     </div>
 
+
   </form>
 
-</div>
+<!--</div>-->
 
 <div id="event-filter-bottom">
   <button type="submit" class="btn btn-lg btn-primary" ng-click="filterForm.updateFilter()">
@@ -259,6 +263,6 @@
   </button>
 
   <button type="submit" class="btn btn-lg btn-primary" ng-click="map.addEvents()">
-    Add Events
+    Export Events
   </button>
 </div>

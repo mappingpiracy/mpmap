@@ -12,8 +12,10 @@
 #wrap-left {
   position: absolute;
   height: 99%;
-  overflow: hidden;
-  padding-top:50px;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  padding-top:200px;
+  padding-bottom: 200px;
 }
 
 #wrap-right {
@@ -25,6 +27,7 @@
 }
 
 #map-wrapper {
+  z-index: 20;
   padding-top: 50px;
 }
 
@@ -33,13 +36,15 @@
   height: 100%;
 }
 
-#event-filter-scroll-wrapper {
-  position: absolute;
-  overflow-y: scroll;
-  height: 95%;
-  width: 95%;
-  padding: 5px;
-  padding-bottom:500px;
+#event-filter-top {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 10;
+  background-color: white;
+  border-bottom: solid #999 5px;
+  padding: 50px 10px 10px 10px;
+  width: 100%;
 }
 
 #event-filter .panel .panel-body .row {
@@ -47,12 +52,21 @@
 }
 
 #event-filter-bottom {
-  position: absolute;
+  position: fixed;
+  left: 0;
   bottom: 0;
+  z-index: 10;
   background-color: white;
+  border-top: solid #999 5px;
   padding: 15px;
-  border-top: 5px solid #999;
   width: 100%;
+}
+
+#map-analysis-wrapper {
+  background-color: white;
+}
+
+#analysis {
 }
 
 .popup-content {
