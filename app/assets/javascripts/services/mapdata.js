@@ -8,9 +8,10 @@ mpmap.factory('MapData',
       alert('load map called!');
     },
 
-    getEvents : function() {
-      //return $http.get("/mapdata/events");
-      return $http.get("assets/data/events.json");
+    getEvents : function(eventFilter) {
+      console.log("filter passed: " + JSON.stringify(eventFilter));
+      return $http.get("/mapdata/events");
+      //return $http.get("assets/data/events.json");
     },
 
     getEvents2 : function() {
