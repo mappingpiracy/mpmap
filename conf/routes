@@ -13,4 +13,14 @@ POST    /mapdata/events             controllers.MapData.events()
 # Static pages
 
 # Map static resources from the /public folder to the /assets URL path
-GET  /assets/*file        controllers.Assets.at(path="/public", file)
+GET     /assets/*file               controllers.Assets.at(path="/public", file)
+
+#GET     /stylesheets/*file          controllers.Assets.at(path="/public/stylesheets", file)
+#GET     /javascripts/*file          controllers.Assets.at(path="/public/javascripts", file)
+#GET     /images/*file               controllers.Assets.at(path="/public/images", file)
+#GET     /public/*file               controllers.Assets.at(path="/public", file)
+
+#GET  /assets/*file        controllers.Assets.at(path="/app/assets", file)
+
+#GET  /stylesheets/*file        controllers.Assets.at(path="/public/stylesheets", file)
+#GET  /images/*file             controllers.Assets.at(path="/public/images", file)

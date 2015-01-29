@@ -21,5 +21,17 @@ libraryDependencies ++= Seq(
   javaJdbc
 )
 
+// playAssetsDirectories <+= baseDirectory / "app/assets"
+
 // Add mappers to classpath
 unmanagedResourceDirectories in Compile <+= baseDirectory( _ / "app/dao/mappers" )
+
+Seq(
+  scalaSource in Compile <<= baseDirectory / "app",
+  javaSource in Compile <<= baseDirectory / "app",
+  sourceDirectory in Compile <<= baseDirectory / "app",
+  scalaSource in Test <<= baseDirectory / "test",
+  javaSource in Test <<= baseDirectory / "test",
+  sourceDirectory in Test <<= baseDirectory / "test",
+  resourceDirectory in Compile <<= baseDirectory / "conf"
+)
