@@ -33,7 +33,7 @@ public class EventFilter {
         this.closestCountry = JsonHelper.arrayNodeToIntegerList((ArrayNode) jsonNode.get(eventFilterType.CLOSEST_COUNTRY.getJsName()));
         this.territorialWaterStatus = JsonHelper.arrayNodeToIntegerList((ArrayNode) jsonNode.get(eventFilterType.TERRITORIAL_WATER_STATUS.getJsName()));
         this.vesselCountry = JsonHelper.arrayNodeToIntegerList((ArrayNode) jsonNode.get(eventFilterType.VESSEL_COUNTRY.getJsName()));
-        
+        //this.vesselStatus = JsonHelper.arrayNodeToStringList((ArrayNode) jsonNode.get(eventFilterType.VESSEL_STATUS.getJsName()));
     }
 
     public String getBeginDate() {

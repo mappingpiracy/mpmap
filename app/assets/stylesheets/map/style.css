@@ -14,6 +14,7 @@
 }
 
 #wrap-right {
+    overflow: hidden;
 }
 
 #filters,
@@ -23,6 +24,7 @@
 
 #map-wrapper {
   padding-top: 50px;
+  overflow: hidden;
 }
 
 #map {
@@ -52,9 +54,11 @@
 }
 
 #map-analysis-wrapper {
+    overflow: scroll;
 }
 
 #analysis {
+
 }
 
 .popup-content {

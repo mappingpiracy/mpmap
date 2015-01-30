@@ -58,6 +58,12 @@
                     #{id}
                 </foreach>
            </if>
+            <if test="eventFilter.vesselStatus != null">
+                AND ev.vessel_status IN
+                <foreach item="id" index="index" collection="eventFilter.vesselStatus" open="(" separator="," close=")">
+                    #{id}
+                </foreach>
+            </if>
         </where>
         ORDER BY ev.occurred_on ASC;
     </select>
