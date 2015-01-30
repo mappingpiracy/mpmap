@@ -1,12 +1,21 @@
 
 <div id="event-filter-top">
-  <h2>Event Filters</h2>
-  <div class="alert alert-info" style="display: inline-block;">
-    <p>Use the filters below to control which events are presented on the map.</p>
-  </div>
+
+    <h2>Event Filters</h2>
+    <button type="submit" class="btn btn-md btn-primary" ng-click="filterForm.updateEvents()">
+      Update Events
+    </button>
+    <button type="submit" class="btn btn-md btn-primary" ng-click="">
+      Export Events
+    </button>
+
 </div>
 
-<div id="event-filter-scroll-wrapper" resize-filter-form>
+<div id="event-filter-scroll-wrapper" filter-form>
+
+  <div class="alert alert-info">
+    <p>Use the filters below to control which events are presented on the map.</p>
+  </div>
 
   <form id="event-filter" class="form form-horizontal" novalidate>
 
@@ -185,16 +194,16 @@
 
         <!-- Vessel Status -->
 
-        <!-- Vessel Country -->
         <div class="row">
           <div class="col-md-12">
             <label class="large">Vessel Status</label>
+            <button popover="{{messages.help.multiSelect}}" popover-trigger="mouseenter" class="btn btn-xs btn-info">Help</button>
           </div>
         </div>
 
         <div class="row">
 
-          <!-- "All" countries -->
+          <!-- "All" statuses -->
 
           <div class="col-md-6">
             <label>All</label>
@@ -207,7 +216,7 @@
             </div>
           </div>
 
-          <!-- "Selected" countries -->
+          <!-- "Selected" statuses -->
 
           <div class="col-md-6">
             <label>Selected</label>
@@ -252,17 +261,12 @@
       </div>
     </div>
 
-
+    <button type="submit" class="btn btn-md btn-primary" ng-click="filterForm.updateEvents()">
+      Update Events
+    </button>
+    <button type="submit" class="btn btn-md btn-primary" ng-click="">
+      Export Events
+    </button>
   </form>
 
-</div>
-
-<div id="event-filter-bottom">
-  <button type="submit" class="btn btn-lg btn-primary" ng-click="filterForm.updateEvents()">
-    Update Events
-  </button>
-
-  <button type="submit" class="btn btn-lg btn-primary" ng-click="map.addEvents()">
-    Export Events
-  </button>
 </div>

@@ -81,7 +81,7 @@ mpmap.controller('MapController', ['$scope', '$location', '$document', '$http', 
             selected: []
           },
           vesselStatus: {
-            all: ["Anchored", "Berthed", "Moored", "Stationalry", "Steaming", "Unspecified"],
+            all: MapData.getVesselStatus(),
             selected: []
           }
         },
