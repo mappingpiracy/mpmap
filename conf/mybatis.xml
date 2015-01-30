@@ -4,6 +4,8 @@
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 
+    <properties resource="mybatis.properties"></properties>
+
     <typeAliases>
         <typeAlias type="models.Event" alias="Event"/>
         <typeAlias type="models.EventFilter" alias="EventFilter"/>
@@ -15,9 +17,9 @@
             <transactionManager type="JDBC"/>
             <dataSource type="POOLED">
                 <property name="driver" value="org.postgresql.Driver"/>
-                <property name="url" value="jdbc:postgresql://mpmap.cn5ibtpsyvju.us-west-2.rds.amazonaws.com:5432/mpmap"/>
-                <property name="username" value="mpmap_master"/>
-                <property name="password" value="pirat3s!"/>
+                <property name="url" value="${prod.url}"/>
+                <property name="username" value="${prod.user}"/>
+                <property name="password" value="${prod.pass}"/>
             </dataSource>
         </environment>
     </environments>
