@@ -13,3 +13,4 @@ tmp
 misc
 *.iml
 *.log
+conf/mybatis.properties
