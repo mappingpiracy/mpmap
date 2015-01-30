@@ -7,28 +7,33 @@ import org.apache.commons.lang3.StringUtils;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 import play.Logger;
+import models.EventFilterType;
 
+import java.lang.String;
 import java.util.List;
 
 /**
  * Created by alex on 12/14/14.
  */
 public class EventFilter {
-    private String beginDate;
-    private String endDate;
-    private List<Integer> closestCountry;
-    private List<Integer> territorialWaterStatus;
-    private List<Integer> vesselCountry;
+    protected EventFilterType eventFilterType;
+    protected String beginDate;
+    protected String endDate;
+    protected List<Integer> closestCountry;
+    protected List<Integer> territorialWaterStatus;
+    protected List<Integer> vesselCountry;
+    protected List<String> vesselStatus;
 
     public EventFilter() { }
 
     //TODO: create enums for filter names, figure out how to use them in the scala views
     public EventFilter(JsonNode jsonNode){
-        this.beginDate = jsonNode.get("beginDate").asText();
-        this.endDate = jsonNode.get("endDate").asText();
-        this.closestCountry = JsonHelper.arrayNodeToIntegerList((ArrayNode) jsonNode.get("closestCountry"));
-        this.territorialWaterStatus = JsonHelper.arrayNodeToIntegerList((ArrayNode) jsonNode.get("territorialWaterStatus"));
-        this.vesselCountry = JsonHelper.arrayNodeToIntegerList((ArrayNode) jsonNode.get("vesselCountry"));
+        this.beginDate = jsonNode.get(eventFilterType.BEGIN_DATE.getJsName()).asText();
+        this.endDate = jsonNode.get(eventFilterType.END_DATE.getJsName()).asText();
+        this.closestCountry = JsonHelper.arrayNodeToIntegerList((ArrayNode) jsonNode.get(eventFilterType.CLOSEST_COUNTRY.getJsName()));
+        this.territorialWaterStatus = JsonHelper.arrayNodeToIntegerList((ArrayNode) jsonNode.get(eventFilterType.TERRITORIAL_WATER_STATUS.getJsName()));
+        this.vesselCountry = JsonHelper.arrayNodeToIntegerList((ArrayNode) jsonNode.get(eventFilterType.VESSEL_COUNTRY.getJsName()));
+        
     }
 
     public String getBeginDate() {
@@ -82,6 +87,16 @@ public class EventFilter {
     public void setVesselCountry(List<Integer> vesselCountry) {
         this.vesselCountry = vesselCountry;
     }
+
+    public List<String> getVesselStatus() {
+        return vesselStatus;
+    }
+
+    public void setVesselStatus(List<String> vesselStatus) {
+        this.vesselStatus = vesselStatus;
+    }
+
+
 
     /*
         Check the passed json to make sure begindate and enddate are present

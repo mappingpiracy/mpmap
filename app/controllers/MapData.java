@@ -24,7 +24,7 @@ public class MapData extends Controller {
 
 
     public static Result index(){
-        return ok("this controller method doesn't really do anything :*(");
+        return ok();
     }
 
     /*
@@ -49,7 +49,6 @@ public class MapData extends Controller {
      */
     public static Result countries() {
         List<Country> countries = Country.getCountries();
-
         return ok(toJson(countries));
     }
 
