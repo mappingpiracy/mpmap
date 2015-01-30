@@ -106,7 +106,8 @@ mpmap.controller('MapController', ['$scope', '$location', '$document', '$http', 
           endDate: $scope.filterForm.fields.dateRange.endDate.value,
           territorialWaterStatus: [],
           closestCountry: [],
-          vesselCountry: []
+          vesselCountry: [],
+          vesselStatus: []
         };
 
         angular.forEach($scope.filterForm.fields.locationInformation.territorialWaterStatus.selected, function(value, key) {
@@ -122,6 +123,10 @@ mpmap.controller('MapController', ['$scope', '$location', '$document', '$http', 
         angular.forEach($scope.filterForm.fields.vesselInformation.vesselCountry.selected, function(value, key) {
           value.id = value.cowId;
           finalFilter.vesselCountry.push(value.id);
+        });
+
+        angular.forEach($scope.filterForm.fields.vesselInformation.vesselStatus.selected, function(value, key) {
+          finalFilter.vesselStatus.push(value);
         });
 
         return finalFilter;
@@ -173,6 +178,7 @@ mpmap.controller('MapController', ['$scope', '$location', '$document', '$http', 
         popupContent += '<li>Closest Country:           <strong>' + feature.properties.closestCountry + '</strong></li>';
         popupContent += '<li>Territorial Water Status:  <strong>' + feature.properties.territorialWaterStatus + '</strong></li>';
         popupContent += '<li>Vessel Flag Country:       <strong>' + feature.properties.vesselFlagCountry + '</strong></li>';
+        popupContent += '<li>Vessel Status:             <strong>' + feature.properties.vesselStatus + '</strong></li>';
         popupContent += '</ul></div>';
         layer.bindPopup(popupContent, popupOptions);
       },

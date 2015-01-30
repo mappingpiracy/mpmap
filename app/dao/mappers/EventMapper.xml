@@ -13,6 +13,7 @@
         <result property="closestCountry" column="closest_country"/>
         <result property="territorialWaterStatus" column="territorial_water_status"/>
         <result property="vesselFlagCountry" column="vessel_flag_country"/>
+        <result property="vesselStatus" column="vessel_status"/>
     </resultMap>
 
     <resultMap id="CountryResult" type="Country">
@@ -28,7 +29,8 @@
             ST_X(ev.location) AS longitude, ST_Y(ev.location) AS latitude,
             COALESCE(co01.name, 'Unspecified') AS closest_country,
             COALESCE(co02.name, 'Unspecified') AS territorial_water_status,
-            COALESCE(co03.name, 'Unspecified') AS vessel_flag_country
+            COALESCE(co03.name, 'Unspecified') AS vessel_flag_country,
+            ev.vessel_status AS vessel_status
         FROM event AS ev
         LEFT JOIN country AS co01
             ON co01.cow_id = ev.location_closest_country_id

@@ -14,11 +14,11 @@ import java.io.InputStream;
  */
 public class MybatisMapper {
 
-    private String resource = "mybatis.xml";
-    private InputStream inputStream;
-    private SqlSessionFactory sqlSessionFactory;
-    private SqlSession session;
-    //private EventMapper eventMapper;
+    protected String resource = "mybatis.xml";
+    protected InputStream inputStream;
+    protected SqlSessionFactory sqlSessionFactory;
+    protected SqlSession session;
+    //protected EventMapper eventMapper;
 
     public MybatisMapper() {
         try {

@@ -33,7 +33,7 @@ public class EventFilter {
         this.closestCountry = JsonHelper.arrayNodeToIntegerList((ArrayNode) jsonNode.get(eventFilterType.CLOSEST_COUNTRY.getJsName()));
         this.territorialWaterStatus = JsonHelper.arrayNodeToIntegerList((ArrayNode) jsonNode.get(eventFilterType.TERRITORIAL_WATER_STATUS.getJsName()));
         this.vesselCountry = JsonHelper.arrayNodeToIntegerList((ArrayNode) jsonNode.get(eventFilterType.VESSEL_COUNTRY.getJsName()));
-        //this.vesselStatus = JsonHelper.arrayNodeToStringList((ArrayNode) jsonNode.get(eventFilterType.VESSEL_STATUS.getJsName()));
+        this.vesselStatus = JsonHelper.arrayNodeToStringList((ArrayNode) jsonNode.get(eventFilterType.VESSEL_STATUS.getJsName()));
     }
 
     public String getBeginDate() {
@@ -53,10 +53,10 @@ public class EventFilter {
     }
 
     public List<Integer> getTerritorialWaterStatus() {
-        if(this.territorialWaterStatus.size() > 0) {
-            return territorialWaterStatus;
-        } else {
+        if(territorialWaterStatus.isEmpty()) {
             return null;
+        } else {
+            return territorialWaterStatus;
         }
     }
 
@@ -65,10 +65,10 @@ public class EventFilter {
     }
 
     public List<Integer> getClosestCountry() {
-        if(this.closestCountry.size() > 0) {
-            return closestCountry;
-        } else {
+        if(closestCountry.isEmpty()) {
             return null;
+        } else {
+            return closestCountry;
         }
     }
 
@@ -77,10 +77,10 @@ public class EventFilter {
     }
 
     public List<Integer> getVesselCountry() {
-        if(this.vesselCountry.size() > 0) {
-            return vesselCountry;
-        } else {
+        if(vesselCountry.isEmpty()) {
             return null;
+        } else {
+            return vesselCountry;
         }
     }
 
@@ -89,7 +89,11 @@ public class EventFilter {
     }
 
     public List<String> getVesselStatus() {
-        return vesselStatus;
+        if(vesselStatus.isEmpty()){
+            return null;
+        } else {
+            return vesselStatus;
+        }
     }
 
     public void setVesselStatus(List<String> vesselStatus) {

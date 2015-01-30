@@ -18,14 +18,16 @@ import java.util.List;
  */
 public class Event {
 
-    private Integer id;
-    private Date occurredOnDate;
-    private Time occurredOnTime;
-    private double latitude;
-    private double longitude;
-    private String closestCountry;
-    private String territorialWaterStatus;
-    private String vesselFlagCountry;
+    protected Integer id;
+    protected Date occurredOnDate;
+    protected Time occurredOnTime;
+    protected double latitude;
+    protected double longitude;
+    protected String closestCountry;
+    protected String territorialWaterStatus;
+    protected String vesselFlagCountry;
+
+    protected String vesselStatus;
 
     public Event() { }
 
@@ -91,6 +93,14 @@ public class Event {
 
     public void setVesselFlagCountry(String vesselFlagCountry) {
         this.vesselFlagCountry = vesselFlagCountry;
+    }
+
+    public String getVesselStatus() {
+        return vesselStatus;
+    }
+
+    public void setVesselStatus(String vesselStatus) {
+        this.vesselStatus = vesselStatus;
     }
 
      /*

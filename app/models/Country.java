@@ -10,10 +10,10 @@ import dao.MybatisMapper;
 import org.apache.ibatis.session.SqlSession;
 
 public class Country {
-    private Integer id;
-    private Integer cowId;
-    private String name;
-    private String abbreviation;
+    protected Integer id;
+    protected Integer cowId;
+    protected String name;
+    protected String abbreviation;
 
     public Country() { }
 

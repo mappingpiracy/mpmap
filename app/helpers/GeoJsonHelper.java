@@ -40,6 +40,7 @@ public class GeoJsonHelper {
         properties.put("closestCountry", event.getClosestCountry());
         properties.put("territorialWaterStatus", event.getTerritorialWaterStatus());
         properties.put("vesselFlagCountry", event.getVesselFlagCountry());
+        properties.put("vesselStatus", event.getVesselStatus());
 
         feature.put("geometry", geometry);
         feature.put("properties", properties);
