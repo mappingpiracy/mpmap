@@ -1,4 +1,9 @@
 <section id="page-map" ng-controller="MapController">
+
+    <modal-dialog show='messages.modal.show' dialog-title='{{messages.modal.title}}'>
+        <p>{{messages.modal.value}}</p>
+    </modal-dialog>
+
   <div ui-layout>
 
     <div ui-layout-container>
@@ -11,6 +16,9 @@
           <div ui-layout="{flow : 'row'}">
 
             <div ui-layout-container id="map-wrapper">
+                <div class="popup-message" ng-show="map.modal.show">
+                    <p model="map.popupMessage.value"></p>
+                </div>
               <leaflet id="map" defaults="map.defaults" center="map.center" geojson="map.geojson"></leaflet>
             </div>
 

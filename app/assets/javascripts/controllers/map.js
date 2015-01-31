@@ -22,6 +22,25 @@ mpmap.controller('MapController', ['$scope', '$location', '$document', '$http', 
       },
       placeHolder: {
         multiSelectSearch: "Search and select by country name."
+      },
+      events: {
+        loading : "Events loading. Please wait.",
+        error: "Error loading events."
+      },
+      modal: {
+        show: false,
+        title: "",
+        value: "",
+        display: function(title, value) {
+            $scope.messages.modal.title = title;
+            $scope.messages.modal.value = value;
+            $scope.messages.modal.show = true;
+        },
+        hide: function() {
+            $scope.messages.modal.title = "";
+            $scope.messages.modal.value = "";
+            $scope.messages.modal.show = false;
+        }
       }
     };
 
@@ -130,21 +149,6 @@ mpmap.controller('MapController', ['$scope', '$location', '$document', '$http', 
         });
 
         return finalFilter;
-      },
-      /*
-      - get the current filters
-      - retrieve the events via the mapdata service with the given filters
-      - replace the map's geojson with the new events
-      */
-      updateEvents: function() {
-        MapData.getEvents($scope.filterForm.getFilter()).success(function(data, status) {
-          $scope.map.geojson = {
-            data: data,
-            pointToLayer: $scope.map.createMarker,
-            onEachFeature: $scope.map.createPopup
-          };
-          console.log('Events updated.');
-        });
       }
 
     };
@@ -192,18 +196,35 @@ mpmap.controller('MapController', ['$scope', '$location', '$document', '$http', 
       },
       popupOptions: {
         maxWidth: 300
-      }
+      },
+     /*
+     - get the current filters
+     - retrieve the events via the mapdata service with the given filters
+     - replace the map's geojson with the new events
+     */
+     updateEvents: function() {
+       $scope.messages.modal.display($scope.messages.events.loading, "");
+       MapData.getEvents($scope.filterForm.getFilter())
+       .success(function(data, status) {
+           $scope.map.geojson = {
+               data: data,
+               pointToLayer: $scope.map.createMarker,
+               onEachFeature: $scope.map.createPopup
+           };
+           $scope.messages.modal.hide();
+           console.log('Events updated.');
+       })
+       .error(function(data, status) {
+           $scope.messages.modal.hide();
+           $scope.messages.modal.display($scope.messages.events.error, "");
+       });
+     }
     };
 
-    MapData.getEvents($scope.filterForm.getFilter()).success(function(data, status) {
-      $scope.map.geojson = {
-        data: data,
-        pointToLayer: $scope.map.createMarker,
-        onEachFeature: $scope.map.createPopup
-      };
-      console.log('Initial events loaded.');
-    });
-
+    /*
+    - Initial event loading, executes when the controller is called.
+    */
+    $scope.map.updateEvents();
 
   }
 ]); //  MapController

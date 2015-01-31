@@ -20,6 +20,7 @@ MPMAP Version 0.2 is currently under development.
   - [Angular Bootstrap](https://github.com/angular-ui/bootstrap)
   - [Angular UI/UI-Layout](https://github.com/angular-ui/ui-layout)
   - [Bootstrap](https://github.com/twbs/bootstrap)
+  - [ngModal](https://github.com/adamalbrecht/ngModal)
 - Mapping: [LeafletJS](https://github.com/Leaflet/Leaflet)
 
 ###Contributors
