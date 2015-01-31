@@ -14,7 +14,9 @@ MPMAP Version 0.2 is currently under development.
 
 ###This project uses the following tools and frameworks:
 - Web framework: [Java Play Framework 2.3.6](https://www.playframework.com/)
-- Database: [PostgreSQL](http://www.postgresql.org/) and [PostGIS](http://postgis.net/)
+- Database: [PostgreSQL](http://www.postgresql.org/) with:
+  - [PostGIS](http://postgis.net/)
+  - [MyBatis 3](https://github.com/mybatis/mybatis-3)
 - Front-end framework: [AngularJS](https://angularjs.org/) with:
   - [Angular Leaflet Directive](https://github.com/tombatossals/angular-leaflet-directive)
   - [Angular Bootstrap](https://github.com/angular-ui/bootstrap)
