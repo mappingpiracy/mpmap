@@ -36,6 +36,7 @@
 #event-filter-top {
   background-color: white;
   height:20%;
+  max-height: 20%;
   width: 100%;
   padding-bottom: 10px;
 }
@@ -44,10 +45,10 @@
   position:absolute;
   overflow-y: scroll;
   overflow-x: hidden;
-  height: 78%;
+  height: 80%;
   width: 98%;
   border-top: solid #999 10px;
-  padding: 10px 10px 100px 10px;
+  padding: 10px 10px 30% 10px;
 }
 
 #event-filter .panel .panel-body .row {
