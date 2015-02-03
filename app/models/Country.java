@@ -5,6 +5,8 @@ package models;
  */
 
 import java.util.List;
+
+import dao.CountryMapper;
 import dao.EventMapper;
 import dao.MybatisMapper;
 import org.apache.ibatis.session.SqlSession;
@@ -52,12 +54,12 @@ public class Country {
     public static List<Country> getCountries() {
         MybatisMapper mapper = new MybatisMapper();
         SqlSession session = mapper.getSession();
-        EventMapper eventMapper = session.getMapper(EventMapper.class);
+        CountryMapper countryMapper = session.getMapper(CountryMapper.class);
 
         List<Country> countries;
 
         try {
-            countries = eventMapper.getCountries();
+            countries = countryMapper.getCountries();
         } finally {
             session.close();
         }

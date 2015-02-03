@@ -17,5 +17,4 @@ public interface EventMapper {
     public List<Event> getEvents();
     public List<Event> getEventsWithFilter(@Param("eventFilter") EventFilter eventFilter,
                                            @Param("closestCountry") List<Integer> closestCountry);
-    public List<Country> getCountries();
 }
