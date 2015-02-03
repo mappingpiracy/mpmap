@@ -14,3 +14,4 @@ misc
 *.iml
 *.log
 conf/mybatis.properties
+misc
