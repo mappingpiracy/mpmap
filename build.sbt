@@ -32,10 +32,12 @@ libraryDependencies ++= Seq(
   "org.webjars" % "angular-ui" % "0.4.0-3",
   "org.webjars" % "angular-ui-bootstrap" % "0.12.0",
   "org.webjars" % "leaflet" % "0.7.3",
-  "org.webjars" % "angular-leaflet-directive" % "0.7.10"
+  "org.webjars" % "angular-leaflet-directive" % "0.7.10",
+  "org.webjars" % "d3js" % "3.5.3",
+  "org.webjars" % "angular-nvd3" % "0.0.9"
 )
 
-// Add mappers to classpath
+// Add MyBatis Mappers to the Runtime Classpath
 unmanagedResourceDirectories in Compile <+= baseDirectory( _ / "app/dao/mappers" )
 
 Seq(
