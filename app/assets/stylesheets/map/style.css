@@ -101,3 +101,8 @@
 .multi-select-list ul li a:hover {
   text-decoration: none;
 }
+
+.ng-modal-dialog-content {
+  text-align: center;
+  padding: 20px;
+}

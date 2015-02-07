@@ -6,8 +6,8 @@ Alex Klibisz, 1/16/14
 
 ******************************************/
 
-mpmap.controller('MapController', ['$scope', '$location', '$document', '$http', 'MapData',
-  function($scope, $location, $document, $http, MapData) {
+mpmap.controller('MapController', 
+  function($scope, $location, $document, $modal, MapData) {
 
     /******************************************
 
@@ -24,13 +24,14 @@ mpmap.controller('MapController', ['$scope', '$location', '$document', '$http', 
         multiSelectSearch: "Search and select by country name."
       },
       events: {
-        loading: "Events loading. Please wait.",
+        loading: 'Events loading. Please wait.',
         error: "Error loading events."
       },
       modal: {
         show: false,
-        title: "",
-        value: "",
+        title: null,
+        value: null,
+        valueHTML: null,
         display: function(title, value) {
           $scope.messages.modal.title = title;
           $scope.messages.modal.value = value;
@@ -242,6 +243,25 @@ mpmap.controller('MapController', ['$scope', '$location', '$document', '$http', 
       }
     };
 
+    $scope.export = {
+      openDialog : function() {
+        $scope.messages.modal.show = true;
+        $scope.messages.modal.title = 'Export Events';
+        //TODO: abstract this to a partial
+        var message = '<div class="row">';
+        message +=      '<div class="col-md-6">'; 
+        message +=        '<h4>Export currently selected filters.</h4>';
+        message +=        '<a class="btn btn-default">Export Filters</a>';
+        message +=      '</div>';
+        message +=      '<div class="col-md-6">';
+        message +=        '<h4>Export currently selected events.</h4>';
+        message +=        '<a class="btn btn-default">Export as JSON</a>';
+        message +=        '<a class="btn btn-default">Export as CSV</a>';
+        message +=      '</div>';
+        message +=    '</div>';
+        $scope.messages.modal.valueHTML = message;
+      }
+    };
     
     /*
     - Initial event loading, executes when the controller is called.
@@ -251,4 +271,4 @@ mpmap.controller('MapController', ['$scope', '$location', '$document', '$http', 
 
 
   }
-]); //  MapController
+); //  MapController

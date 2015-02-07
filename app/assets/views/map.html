@@ -1,7 +1,8 @@
 <section id="page-map">
 
-    <modal-dialog show='messages.modal.show' dialog-title='{{messages.modal.title}}'>
-        <p>{{messages.modal.value}}</p>
+    <modal-dialog show='messages.modal.show' dialog-title="{{messages.modal.title}}">
+        <span>{{messages.modal.value}}</span>
+        <div ng-bind-html="messages.modal.valueHTML"></div>
     </modal-dialog>
 
   <div ui-layout>
@@ -25,10 +26,7 @@
             <div ui-layout-container id="map-analysis-wrapper" size="20%">
               <div id="analysis" ng-include="'assets/partials/map/analysis.html'"></div>
             </div>
-
           </div>
-
-
         </div>
       </div>
     </div>
