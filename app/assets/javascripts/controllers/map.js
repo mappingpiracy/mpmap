@@ -164,10 +164,12 @@ mpmap.controller('MapController', ['$scope', '$location', '$document', '$http', 
           $scope.filterForm.fields.locationInformation.closestCountry.all
           $scope.filterForm.fields.vesselInformation.vesselCountry.all
         */
-        $scope.filterForm.fields.locationInformation.territorialWaterStatus.all = MapData.getCountries();
-        $scope.filterForm.fields.locationInformation.closestCountry.all = MapData.getCountries();
-        $scope.filterForm.fields.vesselInformation.vesselCountry.all = MapData.getCountries();
-
+        MapData.getCountries()
+          .success(function(data, status) {
+            $scope.filterForm.fields.locationInformation.territorialWaterStatus.all = data;
+            $scope.filterForm.fields.locationInformation.closestCountry.all = data;
+            $scope.filterForm.fields.vesselInformation.vesselCountry.all = data;
+          });
       }
 
     };
@@ -221,7 +223,7 @@ mpmap.controller('MapController', ['$scope', '$location', '$document', '$http', 
       - retrieve the events via the mapdata service with the given filters
       - replace the map's geojson with the new events
       */
-      updateEvents: function() {
+      getData: function() {
         $scope.messages.modal.display($scope.messages.events.loading, "");
         MapData.getEvents($scope.filterForm.getFilter())
           .success(function(data, status) {
@@ -245,7 +247,7 @@ mpmap.controller('MapController', ['$scope', '$location', '$document', '$http', 
     - Initial event loading, executes when the controller is called.
     */
     $scope.filterForm.getData();
-    $scope.map.updateEvents();
+    $scope.map.getData();
 
 
   }
