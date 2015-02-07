@@ -6,7 +6,7 @@ Alex Klibisz, 1/16/14
 
 ******************************************/
 
-mpmap.controller('MapController', 
+mpmap.controller('MapController',
   function($scope, $location, $document, $modal, MapData) {
 
     /******************************************
@@ -244,25 +244,28 @@ mpmap.controller('MapController',
     };
 
     $scope.export = {
-      openDialog : function() {
-        $scope.messages.modal.show = true;
-        $scope.messages.modal.title = 'Export Events';
-        //TODO: abstract this to a partial
-        var message = '<div class="row">';
-        message +=      '<div class="col-md-6">'; 
-        message +=        '<h4>Export currently selected filters.</h4>';
-        message +=        '<a class="btn btn-default">Export Filters</a>';
-        message +=      '</div>';
-        message +=      '<div class="col-md-6">';
-        message +=        '<h4>Export currently selected events.</h4>';
-        message +=        '<a class="btn btn-default">Export as JSON</a>';
-        message +=        '<a class="btn btn-default">Export as CSV</a>';
-        message +=      '</div>';
-        message +=    '</div>';
-        $scope.messages.modal.valueHTML = message;
+      events : function(format) {
+        console.log("export events as: ", format);
+      },
+      filters : function(format) {
+        console.log("export filters as: ", format);
+      },
+      exportFilters: function() {
+        console.log("export filters");
+        console.log($scope.filterForm.getFilter());
+        // csvInput = "hello";
+        // content = "world";
+        // console.log("here..");
+        // File.save(csvInput, function(content) {
+        //   var hiddenElement = document.createElement('a');
+        //   hiddenElement.href = 'data:attachment/csv,' + encodeURI(content);
+        //   hiddenElement.target = '_blank';
+        //   hiddenElement.download = 'myFile.csv';
+        //   hiddenElement.click();
+        // });
       }
     };
-    
+
     /*
     - Initial event loading, executes when the controller is called.
     */

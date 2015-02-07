@@ -2,7 +2,6 @@
 
     <modal-dialog show='messages.modal.show' dialog-title="{{messages.modal.title}}">
         <span>{{messages.modal.value}}</span>
-        <div ng-bind-html="messages.modal.valueHTML"></div>
     </modal-dialog>
 
   <div ui-layout>
@@ -10,7 +9,7 @@
     <div ui-layout-container>
       <div ui-layout="{flow : 'column'}" id="wrap-outer">
         <div ui-layout-container id="wrap-left" size="30%">
-          <div id="filters" ng-include="'assets/partials/map/eventfilters.html'"></div>
+          <div id="filters" ng-include="'assets/partials/map/event-filters.html'"></div>
         </div>
         <div ui-layout-container id="wrap-right" size="70%">
 

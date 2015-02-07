@@ -2,12 +2,8 @@
 <div id="event-filter-top">
 
     <h2>Event Filters</h2>
-    <button type="submit" class="btn btn-md btn-primary" ng-click="map.getData()">
-      Update Events
-    </button>
-    <button type="submit" class="btn btn-md btn-primary" ng-click="export.openDialog()">
-      Export Events
-    </button>
+
+    <div ng-include="'assets/partials/map/event-filter-buttons.html'"></div>
 
 </div>
 
@@ -261,12 +257,8 @@
       </div>
     </div>
 
-    <button type="submit" class="btn btn-md btn-primary" ng-click="map.updateEvents()">
-      Update Events
-    </button>
-    <button type="submit" class="btn btn-md btn-primary" ng-click="">
-      Export Events
-    </button>
+    <div ng-include="'assets/partials/map/event-filter-buttons.html'"></div>
+    
   </form>
 
 </div>
