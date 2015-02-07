@@ -52,19 +52,10 @@ public class MapData extends Controller {
         return ok(toJson(countries));
     }
 
-    /*
-        Checks for posted event filters.
-        Returns either filtered events, or all events if there are no filters.
-     */
-    @BodyParser.Of(BodyParser.Json.class)
-    public static Result export() {
-        JsonNode jsonEvents = request().body().asJson();
-
-        if(jsonEvents == null) {
-            return ok("nothing to see here...");
-        }
-
-        return ok(toJson(jsonEvents));
+    public static Result eventsOverTime() {
+        return ok();
     }
+
+
 
 }
