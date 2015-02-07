@@ -1,27 +1,25 @@
 <section id="page-map">
-
-    <modal-dialog show='messages.modal.show' dialog-title="{{messages.modal.title}}">
-        <span>{{messages.modal.value}}</span>
-    </modal-dialog>
+  <!-- Generic Modal -->
+  <modal-dialog show='modals.generic.show' dialog-title="{{modals.generic.title}}">
+    {{modals.generic.value}}
+  </modal-dialog>
+  <!-- Help -->
+  <modal-dialog show="messages.help.show" dialog-title="Help">
+    <div ng-include="'assets/partials/help/help-content.html'"></div>
+  </modal-dialog>
+  <!-- About -->
 
   <div ui-layout>
-
     <div ui-layout-container>
       <div ui-layout="{flow : 'column'}" id="wrap-outer">
         <div ui-layout-container id="wrap-left" size="30%">
-          <div id="filters" ng-include="'assets/partials/map/event-filters.html'"></div>
+           <div id="filters" ng-include="'assets/partials/map/event-filters.html'"></div>
         </div>
         <div ui-layout-container id="wrap-right" size="70%">
-
           <div ui-layout="{flow : 'row'}">
-
             <div ui-layout-container id="map-wrapper">
-                <div class="popup-message" ng-show="map.modal.show">
-                    <p model="map.popupMessage.value"></p>
-                </div>
               <leaflet id="map" defaults="map.defaults" center="map.center" geojson="map.geojson"></leaflet>
             </div>
-
             <div ui-layout-container id="map-analysis-wrapper" size="20%">
               <div id="analysis" ng-include="'assets/partials/map/analysis.html'"></div>
             </div>
@@ -29,7 +27,6 @@
         </div>
       </div>
     </div>
-
   </div>
 
 </section>

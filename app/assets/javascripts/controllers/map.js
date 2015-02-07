@@ -18,7 +18,7 @@ mpmap.controller('MapController',
 
     $scope.messages = {
       help: {
-        multiSelect: "Use the search field to filter the \"All\" column. Transfer items from the \"All\" column to the selected column by clicking on them."
+        multiSelect: "Use the search field to filter the \"All\" column. Transfer items from the \"All\" column to the selected column by clicking on them.",
       },
       placeHolder: {
         multiSelectSearch: "Search and select by country name."
@@ -26,21 +26,36 @@ mpmap.controller('MapController',
       events: {
         loading: 'Events loading. Please wait.',
         error: "Error loading events."
-      },
-      modal: {
+      }
+    };
+
+    /******************************************
+
+      Modals object - handles all modals for the
+      map view.
+
+    ******************************************/
+
+    $scope.modals = {
+      generic: {
         show: false,
         title: null,
         value: null,
-        valueHTML: null,
-        display: function(title, value) {
-          $scope.messages.modal.title = title;
-          $scope.messages.modal.value = value;
-          $scope.messages.modal.show = true;
+        open: function(title, value) {
+          $scope.modals.generic.title = title;
+          $scope.modals.generic.value = value;
+          $scope.modals.generic.show = true;
         },
-        hide: function() {
-          $scope.messages.modal.title = "";
-          $scope.messages.modal.value = "";
-          $scope.messages.modal.show = false;
+        close: function() {
+          $scope.modals.generic.title = null;
+          $scope.modals.generic.value = null;
+          $scope.modals.generic.show = false;
+        }
+      },
+      help: {
+        show: false,
+        open: function() { 
+          $scope.modals.help.show = true; 
         }
       }
     };
@@ -225,7 +240,7 @@ mpmap.controller('MapController',
       - replace the map's geojson with the new events
       */
       getData: function() {
-        $scope.messages.modal.display($scope.messages.events.loading, "");
+        $scope.modals.generic.open($scope.messages.events.loading, "");
         MapData.getEvents($scope.filterForm.getFilter())
           .success(function(data, status) {
             $scope.map.geojson = {
@@ -233,12 +248,12 @@ mpmap.controller('MapController',
               pointToLayer: $scope.map.createMarker,
               onEachFeature: $scope.map.createPopup
             };
-            $scope.messages.modal.hide();
+            $scope.modals.generic.close();
             console.log('Events updated.');
           })
           .error(function(data, status) {
-            $scope.messages.modal.hide();
-            $scope.messages.modal.display($scope.messages.events.error, "");
+            $scope.modals.generic.close();
+            $scope.modals.generic.open($scope.messages.events.error, "");
           });
       }
     };
