@@ -6,25 +6,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="MPMAP, Maritime Piracy Mapping Analysis Portal">
     <meta name="author" content="MappingPiracy.net, Alex Klibisz">
-
-    <title>MPMAP</title>
-
-    <!-- Favicon -->
     <link rel="icon" type="image/ico" href="@routes.Assets.at("images/favicon.ico")">
+    
+    <title>MPMAP | Maritime Piracy Mapping Analysis Portal</title>
+
+    <!-- *****  CSS DEPENDENCIES ***** -->
+
     <!-- CSS: Bootstrap core -->
-    <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/lib/bootstrap/bootstrap.min.css")">
-    <!-- CSS: Main styles and fonts -->
-    <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/style.css")">
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
-    <!-- CSS: Map styles -->
-    <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/map/style.css")">
+    <link rel='stylesheet' href='@routes.WebJarAssets.at(WebJarAssets.locate("css/bootstrap.min.css"))'>
     <!-- CSS: Angular-UI styles -->
     <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/lib/angular-ui/ui-layout.css")">
     <!-- CSS: Leaflet styles -->
-    <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/lib/leaflet/leaflet.css")">
+    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
     <!-- CSS: NG-Modal -->
     <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/lib/other/ng-modal.css")">
-    <!-- Font -->
+    <!-- Fonts: Lato, Oswald -->
     <link href='http://fonts.googleapis.com/css?family=Lato|Oswald:400' rel='stylesheet' type='text/css'>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -34,6 +30,14 @@
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
+    <!-- ***** CSS CUSTOM STYLES ***** -->
+
+     <!-- CSS: Main styles-->
+    <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/style.css")">
+    <!-- CSS: Map styles -->
+    <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/map/style.css")">
+    
+
 </head>
 
 <body>
@@ -42,40 +46,37 @@
 
     <main ng-view></main>
 
+    <!-- *****  JAVASCRIPT DEPENDENCIES ***** -->
+
     <!-- JS: Angular -->
-    <script src="@routes.Assets.at("javascripts/lib/angular/angular.min.js")" type="text/javascript" defer="defer" ></script>
-    <script src="@routes.Assets.at("javascripts/lib/angular/angular-route.min.js")" type="text/javascript" defer="defer" ></script>
-    <script src="@routes.Assets.at("javascripts/lib/angular/angular-animate.min.js")" type="text/javascript" defer="defer" ></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.12/angular-sanitize.min.js" type="text/javascript" defer="defer"></script>
+    <script type='text/javascript' src='@routes.WebJarAssets.at(WebJarAssets.locate("angular.min.js"))'></script>
+    <script type='text/javascript' src='@routes.WebJarAssets.at(WebJarAssets.locate("angular-route.min.js"))'></script>
+    <script type='text/javascript' src='@routes.WebJarAssets.at(WebJarAssets.locate("angular-sanitize.min.js"))'></script>
+
+    <!-- JS: Angular Custom Directives -->
+     <script src="@routes.Assets.at("javascripts/lib/angular-ui/ui-layout.min.js")" type="text/javascript" defer="defer" ></script>
+    <script src="@routes.Assets.at("javascripts/lib/other/ng-modal.min.js")" type="text/javascript" defer="defer"></script>
+    <script type='text/javascript' src='@routes.WebJarAssets.at(WebJarAssets.locate("angular-leaflet-directive.min.js"))'></script>
+
+    <!-- JS: jQuery and Bootstrap -->
+    <script type='text/javascript' src='@routes.WebJarAssets.at(WebJarAssets.locate("ui-bootstrap-tpls.js"))'></script>
+    <script type='text/javascript' src='@routes.WebJarAssets.at(WebJarAssets.locate("jquery.min.js"))'></script>
+    <script type='text/javascript' src='@routes.WebJarAssets.at(WebJarAssets.locate("bootstrap.min.js"))'></script>
+    <!-- JS: Mapping -->
+    <script type='text/javascript' src='@routes.WebJarAssets.at(WebJarAssets.locate("leaflet.js"))'></script>
+    <!-- JS: Other libraries -->
+    <script src="@routes.Assets.at("javascripts/lib/other/date.js")" type="text/javascript" defer="defer" ></script>
+
+
+    <!-- *****  ANGULAR FRONT-END CODE***** -->
+
     <!-- JS: Angular App -->
     <script src="@routes.Assets.at("javascripts/app.js")" type="text/javascript" defer="defer" ></script>
-
     <!-- JS: Angular Services -->
     <script src="@routes.Assets.at("javascripts/services/mapdata.js")" type="text/javascript" defer="defer" ></script>
     <!-- JS: Angular Controllers -->
     <script src="@routes.Assets.at("javascripts/controllers/map.js")" type="text/javascript" defer="defer" ></script>
     <script src="@routes.Assets.at("javascripts/controllers/staticpage.js")" type="text/javascript" defer="defer" ></script>
-
-    <!-- JS: Angular Custom Directives -->
-    <script src="@routes.Assets.at("javascripts/lib/angular-ui/ui-layout.min.js")" type="text/javascript" defer="defer" ></script>
-    <script src="@routes.Assets.at("javascripts/lib/angular/angular-leaflet-directive.min.js")" type="text/javascript" defer="defer" ></script>
-    <script src="@routes.Assets.at("javascripts/lib/other/ng-modal.min.js")" type="text/javascript" defer="defer"></script>
-
-    <!-- JS: jQuery and Bootstrap -->
-    <script src="@routes.Assets.at("javascripts/lib/ui-bootstrap/ui-bootstrap-tpls-0.12.0.min.js")" type="text/javascript" defer="defer" ></script>
-
-    <script src="@routes.Assets.at("javascripts/lib/jquery/jquery.min.js")" type="text/javascript" defer="defer" ></script>
-    <script src="@routes.Assets.at("javascripts/lib/bootstrap/bootstrap.min.js")" type="text/javascript" defer="defer" ></script>
-
-    <!-- JS: IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <script src="@routes.Assets.at("javascripts/lib/bootstrap/ie10-viewport-bug-workaround.js")" type="text/javascript" defer="defer" ></script>
-
-    <!-- JS: Mapping -->
-    <script src="@routes.Assets.at("javascripts/lib/mapping/leaflet.min.js")" type="text/javascript" defer="defer" ></script>
-    <script src="@routes.Assets.at("javascripts/lib/mapping/mapbox.min.js")" type="text/javascript" defer="defer" ></script>
-
-    <!-- JS: Other libraries -->
-    <script src="@routes.Assets.at("javascripts/lib/other/date.js")" type="text/javascript" defer="defer" ></script>
 
 </body>
 </html>
