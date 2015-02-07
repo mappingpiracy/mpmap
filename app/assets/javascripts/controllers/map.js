@@ -24,7 +24,7 @@ mpmap.controller('MapController', ['$scope', '$location', '$document', '$http', 
         multiSelectSearch: "Search and select by country name."
       },
       events: {
-        loading : "Events loading. Please wait.",
+        loading: "Events loading. Please wait.",
         error: "Error loading events."
       },
       modal: {
@@ -32,14 +32,14 @@ mpmap.controller('MapController', ['$scope', '$location', '$document', '$http', 
         title: "",
         value: "",
         display: function(title, value) {
-            $scope.messages.modal.title = title;
-            $scope.messages.modal.value = value;
-            $scope.messages.modal.show = true;
+          $scope.messages.modal.title = title;
+          $scope.messages.modal.value = value;
+          $scope.messages.modal.show = true;
         },
         hide: function() {
-            $scope.messages.modal.title = "";
-            $scope.messages.modal.value = "";
-            $scope.messages.modal.show = false;
+          $scope.messages.modal.title = "";
+          $scope.messages.modal.value = "";
+          $scope.messages.modal.show = false;
         }
       }
     };
@@ -56,7 +56,7 @@ mpmap.controller('MapController', ['$scope', '$location', '$document', '$http', 
 
       fields: {
         dateRange: {
-          years: MapData.getYears(),
+          years: [ /*getData*/ ],
           selectedYear: Date.today().getFullYear(),
           beginDate: {
             value: new Date(Date.today().getFullYear(), 0, 1).toString("yyyy-MM-dd"),
@@ -84,23 +84,23 @@ mpmap.controller('MapController', ['$scope', '$location', '$document', '$http', 
         locationInformation: {
           territorialWaterStatus: {
             searchTerm: "",
-            all: MapData.getCountries(),
+            all: [ /*getData*/ ],
             selected: []
           },
           closestCountry: {
             searchTerm: "",
-            all: MapData.getCountries(),
+            all: [ /*getData*/ ],
             selected: []
           }
         },
         vesselInformation: {
           vesselCountry: {
             searchTerm: "",
-            all: MapData.getCountries(),
+            all: [ /*getData*/ ],
             selected: []
           },
           vesselStatus: {
-            all: MapData.getVesselStatus(),
+            all: [ /*getData*/ ],
             selected: []
           }
         },
@@ -149,6 +149,25 @@ mpmap.controller('MapController', ['$scope', '$location', '$document', '$http', 
         });
 
         return finalFilter;
+      },
+      getData: function() {
+        /*
+          $scope.filterForm.fields.dateRange.years
+        */
+        $scope.filterForm.fields.dateRange.years = MapData.getYears();
+        /*
+          $scope.vesselStatus.all
+        */
+        $scope.filterForm.fields.vesselInformation.vesselStatus.all = MapData.getVesselStatus();
+        /*
+          $scope.filterForm.fields.locationInformation.territorialWaterStatus.all
+          $scope.filterForm.fields.locationInformation.closestCountry.all
+          $scope.filterForm.fields.vesselInformation.vesselCountry.all
+        */
+        $scope.filterForm.fields.locationInformation.territorialWaterStatus.all = MapData.getCountries();
+        $scope.filterForm.fields.locationInformation.closestCountry.all = MapData.getCountries();
+        $scope.filterForm.fields.vesselInformation.vesselCountry.all = MapData.getCountries();
+
       }
 
     };
@@ -197,34 +216,37 @@ mpmap.controller('MapController', ['$scope', '$location', '$document', '$http', 
       popupOptions: {
         maxWidth: 300
       },
-     /*
-     - get the current filters
-     - retrieve the events via the mapdata service with the given filters
-     - replace the map's geojson with the new events
-     */
-     updateEvents: function() {
-       $scope.messages.modal.display($scope.messages.events.loading, "");
-       MapData.getEvents($scope.filterForm.getFilter())
-       .success(function(data, status) {
-           $scope.map.geojson = {
-               data: data,
-               pointToLayer: $scope.map.createMarker,
-               onEachFeature: $scope.map.createPopup
-           };
-           $scope.messages.modal.hide();
-           console.log('Events updated.');
-       })
-       .error(function(data, status) {
-           $scope.messages.modal.hide();
-           $scope.messages.modal.display($scope.messages.events.error, "");
-       });
-     }
+      /*
+      - get the current filters
+      - retrieve the events via the mapdata service with the given filters
+      - replace the map's geojson with the new events
+      */
+      updateEvents: function() {
+        $scope.messages.modal.display($scope.messages.events.loading, "");
+        MapData.getEvents($scope.filterForm.getFilter())
+          .success(function(data, status) {
+            $scope.map.geojson = {
+              data: data,
+              pointToLayer: $scope.map.createMarker,
+              onEachFeature: $scope.map.createPopup
+            };
+            $scope.messages.modal.hide();
+            console.log('Events updated.');
+          })
+          .error(function(data, status) {
+            $scope.messages.modal.hide();
+            $scope.messages.modal.display($scope.messages.events.error, "");
+          });
+      }
     };
 
+    
     /*
     - Initial event loading, executes when the controller is called.
     */
+    $scope.filterForm.getData();
     $scope.map.updateEvents();
+
 
   }
 ]); //  MapController
