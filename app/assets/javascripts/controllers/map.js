@@ -243,26 +243,38 @@ mpmap.controller('MapController',
       }
     };
 
+     /******************************************
+
+      Export object - contains export functionality
+      for filters and events.
+
+      TODO:Abstract this to a service
+
+    ******************************************/
     $scope.export = {
-      events : function(format) {
-        console.log("export events as: ", format);
+      events: function(format) {
+        var fileName = 'mpmamp_export_events_' + new Date().toString('yyyy-MM-dd-HH:mm:ss')  + '.' + format;
+        var pom = document.createElement('a');
+        var fileContents = null;
+        if(format === 'geojson') {
+          fileContents = $scope.map.geojson;
+        } else if(format === 'csv') {
+          fileContents = null;
+        }
+        pom.setAttribute('href', 'data:application/json;charset=utf-8,' + JSON.stringify(fileContents));         
+        pom.setAttribute('download', fileName);
+        pom.click();
       },
-      filters : function(format) {
-        console.log("export filters as: ", format);
-      },
-      exportFilters: function() {
-        console.log("export filters");
-        console.log($scope.filterForm.getFilter());
-        // csvInput = "hello";
-        // content = "world";
-        // console.log("here..");
-        // File.save(csvInput, function(content) {
-        //   var hiddenElement = document.createElement('a');
-        //   hiddenElement.href = 'data:attachment/csv,' + encodeURI(content);
-        //   hiddenElement.target = '_blank';
-        //   hiddenElement.download = 'myFile.csv';
-        //   hiddenElement.click();
-        // });
+      filters: function(format) {
+        var fileName = 'mpmamp_export_filters_' + new Date().toString('yyyy-MM-dd-HH:mm:ss')  + '.' + format;
+        var pom = document.createElement('a');
+        var fileContents = null;
+        if(format === 'json') {
+          fileContents = $scope.filterForm.getFilter();
+        }
+        pom.setAttribute('href', 'data:application/json;charset=utf-8,' + JSON.stringify(fileContents));         
+        pom.setAttribute('download', fileName);
+        pom.click();
       }
     };
 
