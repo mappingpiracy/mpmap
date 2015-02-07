@@ -24,6 +24,11 @@ MPMAP Version 0.2 is currently under development.
   - [Bootstrap](https://github.com/twbs/bootstrap)
   - [ngModal](https://github.com/adamalbrecht/ngModal)
 - Mapping: [LeafletJS](https://github.com/Leaflet/Leaflet)
+- Graphing/Visualization: 
+  - [D3.js](https://github.com/mbostock/d3)
+  - [nvD3.js](http://nvd3.org/)
+- Dependency Management
+  - [WebJars](https://github.com/webjars)
 
 ###Contributors
 - [Alex Klibisz, University of Tennessee](http://alexklibisz.github.io)
