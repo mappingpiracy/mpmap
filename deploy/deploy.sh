@@ -1,4 +1,5 @@
 #!/bin/bash
 
 sudo killall -u mpmap
-sudo -u mpmap ./activator run >> deploy.log
+sudo ./activator play-generate-secret
+sudo -u mpmap ./activator start 
