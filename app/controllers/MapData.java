@@ -52,10 +52,5 @@ public class MapData extends Controller {
         return ok(toJson(countries));
     }
 
-    public static Result eventsOverTime() {
-        return ok();
-    }
-
-
 
 }
