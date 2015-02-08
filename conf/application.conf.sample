@@ -58,7 +58,7 @@ application.langs="en"
 
 # Root logger:
 # logger.root=INFO
-logger.root=TRACE
+logger.root=ERROR
 
 # Logger used by the framework:
 logger.play=INFO
