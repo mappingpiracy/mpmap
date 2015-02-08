@@ -18,3 +18,4 @@ misc
 activator
 activator-launch-1.2.12.jar
 conf/application.conf
+deploy/deploy.log
