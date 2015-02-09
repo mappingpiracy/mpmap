@@ -1,0 +1,3 @@
+prod.url = jdbc:postgresql://[database_url]:[port#]/[database_name]
+prod.user = [database_user]
+prod.pass = [database_password]
