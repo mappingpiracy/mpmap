@@ -27,6 +27,7 @@
     <mappers>
         <mapper resource="EventMapper.xml"/>
         <mapper resource="CountryMapper.xml"/>
+        <mapper resource="AnalysisMapper.xml"/>
     </mappers>
 
 </configuration>
