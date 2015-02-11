@@ -138,31 +138,42 @@ mpmap.controller('MapController',
       getFilter: function() {
         var finalFilter = {
           beginDate: $scope.filterForm.fields.dateRange.beginDate.value,
-          endDate: $scope.filterForm.fields.dateRange.endDate.value,
-          territorialWaterStatus: [],
-          closestCountry: [],
-          vesselCountry: [],
-          vesselStatus: []
+          endDate: $scope.filterForm.fields.dateRange.endDate.value
         };
 
+        var buffer = [];
         angular.forEach($scope.filterForm.fields.locationInformation.territorialWaterStatus.selected, function(value, key) {
-          value.id = value.cowId;
-          finalFilter.territorialWaterStatus.push(value.id);
+          buffer.push(value.cowId);
         });
+        if(buffer.length > 0) {
+          finalFilter.territorialWaterStatus = buffer.join();
+        }
 
+        buffer = [];
         angular.forEach($scope.filterForm.fields.locationInformation.closestCountry.selected, function(value, key) {
-          value.id = value.cowId;
-          finalFilter.closestCountry.push(value.id);
+          buffer.push(value.cowId);
         });
+        if(buffer.length > 0) {
+          finalFilter.closestCountry = buffer.join();
+        }
 
+        buffer = [];
         angular.forEach($scope.filterForm.fields.vesselInformation.vesselCountry.selected, function(value, key) {
-          value.id = value.cowId;
-          finalFilter.vesselCountry.push(value.id);
+          buffer.push(value.cowId);
         });
+        if(buffer.length > 0) {
+          finalFilter.vesselCountry = buffer.join();  
+        }
 
+        buffer = [];
         angular.forEach($scope.filterForm.fields.vesselInformation.vesselStatus.selected, function(value, key) {
-          finalFilter.vesselStatus.push(value);
+          buffer.push(value);
         });
+        if(buffer.length > 0) {
+          finalFilter.vesselStatus = buffer.join();
+        }
+
+        console.log(finalFilter);
 
         return finalFilter;
       },

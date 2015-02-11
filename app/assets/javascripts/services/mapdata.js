@@ -8,7 +8,11 @@ mpmap.factory('MapData', ['$rootScope', '$location', '$http',
       },
 
       getEvents: function(eventFilter) {
-        return $http.post('/mapdata/events', eventFilter);
+        //return $http.post('/mapdata/events', eventFilter);
+        //return $http.get('/mapdata/events', eventFilter);
+        return $http.get('/mapdata/events', {
+          params: eventFilter
+        });
       },
 
       /*

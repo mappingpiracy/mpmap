@@ -7,8 +7,7 @@ GET     /                           controllers.Application.index()
 
 # Mapdata index method -- doesn't really return anything yet.
 GET     /mapdata                    controllers.MapData.index()
-GET     /mapdata/events             controllers.MapData.events()
-POST    /mapdata/events             controllers.MapData.events()
+GET     /mapdata/events             controllers.MapData.events(beginDate:String,endDate:String,territorialWaterStatus:String ?= "",closestCountry:String ?= "",vesselCountry:String ?= "",vesselStatus:String ?= "")
 GET     /mapdata/countries          controllers.MapData.countries()
 
 GET     /analysis/1                 controllers.Analysis.eventsOverTime()

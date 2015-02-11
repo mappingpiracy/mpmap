@@ -26,6 +26,15 @@ public class EventFilter {
 
     public EventFilter() { }
 
+    public EventFilter(String beginDate, String endDate, List<Integer> closestCountry, List<Integer> territorialWaterStatus, List<Integer> vesselCountry, List<String> vesselStatus) {
+        this.beginDate = beginDate;
+        this.endDate = endDate;
+        this.closestCountry = closestCountry;
+        this.territorialWaterStatus = territorialWaterStatus;
+        this.vesselCountry = vesselCountry;
+        this.vesselStatus = vesselStatus;
+    }
+
     //TODO: create enums for filter names, figure out how to use them in the scala views
     public EventFilter(JsonNode jsonNode){
         this.beginDate = jsonNode.get(eventFilterType.BEGIN_DATE.getJsName()).asText();
