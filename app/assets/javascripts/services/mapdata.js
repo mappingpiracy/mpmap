@@ -1,4 +1,4 @@
-mpmap.factory('MapData', ['$rootScope', '$location', '$http',
+mpmap.service('MapData', ['$rootScope', '$location', '$http',
   function($rootScope, $location, $http) {
 
     var mapData = {
@@ -7,9 +7,8 @@ mpmap.factory('MapData', ['$rootScope', '$location', '$http',
         alert('load map called!');
       },
 
-      getEvents: function(eventFilter) {
-        //return $http.post('/mapdata/events', eventFilter);
-        //return $http.get('/mapdata/events', eventFilter);
+      getEvents: function(eventFilter, format) {
+        eventFilter.format = format;
         return $http.get('/mapdata/events', {
           params: eventFilter
         });

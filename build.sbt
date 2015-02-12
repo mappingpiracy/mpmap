@@ -34,7 +34,8 @@ libraryDependencies ++= Seq(
   "org.webjars" % "leaflet" % "0.7.3",
   "org.webjars" % "angular-leaflet-directive" % "0.7.10",
   "org.webjars" % "d3js" % "3.5.3",
-  "org.webjars" % "angular-nvd3" % "0.0.9"
+  "org.webjars" % "nvd3" % "8415ee55d3",
+   "org.webjars" % "angular-nvd3" % "0.0.9"
 )
 
 // Add MyBatis Mappers to the Runtime Classpath

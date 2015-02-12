@@ -1,13 +1,8 @@
 <section id="page-map">
   <!-- Generic Modal -->
-  <modal-dialog show='modals.generic.show' dialog-title="{{modals.generic.title}}">
+   <modal-dialog show='modals.generic.show' dialog-title="{{modals.generic.title}}">
     {{modals.generic.value}}
   </modal-dialog>
-  <!-- Help -->
-  <modal-dialog show="messages.help.show" dialog-title="Help">
-    <div ng-include="'assets/partials/help/help-content.html'"></div>
-  </modal-dialog>
-  <!-- About -->
 
   <div ui-layout>
     <div ui-layout-container>
@@ -20,8 +15,8 @@
             <div ui-layout-container id="map-wrapper">
               <leaflet id="map" defaults="map.defaults" center="map.center" geojson="map.geojson"></leaflet>
             </div>
-            <div ui-layout-container id="map-analysis-wrapper" size="20%">
-              <div id="analysis" ng-include="'assets/partials/map/analysis.html'"></div>
+            <div ui-layout-container id="map-analysis-wrapper" size="40%">
+              <div id="analysis" ng-include="'assets/partials/analysis/analysis.html'"></div>
             </div>
           </div>
         </div>

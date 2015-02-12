@@ -24,3 +24,8 @@ label.large {
   font-size: large;
   border-bottom: 1px solid #999;
 }
+
+h3.section-header {
+	padding-bottom: 2px;
+	border-bottom: 1px solid #999;
+}

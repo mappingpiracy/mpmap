@@ -13,13 +13,15 @@
     <!-- *****  CSS DEPENDENCIES ***** -->
 
     <!-- CSS: Bootstrap core -->
-    <link rel='stylesheet' href='@routes.WebJarAssets.at(WebJarAssets.locate("css/bootstrap.min.css"))'>
+    <link rel="stylesheet" href='@routes.WebJarAssets.at(WebJarAssets.locate("css/bootstrap.min.css"))'>
     <!-- CSS: Angular-UI styles -->
     <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/lib/angular-ui/ui-layout.css")">
     <!-- CSS: Leaflet styles -->
     <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
     <!-- CSS: NG-Modal -->
     <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/directives/ng-modal.css")">
+    <!-- CSS: NV D3 -->
+    <link rel="stylesheet" href="https://rawgit.com/novus/nvd3/v1.1.15-beta/nv.d3.min.css"/>
     <!-- Fonts: Lato, Oswald -->
     <link href='http://fonts.googleapis.com/css?family=Lato|Oswald:400' rel='stylesheet' type='text/css'>
 
@@ -33,9 +35,11 @@
     <!-- ***** CSS CUSTOM STYLES ***** -->
 
      <!-- CSS: Main styles-->
-    <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/style.css")">
+    <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/global.css")">
     <!-- CSS: Map styles -->
-    <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/map/style.css")">
+    <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/map.css")">
+    <!-- CSS: Analysis styles -->
+    <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/analysis.css")">
     
 
 </head>
@@ -65,8 +69,14 @@
     <!-- JS: Mapping -->
     <script type='text/javascript' src='@routes.WebJarAssets.at(WebJarAssets.locate("leaflet.js"))'></script>
     <!-- JS: D3 -->
-    <script type='text/javascript' src='@routes.WebJarAssets.at(WebJarAssets.locate("d3.js"))'></script>
-    <script type='text/javascript' src='@routes.WebJarAssets.at(WebJarAssets.locate("angular-nvd3.js"))'></script>
+    <script src="https://rawgit.com/mbostock/d3/master/d3.min.js"></script>
+    <script src="https://rawgit.com/novus/nvd3/v1.1.15-beta/nv.d3.min.js"></script>
+    <script src="https://rawgit.com/krispo/angular-nvd3/master/dist/angular-nvd3.js"></script>
+
+    <!--<script type='text/javascript' src='@routes.WebJarAssets.at(WebJarAssets.locate("d3.js"))'></script>
+    <script src="@routes.Assets.at("javascripts/lib/nv.js")" type="text/javascript" defer="defer" ></script>
+    <script type='text/javascript' src='@routes.WebJarAssets.at(WebJarAssets.locate("angular-nvd3.js"))'></script>-->
+
     <!-- JS: Other libraries -->
     <script src="@routes.Assets.at("javascripts/lib/other/date.js")" type="text/javascript" defer="defer" ></script>
 
@@ -77,6 +87,7 @@
     <script src="@routes.Assets.at("javascripts/app.js")" type="text/javascript" defer="defer" ></script>
     <!-- JS: Angular Services -->
     <script src="@routes.Assets.at("javascripts/services/mapdata.js")" type="text/javascript" defer="defer" ></script>
+    <script src="@routes.Assets.at("javascripts/services/analysisdata.js")" type="text/javascript" defer="defer" ></script>
     <!-- JS: Angular Controllers -->
     <script src="@routes.Assets.at("javascripts/controllers/map.js")" type="text/javascript" defer="defer" ></script>
     <script src="@routes.Assets.at("javascripts/controllers/staticpage.js")" type="text/javascript" defer="defer" ></script>

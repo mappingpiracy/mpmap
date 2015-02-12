@@ -29,17 +29,10 @@ public class MapData extends Controller {
     }
 
     /*
-        Returns GeoJSON list of all events
+        Returns a Json or GeoJSON list of events given the passed filters
      */
-    public static Result events() {
-        List<Event> events = Event.getEvents();
-        return ok(toJson(GeoJsonHelper.eventsToFeatureCollection(events)));
-    }
-
-    /*
-        Returns GeoJSON list of events given the passed filters
-     */
-    public static Result events(String beginDate,
+    public static Result events(String format,
+                                String beginDate,
                                 String endDate,
                                 String territorialWaterStatus,
                                 String closestCountry,
@@ -52,9 +45,13 @@ public class MapData extends Controller {
                 ListHelper.commaStringToIntegerList(vesselCountry),             //  String -> List<Integer>
                 ListHelper.commaStringToStringList((vesselStatus)));            //  String -> List<String>
         events = Event.getEvents(eventFilter);
-        return ok(toJson(GeoJsonHelper.eventsToFeatureCollection(events)));
-    }
 
+        if(format.equals("geojson")) {
+            return ok(toJson(GeoJsonHelper.eventsToFeatureCollection(events)));
+        } else {
+            return ok(toJson(events));
+        }
+    }
     /*
         Return JSON list of countries
      */

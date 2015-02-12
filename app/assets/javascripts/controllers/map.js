@@ -9,6 +9,7 @@ Alex Klibisz, 1/16/14
 mpmap.controller('MapController',
   function($scope, $location, $document, $modal, MapData) {
 
+
     /******************************************
 
       Messages object - contains all help, error,
@@ -54,8 +55,8 @@ mpmap.controller('MapController',
       },
       help: {
         show: false,
-        open: function() { 
-          $scope.modals.help.show = true; 
+        open: function() {
+          $scope.modals.help.show = true;
         }
       }
     };
@@ -145,33 +146,25 @@ mpmap.controller('MapController',
         angular.forEach($scope.filterForm.fields.locationInformation.territorialWaterStatus.selected, function(value, key) {
           buffer.push(value.cowId);
         });
-        if(buffer.length > 0) {
-          finalFilter.territorialWaterStatus = buffer.join();
-        }
+        finalFilter.territorialWaterStatus = buffer.join();
 
         buffer = [];
         angular.forEach($scope.filterForm.fields.locationInformation.closestCountry.selected, function(value, key) {
           buffer.push(value.cowId);
         });
-        if(buffer.length > 0) {
-          finalFilter.closestCountry = buffer.join();
-        }
+        finalFilter.closestCountry = buffer.join();
 
         buffer = [];
         angular.forEach($scope.filterForm.fields.vesselInformation.vesselCountry.selected, function(value, key) {
           buffer.push(value.cowId);
         });
-        if(buffer.length > 0) {
-          finalFilter.vesselCountry = buffer.join();  
-        }
+        finalFilter.vesselCountry = buffer.join();
 
         buffer = [];
         angular.forEach($scope.filterForm.fields.vesselInformation.vesselStatus.selected, function(value, key) {
           buffer.push(value);
         });
-        if(buffer.length > 0) {
-          finalFilter.vesselStatus = buffer.join();
-        }
+        finalFilter.vesselStatus = buffer.join();
 
         console.log(finalFilter);
 
@@ -252,7 +245,7 @@ mpmap.controller('MapController',
       */
       getData: function() {
         $scope.modals.generic.open($scope.messages.events.loading, "");
-        MapData.getEvents($scope.filterForm.getFilter())
+        MapData.getEvents($scope.filterForm.getFilter(), 'geojson')
           .success(function(data, status) {
             $scope.map.geojson = {
               data: data,
@@ -261,6 +254,7 @@ mpmap.controller('MapController',
             };
             $scope.modals.generic.close();
             console.log('Events updated.');
+            console.log(data);
           })
           .error(function(data, status) {
             $scope.modals.generic.close();
@@ -269,7 +263,7 @@ mpmap.controller('MapController',
       }
     };
 
-     /******************************************
+    /******************************************
 
       Export object - contains export functionality
       for filters and events.
@@ -279,37 +273,156 @@ mpmap.controller('MapController',
     ******************************************/
     $scope.export = {
       events: function(format) {
-        var fileName = 'mpmamp_export_events_' + new Date().toString('yyyy-MM-dd-HH:mm:ss')  + '.' + format;
+        var fileName = 'mpmamp_export_events_' + new Date().toString('yyyy-MM-dd-HH:mm:ss') + '.' + format;
         var pom = document.createElement('a');
         var fileContents = null;
-        if(format === 'geojson') {
+        if (format === 'geojson') {
           fileContents = $scope.map.geojson;
-        } else if(format === 'csv') {
+        } else if (format === 'csv') {
           fileContents = null;
         }
-        pom.setAttribute('href', 'data:application/json;charset=utf-8,' + JSON.stringify(fileContents));         
+        pom.setAttribute('href', 'data:application/json;charset=utf-8,' + JSON.stringify(fileContents));
         pom.setAttribute('download', fileName);
         pom.click();
       },
       filters: function(format) {
-        var fileName = 'mpmamp_export_filters_' + new Date().toString('yyyy-MM-dd-HH:mm:ss')  + '.' + format;
+        var fileName = 'mpmamp_export_filters_' + new Date().toString('yyyy-MM-dd-HH:mm:ss') + '.' + format;
         var pom = document.createElement('a');
         var fileContents = null;
-        if(format === 'json') {
+        if (format === 'json') {
           fileContents = $scope.filterForm.getFilter();
         }
-        pom.setAttribute('href', 'data:application/json;charset=utf-8,' + JSON.stringify(fileContents));         
+        pom.setAttribute('href', 'data:application/json;charset=utf-8,' + JSON.stringify(fileContents));
         pom.setAttribute('download', fileName);
         pom.click();
       }
     };
 
-    /*
-    - Initial event loading, executes when the controller is called.
-    */
+    /******************************************
+
+      Analysis object - contains all models
+      for the d3 and nv.d3 data visualizations.
+
+      TODO: Abstract this to another file or 
+      a service -- http://joelhooks.com/blog/2013/04/24/modeling-data-and-state-in-your-angularjs-application/
+
+    ******************************************/
+
+    $scope.analysis = {
+      models: {
+        eventsPerYear: {
+          options: {
+            chart: {
+              type: 'lineChart',
+              height: 275,
+              margin: {
+                top: 20,
+                right: 60,
+                bottom: 40,
+                left: 55
+              },
+              x: function(d) {
+                return d.x;
+              },
+              y: function(d) {
+                return d.y;
+              },
+              useInteractiveGuideline: true,
+              dispatch: {
+                stateChange: function(e) {
+                  console.log("stateChange");
+                },
+                changeState: function(e) {
+                  console.log("changeState");
+                },
+                tooltipShow: function(e) {
+                  console.log("tooltipShow");
+                },
+                tooltipHide: function(e) {
+                  console.log("tooltipHide");
+                }
+              },
+              xAxis: {
+                axisLabel: 'Years'
+              },
+              yAxis: {
+                axisLabel: 'Events',
+                tickFormat: d3.format(''),
+                axisLabelDistance: 30
+              },
+              callback: function(chart) {
+                console.log("!!! lineChart callback !!!");
+              }
+            },
+            title: {
+              enable: true,
+              text: 'Events Per Year (Note: we are currently testing, and this is randomly generated data.)'
+            },
+            subtitle: {
+              enable: false,
+              text: '',
+              css: {}
+            },
+            caption: {
+              enable: true,
+              html: '<p>This chart displays the events per year for the currently filtered events.',
+              css: {
+                'text-align': 'justify',
+                'margin': '10px 13px 0px 7px'
+              }
+            }
+          },
+          data: [],
+          getData: function() {
+            console.log("randData called");
+            var a = [];
+            var b = [];
+            var c = [];
+
+            for (var i = 1993; i < 2016; i++) {
+              a.push({
+                x: i,
+                y: Math.floor((Math.random() * 50) + 1)
+              });
+              b.push({
+                x: i,
+                y: Math.floor((Math.random() * 50) + 1)
+              });
+              c.push({
+                x: i,
+                y: Math.floor((Math.random() * 50) + 1)
+              });
+            }
+
+            return [{
+              values: a,
+              key: 'Somalia',
+              color: '#ff7f0e'
+            }, {
+              values: b,
+              key: 'Kenya',
+              color: '#2ca02c'
+            }, {
+              values: c,
+              key: 'Yemen',
+              color: '#7777ff'
+            }];
+          }
+        }
+      },
+      getData: function() {
+        $scope.analysis.models.eventsPerYear.data = $scope.analysis.models.eventsPerYear.getData();
+      }
+    };
+
+    /******************************************
+
+      Data Loading - call all data loading
+      functions.
+
+    ******************************************/
     $scope.filterForm.getData();
     $scope.map.getData();
-
-
+    $scope.analysis.getData();
   }
 ); //  MapController

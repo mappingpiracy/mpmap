@@ -5,7 +5,7 @@ var mpmap = angular.module('mpmap',
   'leaflet-directive',        //  leaflet-directive, used for adding leaflet to angular
   'ui.bootstrap',             //  for bootstrap js functionality
   'ngModal',                  //  angular modal popups
-  'ngSanitize'
+  'nvd3'
   ]);
 
 var appControllers = angular.module('appControllers',[]);

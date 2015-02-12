@@ -6,6 +6,11 @@
 
     <!--select EXTRACT(YEAR FROM occurred_on) as year, count(*) from event group by year order by year ASC;-->
 
+    <!--SELECT vessel_flag_country_id, EXTRACT(YEAR FROM occurred_on) as year, count(*)-->
+    <!--FROM event-->
+    <!--GROUP BY vessel_flag_country_id, year-->
+    <!--ORDER by vessel_flag_country_id ASC, year ASC;-->
+
     <!--<resultMap id="CountryResult" type="Country">-->
         <!--<id property="id" column="id"/>-->
         <!--<result property="cowId" column="cow_id"/>-->
