@@ -31,7 +31,7 @@ public class MapData extends Controller {
     /*
         Returns a Json or GeoJSON list of events given the passed filters
      */
-    public static Result events(String format,
+    public static Result events(String format,      // json || geojson
                                 String beginDate,
                                 String endDate,
                                 String territorialWaterStatus,

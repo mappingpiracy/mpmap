@@ -206,6 +206,7 @@ mpmap.controller('MapController',
         tileLayer: "http://{s}.tiles.mapbox.com/v3/utkpiracyscience.k1ei0a8m/{z}/{x}/{y}.png",
         maxZoom: 14
       },
+      geojson: [],
       center: {
         lat: 0,
         lng: 0,
@@ -215,6 +216,7 @@ mpmap.controller('MapController',
         return L.circleMarker(latlng, $scope.map.markerOptions);
       },
       createPopup: function(feature, layer) {
+        //console.log("createPopup");
         popupOptions = $scope.map.popupOptions;
         popupContent = '<div class="popup-content"><ul>';
         popupContent += '<li>Id:                        <strong>' + feature.properties.id + '</strong></li>';
@@ -231,9 +233,9 @@ mpmap.controller('MapController',
         radius: 7,
         fillColor: "#ff7800",
         color: "#000",
-        weight: 1,
+        weight: 1/*,
         opacity: 1,
-        fillOpacity: 0.8
+        fillOpacity: 0.8*/
       },
       popupOptions: {
         maxWidth: 300
@@ -249,7 +251,7 @@ mpmap.controller('MapController',
           .success(function(data, status) {
             $scope.map.geojson = {
               data: data,
-              pointToLayer: $scope.map.createMarker,
+              //pointToLayer: $scope.map.createMarker,
               onEachFeature: $scope.map.createPopup
             };
             $scope.modals.generic.close();
@@ -394,7 +396,7 @@ mpmap.controller('MapController',
               });
             }
 
-            return [{
+            var r = [{
               values: a,
               key: 'Somalia',
               color: '#ff7f0e'
@@ -407,7 +409,9 @@ mpmap.controller('MapController',
               key: 'Yemen',
               color: '#7777ff'
             }];
+            return r;
           }
+
         }
       },
       getData: function() {
