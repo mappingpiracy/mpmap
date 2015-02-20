@@ -7,7 +7,7 @@ Alex Klibisz, 1/16/14
 ******************************************/
 
 mpmap.controller('MapController',
-  function($scope, $location, $document, $modal, MapData) {
+  function($scope, $location, $document, $modal, MapData, ExportData) {
 
 
     /******************************************
@@ -266,40 +266,17 @@ mpmap.controller('MapController',
 
     /******************************************
 
-      Export object - contains export functionality
+      Export object - calls export functionality
       for filters and events.
-
-      TODO:Abstract this to a service
 
     ******************************************/
     $scope.export = {
-      events: function(format) {
-        var fileName = 'mpmamp_export_events_' + new Date().toString('yyyy-MM-dd-HH:mm:ss') + '.' + format;
-        var fileContents, fileType, blob;
 
-        if (format === 'geojson') {
-          fileContents = JSON.stringify($scope.map.geojson);
-          fileType = 'application/json;';
-        } else if (format === 'csv') {
-          fileContents = null;
-          fileType = null;
-        }
-        
-        blob = new Blob([fileContents], {
-          type: fileType + 'charset=utf-8;'
-        });
-        saveAs(blob, fileName);
+      events: function(format) {
+        ExportData.export($scope.map.geojson, format);
       },
       filters: function(format) {
-        var fileName = 'mpmamp_export_filters_' + new Date().toString('yyyy-MM-dd-HH:mm:ss') + '.' + format;
-        var pom = document.createElement('a');
-        var fileContents = null;
-        if (format === 'json') {
-          fileContents = $scope.filterForm.getFilter();
-        }
-        pom.setAttribute('href', 'data:application/json;charset=utf-8,' + JSON.stringify(fileContents));
-        pom.setAttribute('download', fileName);
-        pom.click();
+        ExportData.export($scope.filterForm.getFilter(), format);
       }
     };
 
