@@ -46,7 +46,7 @@ mpmap.service('EventsPerYearModel', function($rootScope) {
             },
             title: {
                 enable: true,
-                text: 'Events Per Year (based on closest country)'
+                text: 'Events Per Year (By Closest Country)'
             },
             subtitle: {
                 enable: false,
@@ -55,7 +55,7 @@ mpmap.service('EventsPerYearModel', function($rootScope) {
             },
             caption: {
                 enable: true,
-                html: '<p>This chart displays the events per year by closest country for the currently filtered events.',
+                html: '<p>This chart displays the events per year by closest country for the currently filtered events.</p>',
                 css: {
                     'text-align': 'justify',
                     'margin': '10px 13px 0px 7px'
@@ -65,71 +65,55 @@ mpmap.service('EventsPerYearModel', function($rootScope) {
         },
         data: [],
         /*
-            final return object should be essentially a list with country
-            names, arrays of their yearly event counts
+            Extract the chart data for this analysis model.
+            2-step process:
+            1. Create a 2-dimensional map object keyed on country name and year with value yearly number of events for each country.
+            2. Transcribe this map object to the chartData array so that it works with nvd3.js
+
         */
         getData: function(mapData) {
-            var features = mapData.data.features;
-            var countries = { };
-            var key, val, year, i, j;
-            var temp = [ { x: 2000, y: 25 }, { x: 2002, y: 30 }, { x: 2003, y: 40 } ];
+            var features = mapData.data.features,   //extract features array from the passed mapdata
+                countries = {},
+                chartData = [],
+                yearlyValues = [],
+                country, year;
 
-            for(i = 0; i < features.length; i++) {
-                key = features[i].properties.closestCountry;
+            //iterate over the features array to create the 2-dimensional map object
+            for (var i = 0; i < features.length; i++) {
+                
+                //extract the closest country name and year
+                country = features[i].properties.closestCountry;
                 year = new Date(features[i].properties.occurredOnDate).getFullYear();
-                if(key in countries) {
-                    for(j = 0; j < countries[key].length; j++) {
-                        if(countries[key][j].x == year) {
-                            countries[key][j].y++;
-                        }
+
+                if (country in countries) {  //check if this country has already been stored
+
+                    if (year in countries[country]) {  //country has been stored -- check if this year has been stored
+                        countries[country][year] ++;  //year has been stored -- increment its count
+                    } else {
+                        countries[country][year] = 1;  //year has not been stored -- initialize it
                     }
                 } else {
-                    val = {
-                        x: year,
-                        y: 1
-                    };
-                    countries[key] = [];
-                    countries[key].push(val);
+                    countries[country] = {};  //country has not been stored -- initialize its map object
+                    countries[country][year] = 1;  //initialize the country counter
                 }
             }
 
-            console.log(countries);
-
-            return null;
-
-        },
-        getData2: function(mapData) {
-            console.log("getData", mapData);
-            var a = [];
-            var b = [];
-            var c = [];
-
-            for (var i = 1993; i < 2016; i++) {
-                a.push({
-                    x: i,
-                    y: Math.floor((Math.random() * 50) + 1)
-                });
-                b.push({
-                    x: i,
-                    y: Math.floor((Math.random() * 50) + 1)
-                });
-                c.push({
-                    x: i,
-                    y: Math.floor((Math.random() * 50) + 1)
+            //iterate over the countries again to create the final nvd3.js-friendly object
+            for(country in countries) {
+                yearlyValues = [];  //yearly values for this country
+                for(year in countries[country]) {
+                    yearlyValues.push({  //push a new (x,y) pair for this year
+                        x: year,
+                        y: countries[country][year]
+                    });
+                }
+                chartData.push({  //push a new (key, value) pair for this country
+                    values: yearlyValues,
+                    key: country
                 });
             }
 
-            var r = [{
-                values: a,
-                key: 'Somalia'
-            }, {
-                values: b,
-                key: 'Kenya'
-            }, {
-                values: c,
-                key: 'Yemen'
-            }];
-            return r;
+            return chartData;
         }
     };
 

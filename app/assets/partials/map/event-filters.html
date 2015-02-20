@@ -60,6 +60,45 @@
       <div class="panel-heading">Location Information</div>
       <div class="panel-body">
 
+        <!-- Closest Country -->
+
+        <div class="row">
+          <div class="col-md-12">
+            <label class="large">Closest Country</label>
+            <button popover="{{messages.help.multiSelect}}" popover-trigger="mouseenter" class="btn btn-xs btn-info">Help</button>
+            <input class="form-control" placeholder="{{messages.placeHolder.multiSelectSearch}}" ng-model="filterForm.fields.locationInformation.closestCountry.searchTerm">
+          </div>
+        </div>
+
+        <div class="row">
+
+          <!-- "All" countries -->
+
+          <div class="col-md-6">
+            <label>All</label>
+            <div class="multi-select-list">
+              <ul ng-model="filterForm.fields.locationInformation.closestCountry.all">
+                <li ng-repeat="item in filterForm.fields.locationInformation.closestCountry.all | filter: filterForm.fields.locationInformation.closestCountry.searchTerm | orderBy: 'name'">
+                  <a href="" ng-click="filterForm.multiSelectTransfer(filterForm.fields.locationInformation.closestCountry.all, filterForm.fields.locationInformation.closestCountry.selected, filterForm.fields.locationInformation.closestCountry.all.indexOf(item))">{{item.name}} &rArr;</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- "Selected" countries -->
+
+          <div class="col-md-6">
+            <label>Selected</label>
+            <div class="multi-select-list">
+              <ul ng-model="filterForm.fields.locationInformation.closestCountry.selected">
+                <li ng-repeat="item in filterForm.fields.locationInformation.closestCountry.selected | orderBy: 'name'">
+                  <a href="" ng-click="filterForm.multiSelectTransfer(filterForm.fields.locationInformation.closestCountry.selected, filterForm.fields.locationInformation.closestCountry.all, filterForm.fields.locationInformation.closestCountry.selected.indexOf(item))">&lArr; {{item.name}}</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
         <!-- Territorial Water Status -->
 
         <div class="row">
@@ -99,44 +138,7 @@
           </div>
         </div>
 
-        <!-- Closest Country -->
-
-        <div class="row">
-          <div class="col-md-12">
-            <label class="large">Closest Country</label>
-            <button popover="{{messages.help.multiSelect}}" popover-trigger="mouseenter" class="btn btn-xs btn-info">Help</button>
-            <input class="form-control" placeholder="{{messages.placeHolder.multiSelectSearch}}" ng-model="filterForm.fields.locationInformation.closestCountry.searchTerm">
-          </div>
-        </div>
-
-        <div class="row">
-
-          <!-- "All" countries -->
-
-          <div class="col-md-6">
-            <label>All</label>
-            <div class="multi-select-list">
-              <ul ng-model="filterForm.fields.locationInformation.closestCountry.all">
-                <li ng-repeat="item in filterForm.fields.locationInformation.closestCountry.all | filter: filterForm.fields.locationInformation.closestCountry.searchTerm | orderBy: 'name'">
-                  <a href="" ng-click="filterForm.multiSelectTransfer(filterForm.fields.locationInformation.closestCountry.all, filterForm.fields.locationInformation.closestCountry.selected, filterForm.fields.locationInformation.closestCountry.all.indexOf(item))">{{item.name}} &rArr;</a>
-                </li>
-              </ul>
-            </div>
-          </div>
-
-          <!-- "Selected" countries -->
-
-          <div class="col-md-6">
-            <label>Selected</label>
-            <div class="multi-select-list">
-              <ul ng-model="filterForm.fields.locationInformation.closestCountry.selected">
-                <li ng-repeat="item in filterForm.fields.locationInformation.closestCountry.selected | orderBy: 'name'">
-                  <a href="" ng-click="filterForm.multiSelectTransfer(filterForm.fields.locationInformation.closestCountry.selected, filterForm.fields.locationInformation.closestCountry.all, filterForm.fields.locationInformation.closestCountry.selected.indexOf(item))">&lArr; {{item.name}}</a>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
+        
       </div>
     </div>
 
