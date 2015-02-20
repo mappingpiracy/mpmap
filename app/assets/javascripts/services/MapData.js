@@ -10,10 +10,6 @@ mpmap.service('MapData',
         });
       },
 
-      getGeoJsonFeatures: function(data) {
-        return data.data.features;
-      },
-
       /*
           return the list of countries
       */

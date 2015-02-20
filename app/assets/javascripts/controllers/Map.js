@@ -7,7 +7,7 @@ Alex Klibisz, 1/16/14
 ******************************************/
 
 mpmap.controller('MapController',
-  function($scope, $location, $document, $modal, MapData, ExportData) {
+  function($scope, $location, $document, $modal, MapData, ExportData, EventsPerYearModel) {
 
 
     /******************************************
@@ -243,6 +243,9 @@ mpmap.controller('MapController',
       - get the current filters
       - retrieve the events via the mapdata service with the given filters
       - replace the map's geojson with the new events
+
+      //TODO: potentially abstract this to a more general function that reloads
+      all of the view data.
       */
       getData: function() {
         $scope.modals.generic.open($scope.messages.events.loading, "");
@@ -253,13 +256,16 @@ mpmap.controller('MapController',
               // pointToLayer: $scope.map.createMarker,
               onEachFeature: $scope.map.createPopup
             };
-            $scope.modals.generic.close();
             console.log('Events updated.');
             console.log(data);
           })
           .error(function(data, status) {
-            $scope.modals.generic.close();
             $scope.modals.generic.open($scope.messages.events.error, "");
+          })
+          .then(function(){
+            //reload the analysis data
+            $scope.analysis.getData();
+            $scope.modals.generic.close();
           });
       }
     };
@@ -274,11 +280,11 @@ mpmap.controller('MapController',
 
       events: function(format) {
         //export the geojson as is
-        if(format == 'geojson') {
+        if (format == 'geojson') {
           ExportData.export($scope.map.geojson, format);
-        } 
+        }
         //get the feature list from the geojson object, convert it to csv, then export
-        else if(format == 'csv') {
+        else if (format == 'csv') {
           ExportData.export(MapData.convert.geoJsonFeaturesToCSV($scope.map.geojson), format);
         }
       },
@@ -292,117 +298,15 @@ mpmap.controller('MapController',
       Analysis object - contains all models
       for the d3 and nv.d3 data visualizations.
 
-      TODO: Abstract this to another file or 
-      a service -- http://joelhooks.com/blog/2013/04/24/modeling-data-and-state-in-your-angularjs-application/
-
+      TODO: try to clean up the getData function.
     ******************************************/
 
     $scope.analysis = {
       models: {
-        eventsPerYear: {
-          options: {
-            chart: {
-              type: 'lineChart',
-              height: 275,
-              margin: {
-                top: 20,
-                right: 60,
-                bottom: 40,
-                left: 55
-              },
-              x: function(d) {
-                return d.x;
-              },
-              y: function(d) {
-                return d.y;
-              },
-              useInteractiveGuideline: true,
-              dispatch: {
-                stateChange: function(e) {
-                  console.log("stateChange");
-                },
-                changeState: function(e) {
-                  console.log("changeState");
-                },
-                tooltipShow: function(e) {
-                  console.log("tooltipShow");
-                },
-                tooltipHide: function(e) {
-                  console.log("tooltipHide");
-                }
-              },
-              xAxis: {
-                axisLabel: 'Years'
-              },
-              yAxis: {
-                axisLabel: 'Events',
-                tickFormat: d3.format(''),
-                axisLabelDistance: 30
-              },
-              callback: function(chart) {
-                console.log("!!! lineChart callback !!!");
-              }
-            },
-            title: {
-              enable: true,
-              text: 'Events Per Year (Note: we are currently testing, and this is randomly generated data.)'
-            },
-            subtitle: {
-              enable: false,
-              text: '',
-              css: {}
-            },
-            caption: {
-              enable: true,
-              html: '<p>This chart displays the events per year for the currently filtered events.',
-              css: {
-                'text-align': 'justify',
-                'margin': '10px 13px 0px 7px'
-              }
-            }
-          },
-          data: [],
-          getData: function() {
-            console.log("randData called");
-            var a = [];
-            var b = [];
-            var c = [];
-
-            for (var i = 1993; i < 2016; i++) {
-              a.push({
-                x: i,
-                y: Math.floor((Math.random() * 50) + 1)
-              });
-              b.push({
-                x: i,
-                y: Math.floor((Math.random() * 50) + 1)
-              });
-              c.push({
-                x: i,
-                y: Math.floor((Math.random() * 50) + 1)
-              });
-            }
-
-            var r = [{
-              values: a,
-              key: 'Somalia',
-              color: '#ff7f0e'
-            }, {
-              values: b,
-              key: 'Kenya',
-              color: '#2ca02c'
-            }, {
-              values: c,
-              key: 'Yemen',
-              color: '#7777ff'
-            }];
-            return r;
-          }
-
-        }
+        eventsPerYear: EventsPerYearModel
       },
       getData: function() {
-        $scope.analysis.models.eventsPerYear.data = $scope.analysis.models.eventsPerYear.getData();
+        $scope.analysis.models.eventsPerYear.data = $scope.analysis.models.eventsPerYear.getData($scope.map.geojson);
       }
     };
 
@@ -414,6 +318,5 @@ mpmap.controller('MapController',
     ******************************************/
     $scope.filterForm.getData();
     $scope.map.getData();
-    $scope.analysis.getData();
   }
 ); //  MapController
