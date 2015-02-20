@@ -10,19 +10,18 @@ function($rootScope, $location, $http) {
     export: function(data, format) {
       var fileName, fileContents, fileType, blob;
       fileName = 'mpmamp_export_events_' + new Date().toString('yyyy-MM-dd-HH:mm:ss') + '.' + format;
-      console.log("here");
       if (format.indexOf('json') > -1) {
         fileContents = JSON.stringify(data);
         fileType = 'application/json;';
       } else if (format.indexOf('csv') > -1) {
-        fileContents = null;
-        fileType = null;
+        fileContents = data;
+        fileType = 'text/csv;';
       }
 
       blob = new Blob([fileContents], {
         type: fileType + 'charset=utf-8;'
       });
-      
+
       saveAs(blob, fileName);
   }
 

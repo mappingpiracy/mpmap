@@ -273,7 +273,14 @@ mpmap.controller('MapController',
     $scope.export = {
 
       events: function(format) {
-        ExportData.export($scope.map.geojson, format);
+        //export the geojson as is
+        if(format == 'geojson') {
+          ExportData.export($scope.map.geojson, format);
+        } 
+        //get the feature list from the geojson object, convert it to csv, then export
+        else if(format == 'csv') {
+          ExportData.export(MapData.convert.geoJsonFeaturesToCSV($scope.map.geojson), format);
+        }
       },
       filters: function(format) {
         ExportData.export($scope.filterForm.getFilter(), format);

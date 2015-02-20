@@ -4,15 +4,9 @@ mpmap.service('AnalysisData',
     var analysisData = {
 
       getData : function() {
-
-      },
-
-      eventsPerYear : function() {
-
       }
 
     };
-
     return analysisData;
 
   }
