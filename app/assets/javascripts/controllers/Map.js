@@ -85,8 +85,7 @@ mpmap.controller('MapController',
         {
             dateRange :
             {
-                years : [/*getData*/
-                ],
+                years : [/*getData*/],
                 selectedYear : Date.today().getFullYear(),
                 beginDate :
                 {
@@ -358,8 +357,7 @@ mpmap.controller('MapController',
     Analysis object - contains all models
     for the d3 and nv.d3 data visualizations.
 
-    TODO: try to clean up the getData function.
-     ******************************************/
+    ******************************************/
 
     $scope.analysis =
     {
@@ -369,7 +367,9 @@ mpmap.controller('MapController',
         },
         getData : function ()
         {
-            EventsPerYearModel($scope.map.geojson);
+            EventsPerYearModel($scope.map.geojson, 
+              $scope.filterForm.fields.dateRange.beginDate.value, 
+              $scope.filterForm.fields.dateRange.endDate.value);
         }
     };
 

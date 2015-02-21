@@ -119,39 +119,28 @@ mpmap.service('EventsPerYearModel', function ($rootScope)
         return chartData;
     }
 
-    /*
-    Extract a list of all unique years from the passed chartData
-    2-step process:
-    1. Create a set of all unique years using an object
-    2. Transfer the map keys to a list of years
-     */
-    function getTickValues(chartData)
-    {
-        var i,
-        j,
-        year,
-        years = {},
-        tickValues = [];
-
-        //Create the years object which acts as a set of all unique years
-        for (i = 0; i < chartData.length; i++) {
-            for (j = 0; j < chartData[i].values.length; j++) {
-                year = chartData[i].values[j].x;
-                years[year] = {};
-            }
+    function getTickValues(beginDate, endDate) {
+        var i, beginYear, endYear, tickValues = [];
+        try {
+            beginYear = new Date(beginDate).getFullYear();
+            endYear = new Date(endDate).getFullYear();    
+        } catch(err) {
+            return tickValues;
         }
 
-        //Create the tickValues list with all unique years
-        for (year in years) {
-            tickValues.push(year);
+        if(beginYear == endYear) {
+            tickValues.push(beginYear);
+        } else {
+            for(i = beginYear; i <= endYear; i++) {
+                tickValues.push(i);
+            }    
         }
-
         return tickValues;
     }
-
-    return function (mapData) {
+    
+    return function (mapData, beginDate, endDate) {
         model.data = getData(mapData);
-        model.options.chart.xAxis.tickValues = getTickValues(model.data);
+        model.options.chart.xAxis.tickValues = getTickValues(beginDate, endDate);
         return model;
     };
 
