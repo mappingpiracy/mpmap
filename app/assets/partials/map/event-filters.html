@@ -1,28 +1,25 @@
-
 <div id="event-filter-top">
+  <h3 class="section-header">Event Filters <small>(Control the events displayed.)</small></h3>
 
-    <h3 class="section-header">
-      Event Filters
-      <small>(Control the events displayed.)</small>
-    </h3>
-
-    <div ng-include="'assets/partials/map/event-filter-buttons.html'"></div>
-
+  <div ng-include="'assets/partials/map/event-filter-buttons.html'"></div>
 </div>
 
-<div id="event-filter-scroll-wrapper" filter-form>
-  <form id="event-filter" class="form form-horizontal" novalidate>
-
+<div id="event-filter-scroll-wrapper" filter-form="">
+  <form id="event-filter" class="form form-horizontal" novalidate="">
     <!-- Date Range -->
-    <div class="panel panel-primary">
-      <div class="panel-heading">Date Range</div>
-      <div class="panel-body">
 
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        Date Range
+      </div>
+
+      <div class="panel-body">
         <div class="row">
           <div class="col-md-12">
-            <label for="year">Year</label>
-            <select id="year" class="form-control" ng-model="filterForm.fields.dateRange.selectedYear" ng-change="filterForm.fields.dateRange.update()">
-              <option ng-repeat="item in filterForm.fields.dateRange.years" value="{{item}}">{{item}}</option>
+            <label for="year">Year</label> <select id="year" class="form-control" ng-model="filterForm.fields.dateRange.selectedYear" ng-change="filterForm.fields.dateRange.update()">
+              <option ng-repeat="item in filterForm.fields.dateRange.years" value="{{item}}">
+                {{item}}
+              </option>
             </select>
           </div>
         </div>
@@ -30,12 +27,9 @@
         <div class="row">
           <div class="col-md-12">
             <label for="begin-date">Begin Date</label>
+
             <div class="input-group">
-              <input id="begin-date" type="text" class="form-control" datepicker-popup="{{filterForm.fields.dateRange.calendarOptions.format}}" ng-model="filterForm.fields.dateRange.beginDate.value" is-open="filterForm.fields.dateRange.beginDate.isOpen" min-date="filterForm.fields.dateRange.calendarOptions.minDate"
-              max-date="filterForm.fields.dateRange.calendarOptions.maxDate" ng-required="true" close-text="Close" />
-              <span class="input-group-btn">
-                <button type="button" class="btn btn-primary" ng-click="filterForm.fields.dateRange.calendarOptions.toggleOpen($event, filterForm.fields.dateRange.beginDate)"><i class="glyphicon glyphicon-calendar"></i>&nbsp;</button>
-              </span>
+              <input id="begin-date" type="text" class="form-control" datepicker-popup="{{filterForm.fields.dateRange.calendarOptions.format}}" ng-model="filterForm.fields.dateRange.beginDate.value" is-open="filterForm.fields.dateRange.beginDate.isOpen" min-date="filterForm.fields.dateRange.calendarOptions.minDate" max-date="filterForm.fields.dateRange.calendarOptions.maxDate" ng-required="true" close-text="Close" /> <span class="input-group-btn"><button type="button" class="btn btn-primary" ng-click="filterForm.fields.dateRange.calendarOptions.toggleOpen($event, filterForm.fields.dateRange.beginDate)"><span class="input-group-btn">&nbsp;</span></button></span>
             </div>
           </div>
         </div>
@@ -43,214 +37,186 @@
         <div class="row">
           <div class="col-md-12">
             <label for="end-date">End Date</label>
+
             <div class="input-group">
-              <input id="end-date" type="text" class="form-control" datepicker-popup="{{filterForm.fields.dateRange.calendarOptions.format}}" ng-model="filterForm.fields.dateRange.endDate.value" is-open="filterForm.fields.dateRange.endDate.isOpen" min-date="filterForm.fields.dateRange.calendarOptions.minDate"
-              max-date="filterForm.fields.dateRange.calendarOptions.maxDate" ng-required="true" close-text="Close" />
-              <span class="input-group-btn">
-                <button type="button" class="btn btn-primary" ng-click="filterForm.fields.dateRange.calendarOptions.toggleOpen($event, filterForm.fields.dateRange.endDate)"><i class="glyphicon glyphicon-calendar"></i>&nbsp;</button>
-              </span>
+              <input id="end-date" type="text" class="form-control" datepicker-popup="{{filterForm.fields.dateRange.calendarOptions.format}}" ng-model="filterForm.fields.dateRange.endDate.value" is-open="filterForm.fields.dateRange.endDate.isOpen" min-date="filterForm.fields.dateRange.calendarOptions.minDate" max-date="filterForm.fields.dateRange.calendarOptions.maxDate" ng-required="true" close-text="Close" /> <span class="input-group-btn"><button type="button" class="btn btn-primary" ng-click="filterForm.fields.dateRange.calendarOptions.toggleOpen($event, filterForm.fields.dateRange.endDate)"><span class="input-group-btn">&nbsp;</span></button></span>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    </div><!-- Location Information -->
 
-    <!-- Location Information -->
     <div class="panel panel-primary">
-      <div class="panel-heading">Location Information</div>
-      <div class="panel-body">
+      <div class="panel-heading">
+        Location Information
+      </div>
 
+      <div class="panel-body">
         <!-- Closest Country -->
 
         <div class="row">
           <div class="col-md-12">
-            <label class="large">Closest Country</label>
-            <button popover="{{messages.help.multiSelect}}" popover-trigger="mouseenter" class="btn btn-xs btn-info">Help</button>
-            <input class="form-control" placeholder="{{messages.placeHolder.multiSelectSearch}}" ng-model="filterForm.fields.locationInformation.closestCountry.searchTerm">
+            <label class="large">Closest Country</label> <button popover="{{messages.help.multiSelect}}" popover-trigger="mouseenter" class="btn btn-xs btn-info">Help</button> <input class="form-control" placeholder="{{messages.placeHolder.multiSelectSearch}}" ng-model="filterForm.fields.locationInformation.closestCountry.searchTerm" />
           </div>
         </div>
 
         <div class="row">
-
           <!-- "All" countries -->
 
           <div class="col-md-6">
             <label>All</label>
+
             <div class="multi-select-list">
               <ul ng-model="filterForm.fields.locationInformation.closestCountry.all">
-                <li ng-repeat="item in filterForm.fields.locationInformation.closestCountry.all | filter: filterForm.fields.locationInformation.closestCountry.searchTerm | orderBy: 'name'">
-                  <a href="" ng-click="filterForm.multiSelectTransfer(filterForm.fields.locationInformation.closestCountry.all, filterForm.fields.locationInformation.closestCountry.selected, filterForm.fields.locationInformation.closestCountry.all.indexOf(item))">{{item.name}} &rArr;</a>
-                </li>
+                <li ng-repeat="item in filterForm.fields.locationInformation.closestCountry.all | filter: filterForm.fields.locationInformation.closestCountry.searchTerm | orderBy: 'name'"><a href="" ng-click="filterForm.multiSelectTransfer(filterForm.fields.locationInformation.closestCountry.all, filterForm.fields.locationInformation.closestCountry.selected, filterForm.fields.locationInformation.closestCountry.all.indexOf(item))">{{item.name}} &rArr;</a></li>
               </ul>
             </div>
-          </div>
-
-          <!-- "Selected" countries -->
+          </div><!-- "Selected" countries -->
 
           <div class="col-md-6">
             <label>Selected</label>
+
             <div class="multi-select-list">
               <ul ng-model="filterForm.fields.locationInformation.closestCountry.selected">
-                <li ng-repeat="item in filterForm.fields.locationInformation.closestCountry.selected | orderBy: 'name'">
-                  <a href="" ng-click="filterForm.multiSelectTransfer(filterForm.fields.locationInformation.closestCountry.selected, filterForm.fields.locationInformation.closestCountry.all, filterForm.fields.locationInformation.closestCountry.selected.indexOf(item))">&lArr; {{item.name}}</a>
-                </li>
+                <li ng-repeat="item in filterForm.fields.locationInformation.closestCountry.selected | orderBy: 'name'"><a href="" ng-click="filterForm.multiSelectTransfer(filterForm.fields.locationInformation.closestCountry.selected, filterForm.fields.locationInformation.closestCountry.all, filterForm.fields.locationInformation.closestCountry.selected.indexOf(item))">&lArr; {{item.name}}</a></li>
               </ul>
             </div>
           </div>
-        </div>
-
-        <!-- Territorial Water Status -->
+        </div><!-- Territorial Water Status -->
 
         <div class="row">
           <div class="col-md-12">
-            <label class="large">Territorial Water Status</label>
-            <button popover="{{messages.help.multiSelect}}" popover-trigger="mouseenter" class="btn btn-xs btn-info">Help</button>
-            <input class="form-control" placeholder="{{messages.placeHolder.multiSelectSearch}}" ng-model="filterForm.fields.locationInformation.territorialWaterStatus.searchTerm">
+            <label class="large">Territorial Water Status</label> <button popover="{{messages.help.multiSelect}}" popover-trigger="mouseenter" class="btn btn-xs btn-info">Help</button> <input class="form-control" placeholder="{{messages.placeHolder.multiSelectSearch}}" ng-model="filterForm.fields.locationInformation.territorialWaterStatus.searchTerm" />
           </div>
         </div>
 
         <div class="row">
-
           <!-- "All" countries -->
 
           <div class="col-md-6">
             <label>All</label>
+
             <div class="multi-select-list">
               <ul ng-model="filterForm.fields.locationInformation.territorialWaterStatus.all">
-                <li ng-repeat="item in filterForm.fields.locationInformation.territorialWaterStatus.all | filter: filterForm.fields.locationInformation.territorialWaterStatus.searchTerm | orderBy: 'name'">
-                  <a href="" ng-click="filterForm.multiSelectTransfer(filterForm.fields.locationInformation.territorialWaterStatus.all, filterForm.fields.locationInformation.territorialWaterStatus.selected, filterForm.fields.locationInformation.territorialWaterStatus.all.indexOf(item))">{{item.name}} &rArr;</a>
-                </li>
+                <li ng-repeat="item in filterForm.fields.locationInformation.territorialWaterStatus.all | filter: filterForm.fields.locationInformation.territorialWaterStatus.searchTerm | orderBy: 'name'"><a href="" ng-click="filterForm.multiSelectTransfer(filterForm.fields.locationInformation.territorialWaterStatus.all, filterForm.fields.locationInformation.territorialWaterStatus.selected, filterForm.fields.locationInformation.territorialWaterStatus.all.indexOf(item))">{{item.name}} &rArr;</a></li>
               </ul>
             </div>
-          </div>
-
-          <!-- "Selected" countries -->
+          </div><!-- "Selected" countries -->
 
           <div class="col-md-6">
             <label>Selected</label>
+
             <div class="multi-select-list">
               <ul ng-model="filterForm.fields.locationInformation.territorialWaterStatus.selected">
-                <li ng-repeat="item in filterForm.fields.locationInformation.territorialWaterStatus.selected | orderBy: 'name'">
-                  <a href="" ng-click="filterForm.multiSelectTransfer(filterForm.fields.locationInformation.territorialWaterStatus.selected, filterForm.fields.locationInformation.territorialWaterStatus.all, filterForm.fields.locationInformation.territorialWaterStatus.selected.indexOf(item))">&lArr; {{item.name}}</a>
-                </li>
+                <li ng-repeat="item in filterForm.fields.locationInformation.territorialWaterStatus.selected | orderBy: 'name'"><a href="" ng-click="filterForm.multiSelectTransfer(filterForm.fields.locationInformation.territorialWaterStatus.selected, filterForm.fields.locationInformation.territorialWaterStatus.all, filterForm.fields.locationInformation.territorialWaterStatus.selected.indexOf(item))">&lArr; {{item.name}}</a></li>
               </ul>
             </div>
           </div>
         </div>
-
-        
       </div>
-    </div>
+    </div><!-- Vessel Information -->
 
-    <!-- Vessel Information -->
     <div class="panel panel-primary">
-      <div class="panel-heading">Vessel Information</div>
-      <div class="panel-body">
+      <div class="panel-heading">
+        Vessel Information
+      </div>
 
+      <div class="panel-body">
         <!-- Vessel Country -->
+
         <div class="row">
           <div class="col-md-12">
-            <label class="large">Vessel Country</label>
-            <button popover="{{messages.help.multiSelect}}" popover-trigger="mouseenter" class="btn btn-xs btn-info">Help</button>
-            <input class="form-control" placeholder="{{messages.placeHolder.multiSelectSearch}}" ng-model="filterForm.fields.vesselInformation.vesselCountry.searchTerm">
+            <label class="large">Vessel Country</label> <button popover="{{messages.help.multiSelect}}" popover-trigger="mouseenter" class="btn btn-xs btn-info">Help</button> <input class="form-control" placeholder="{{messages.placeHolder.multiSelectSearch}}" ng-model="filterForm.fields.vesselInformation.vesselCountry.searchTerm" />
           </div>
         </div>
 
         <div class="row">
-
           <!-- "All" countries -->
 
           <div class="col-md-6">
             <label>All</label>
+
             <div class="multi-select-list">
               <ul ng-model="filterForm.fields.vesselInformation.vesselCountry.all">
-                <li ng-repeat="item in filterForm.fields.vesselInformation.vesselCountry.all | filter: filterForm.fields.vesselInformation.vesselCountry.searchTerm | orderBy: 'name'">
-                  <a href="" ng-click="filterForm.multiSelectTransfer(filterForm.fields.vesselInformation.vesselCountry.all, filterForm.fields.vesselInformation.vesselCountry.selected, filterForm.fields.vesselInformation.vesselCountry.all.indexOf(item))">{{item.name}} &rArr;</a>
-                </li>
+                <li ng-repeat="item in filterForm.fields.vesselInformation.vesselCountry.all | filter: filterForm.fields.vesselInformation.vesselCountry.searchTerm | orderBy: 'name'"><a href="" ng-click="filterForm.multiSelectTransfer(filterForm.fields.vesselInformation.vesselCountry.all, filterForm.fields.vesselInformation.vesselCountry.selected, filterForm.fields.vesselInformation.vesselCountry.all.indexOf(item))">{{item.name}} &rArr;</a></li>
               </ul>
             </div>
-          </div>
-
-          <!-- "Selected" countries -->
+          </div><!-- "Selected" countries -->
 
           <div class="col-md-6">
             <label>Selected</label>
+
             <div class="multi-select-list">
               <ul ng-model="filterForm.fields.vesselInformation.vesselCountry.selected">
-                <li ng-repeat="item in filterForm.fields.vesselInformation.vesselCountry.selected | orderBy: 'name'">
-                  <a href="" ng-click="filterForm.multiSelectTransfer(filterForm.fields.vesselInformation.vesselCountry.selected, filterForm.fields.vesselInformation.vesselCountry.all, filterForm.fields.vesselInformation.vesselCountry.selected.indexOf(item))">&lArr; {{item.name}}</a>
-                </li>
+                <li ng-repeat="item in filterForm.fields.vesselInformation.vesselCountry.selected | orderBy: 'name'"><a href="" ng-click="filterForm.multiSelectTransfer(filterForm.fields.vesselInformation.vesselCountry.selected, filterForm.fields.vesselInformation.vesselCountry.all, filterForm.fields.vesselInformation.vesselCountry.selected.indexOf(item))">&lArr; {{item.name}}</a></li>
               </ul>
             </div>
           </div>
-        </div>
-
-
-        <!-- Vessel Status -->
+        </div><!-- Vessel Status -->
 
         <div class="row">
           <div class="col-md-12">
-            <label class="large">Vessel Status</label>
-            <button popover="{{messages.help.multiSelect}}" popover-trigger="mouseenter" class="btn btn-xs btn-info">Help</button>
+            <label class="large">Vessel Status</label> <button popover="{{messages.help.multiSelect}}" popover-trigger="mouseenter" class="btn btn-xs btn-info">Help</button>
           </div>
         </div>
 
         <div class="row">
-
           <!-- "All" statuses -->
 
           <div class="col-md-6">
             <label>All</label>
+
             <div class="multi-select-list">
               <ul ng-model="filterForm.fields.vesselInformation.vesselStatus.all">
-                <li ng-repeat="item in filterForm.fields.vesselInformation.vesselStatus.all | orderBy: 'toString()'">
-                  <a href="" ng-click="filterForm.multiSelectTransfer(filterForm.fields.vesselInformation.vesselStatus.all, filterForm.fields.vesselInformation.vesselStatus.selected, filterForm.fields.vesselInformation.vesselStatus.all.indexOf(item))">{{item}} &rArr;</a>
-                </li>
+                <li ng-repeat="item in filterForm.fields.vesselInformation.vesselStatus.all | orderBy: 'toString()'"><a href="" ng-click="filterForm.multiSelectTransfer(filterForm.fields.vesselInformation.vesselStatus.all, filterForm.fields.vesselInformation.vesselStatus.selected, filterForm.fields.vesselInformation.vesselStatus.all.indexOf(item))">{{item}} &rArr;</a></li>
               </ul>
             </div>
-          </div>
-
-          <!-- "Selected" statuses -->
+          </div><!-- "Selected" statuses -->
 
           <div class="col-md-6">
             <label>Selected</label>
+
             <div class="multi-select-list">
               <ul ng-model="filterForm.fields.vesselInformation.vesselStatus.selected">
-                <li ng-repeat="item in filterForm.fields.vesselInformation.vesselStatus.selected | orderBy: 'toString()'">
-                  <a href="" ng-click="filterForm.multiSelectTransfer(filterForm.fields.vesselInformation.vesselStatus.selected, filterForm.fields.vesselInformation.vesselStatus.all, filterForm.fields.vesselInformation.vesselStatus.selected.indexOf(item))">&lArr; {{item}}</a>
-                </li>
+                <li ng-repeat="item in filterForm.fields.vesselInformation.vesselStatus.selected | orderBy: 'toString()'"><a href="" ng-click="filterForm.multiSelectTransfer(filterForm.fields.vesselInformation.vesselStatus.selected, filterForm.fields.vesselInformation.vesselStatus.all, filterForm.fields.vesselInformation.vesselStatus.selected.indexOf(item))">&lArr; {{item}}</a></li>
               </ul>
             </div>
           </div>
         </div>
-
 
         <div class="col-md-12">
           <label>Vessel Type</label>
         </div>
       </div>
-    </div>
+    </div><!-- Conflict Information -->
 
-    <!-- Conflict Information -->
     <div class="panel panel-primary">
-      <div class="panel-heading">Conflict Information</div>
+      <div class="panel-heading">
+        Conflict Information
+      </div>
+
       <div class="panel-body">
         <div class="alert alert-info">
           <p>We are currently processing data to enable these filters.</p>
         </div>
+
         <div class="form-group">
           <div class="col-md-12">
             <label>Conflict Type</label>
           </div>
+
           <div class="col-md-12">
             <label>Assailant Count</label>
           </div>
+
           <div class="col-md-12">
             <label>Assailant(s) Armed</label>
           </div>
+
           <div class="col-md-12">
             <label>Violence</label>
           </div>
+
           <div class="col-md-12">
             <label>Weapons</label>
           </div>
@@ -259,7 +225,5 @@
     </div>
 
     <div ng-include="'assets/partials/map/event-filter-buttons.html'"></div>
-    
   </form>
-
 </div>
