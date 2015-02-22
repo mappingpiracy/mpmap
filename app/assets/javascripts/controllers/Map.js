@@ -162,8 +162,6 @@ mpmap.controller('MapController',
         });
         finalFilter.vesselStatus = buffer.join();
 
-        console.log(finalFilter);
-
         return finalFilter;
       },
       getData: function() {
@@ -252,8 +250,6 @@ mpmap.controller('MapController',
               // pointToLayer: $scope.map.createMarker,
               onEachFeature: $scope.map.createPopup
             };
-            console.log('Events updated.');
-            console.log(data);
           })
           .error(function(data, status) {
             $scope.modals.generic.open($scope.messages.events.error, "");
