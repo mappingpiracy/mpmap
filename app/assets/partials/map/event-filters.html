@@ -31,7 +31,7 @@
           <div class="col-md-12">
             <label for="begin-date">Begin Date</label>
             <div class="input-group">
-              <input id="begin-date" type="text" class="form-control" datepicker-popup="{{filterForm.fields.dateRange.calendarOptions.format}}" ng-model="filterForm.fields.dateRange.beginDate.value | date:'yyyy-MM-dd'" is-open="filterForm.fields.dateRange.beginDate.isOpen" min-date="filterForm.fields.dateRange.calendarOptions.minDate"
+              <input id="begin-date" type="text" class="form-control" datepicker-popup="{{filterForm.fields.dateRange.calendarOptions.format}}" ng-model="filterForm.fields.dateRange.beginDate.value" is-open="filterForm.fields.dateRange.beginDate.isOpen" min-date="filterForm.fields.dateRange.calendarOptions.minDate"
               max-date="filterForm.fields.dateRange.calendarOptions.maxDate" ng-required="true" close-text="Close" />
               <span class="input-group-btn">
                 <button type="button" class="btn btn-primary" ng-click="filterForm.fields.dateRange.calendarOptions.toggleOpen($event, filterForm.fields.dateRange.beginDate)"><i class="glyphicon glyphicon-calendar"></i>&nbsp;</button>
@@ -44,7 +44,7 @@
           <div class="col-md-12">
             <label for="end-date">End Date</label>
             <div class="input-group">
-              <input id="end-date" type="text" class="form-control" datepicker-popup="{{filterForm.fields.dateRange.calendarOptions.format}}" ng-model="filterForm.fields.dateRange.endDate.value | date:'yyyy-MM-dd'" is-open="filterForm.fields.dateRange.endDate.isOpen" min-date="filterForm.fields.dateRange.calendarOptions.minDate"
+              <input id="end-date" type="text" class="form-control" datepicker-popup="{{filterForm.fields.dateRange.calendarOptions.format}}" ng-model="filterForm.fields.dateRange.endDate.value" is-open="filterForm.fields.dateRange.endDate.isOpen" min-date="filterForm.fields.dateRange.calendarOptions.minDate"
               max-date="filterForm.fields.dateRange.calendarOptions.maxDate" ng-required="true" close-text="Close" />
               <span class="input-group-btn">
                 <button type="button" class="btn btn-primary" ng-click="filterForm.fields.dateRange.calendarOptions.toggleOpen($event, filterForm.fields.dateRange.endDate)"><i class="glyphicon glyphicon-calendar"></i>&nbsp;</button>
