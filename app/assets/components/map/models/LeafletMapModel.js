@@ -1,3 +1,18 @@
+/******************************************
+
+LeafletMapModel
+
+Alex Klibisz, 2/21/15
+
+This service handles all options and data 
+manipulation for the leaflet map on the main 
+map view.
+
+It is initialized via the final return 
+function with a passed geojson object.
+
+******************************************/
+
 mpmap.service('LeafletMapModel', function() {
 
 	var model = {
@@ -21,9 +36,6 @@ mpmap.service('LeafletMapModel', function() {
 			});
 		},
 		createPopup: function(feature, layer) {
-			popupOptions = {
-				maxWidth: 300
-			};
 			popupContent = '<div class="popup-content"><ul>';
 			popupContent += '<li>Id:                        <strong>' + feature.properties.id + '</strong></li>';
 			popupContent += '<li>Date:                      <strong>' + feature.properties.occurredOnDate + '</strong></li>';
@@ -33,13 +45,14 @@ mpmap.service('LeafletMapModel', function() {
 			popupContent += '<li>Vessel Flag Country:       <strong>' + feature.properties.vesselFlagCountry + '</strong></li>';
 			popupContent += '<li>Vessel Status:             <strong>' + feature.properties.vesselStatus + '</strong></li>';
 			popupContent += '</ul></div>';
-			layer.bindPopup(popupContent, popupOptions);
+			layer.bindPopup(popupContent, {
+				maxWidth: 300
+			});
 		}
 	};
 
 	return function(data) {
-		if (arguments.length === 1) {
-			console.log(data);
+		if (arguments.length) {
 			model.geojson = {
 				data: data,
 				//pointToLayer: model.createMarker,

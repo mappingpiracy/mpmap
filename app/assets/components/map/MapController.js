@@ -65,30 +65,6 @@ mpmap.controller('MapController',
 
      $scope.modal = GenericModalModel();
 
-    /*$scope.modals = {
-      generic: {
-        show: false,
-        title: null,
-        value: null,
-        open: function(title, value) {
-          $scope.modals.generic.title = title;
-          $scope.modals.generic.value = value;
-          $scope.modals.generic.show = true;
-        },
-        close: function() {
-          $scope.modals.generic.title = null;
-          $scope.modals.generic.value = null;
-          $scope.modals.generic.show = false;
-        }
-      },
-      help: {
-        show: false,
-        open: function() {
-          $scope.modals.help.show = true;
-        }
-      }
-    };*/
-
     /******************************************
 
     Filter Form object - contains all data and
@@ -283,11 +259,10 @@ mpmap.controller('MapController',
 
     /******************************************
 
-    Data Loading - call all data loading
-    functions.
+    Initialization: call the primary initialize
+    function.
 
      ******************************************/
-    //$scope.filterForm.getData();
     $scope.initialize();
   }
 ); //  MapController

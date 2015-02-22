@@ -1,30 +1,40 @@
+/******************************************
+
+GenericModalModel
+
+Alex Klibisz, 2/21/15
+
+This service handles all options and 
+manipulation for modals.
+
+******************************************/
 mpmap.service('GenericModalModel', function($modal) {
 
-	var genericModal = {
+	var modal = {
 		show: false,
 		title: null,
 		value: null,
 		open: function(title, value) {
-			openModal(title, value);
+			open(title, value);
 		},
 		close: function() {
-			closeModal();
+			close();
 		}
 	};
 
-	function openModal(title, value) {
-		genericModal.title = title;
-		genericModal.value = value;
-		genericModal.show = true;
+	function open(title, value) {
+		modal.title = title;
+		modal.value = value;
+		modal.show = true;
 	}
 
-	function closeModal() {
-		genericModal.show = false;
-		genericModal.title = null;
-		genericModal.value = null;
+	function close() {
+		modal.show = false;
+		modal.title = null;
+		modal.value = null;
 	}
 
 	return function() {
-		return genericModal;
+		return modal;
 	};
 });
