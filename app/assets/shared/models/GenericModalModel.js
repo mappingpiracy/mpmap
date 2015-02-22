@@ -1,19 +1,27 @@
-mpmap.service('GenericModalModel', function() {
+mpmap.service('GenericModalModel', function($modal) {
 
 	var genericModal = {
 		show: false,
 		title: null,
 		value: null,
-		open: openModal(title, value),
-		close: closeModal()
+		open: function(title, value) {
+			openModal(title, value);
+		},
+		close: function() {
+			closeModal();
+		}
 	};
 
 	function openModal(title, value) {
-		console.log(this.genericModal);
+		genericModal.title = title;
+		genericModal.value = value;
+		genericModal.show = true;
 	}
 
 	function closeModal() {
-		console.log(this.genericModal);
+		genericModal.show = false;
+		genericModal.title = null;
+		genericModal.value = null;
 	}
 
 	return function() {

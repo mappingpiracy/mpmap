@@ -9,30 +9,30 @@ Alex Klibisz, 1/16/15
 mpmap.controller('MapController',
   function($scope, $location, $document, $modal,
     MapDataService, ExportDataService,
-    LeafletMapModel, EventsPerYearModel) {
+    LeafletMapModel, EventsPerYearModel, GenericModalModel) {
 
 
     $scope.initialize = function() {
       
+      //Todo: move filterform.getDate functionality into this function
       if($scope.filterForm.loaded === false) {
         $scope.filterForm.getData();
         $scope.filterForm.loaded = true;
       }
 
-      //open a generic modal
-      $scope.modals.generic.open($scope.messages.events.loading, "");
+      $scope.modal.open($scope.messages.events.loading, "");
       MapDataService.getEvents($scope.filterForm.getFilter(), 'geojson')
         .success(function(data, status) {
           //call the map model constructor with the returned data
           $scope.map = LeafletMapModel(data);
         })
         .error(function(data, status) {
-          $scope.modals.generic.open($scope.messages.events.error, "");
+          $scope.modal.open($scope.message.events.error);
         })
         .then(function() {
           //reload the analysis data
           $scope.analysis.getData();
-          $scope.modals.generic.close();
+          $scope.modal.close();
         });
     };
 
@@ -63,7 +63,9 @@ mpmap.controller('MapController',
 
      ******************************************/
 
-    $scope.modals = {
+     $scope.modal = GenericModalModel();
+
+    /*$scope.modals = {
       generic: {
         show: false,
         title: null,
@@ -85,7 +87,7 @@ mpmap.controller('MapController',
           $scope.modals.help.show = true;
         }
       }
-    };
+    };*/
 
     /******************************************
 
@@ -199,7 +201,6 @@ mpmap.controller('MapController',
         return finalFilter;
       },
       getData: function() {
-        console.log("get filter form data");
         /*
         $scope.filterForm.fields.dateRange.years
          */
