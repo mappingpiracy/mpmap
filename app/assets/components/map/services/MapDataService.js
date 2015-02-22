@@ -1,4 +1,4 @@
-mpmap.service('MapData',
+mpmap.service('MapDataService',
   function($rootScope, $location, $http) {
 
     var mapData = {

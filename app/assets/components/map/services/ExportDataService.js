@@ -1,4 +1,4 @@
-mpmap.service('ExportData', function($rootScope) {
+mpmap.service('ExportDataService', function($rootScope) {
 
   var exportData = {
 
