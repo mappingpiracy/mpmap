@@ -30,5 +30,7 @@ MPMAP Version 0.2 is currently under development.
 - Dependency Management
   - [WebJars](https://github.com/webjars)
 
+Front-end directory/file structure roughly follows this example: https://scotch.io/tutorials/angularjs-best-practices-directory-structure
+
 ###Contributors
 - [Alex Klibisz, University of Tennessee](http://alexklibisz.github.io)
