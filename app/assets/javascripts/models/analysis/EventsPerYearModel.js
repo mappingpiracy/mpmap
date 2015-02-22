@@ -66,68 +66,71 @@ mpmap.service('EventsPerYearModel', function ($rootScope)
     1. Create a 2-dimensional map object keyed on country name and year with value yearly number of events for each country.
     2. Transcribe this map object to the chartData array so that it works with nvd3.js
      */
-    function getData(mapData) {
-        var features,
-        countries = {},
-        chartData = [],
-        yearlyValues = [],
-        country,
-        year;
 
-        try {
-            features = mapData.data.features; //extract features array from the passed mapdata
-        }
-        catch (err) {
-            return [];
-        }
+     function getData(features, countries, beginYear, endYear) {
+        var years = {},
+            uniqueCountries = {},
+            chartData = [],
+            values = [],
+            country, year, value, i, j;
 
-        //iterate over the features array to create the 2-dimensional map object
-        for (var i = 0; i < features.length; i++) {
-            //extract the closest country name and year
-            country = features[i].properties.closestCountry;
-            year = features[i].properties.occurredOnDate.substring(0, 4);
-
-            if (country in countries) { //check if this country has already been stored
-                if (year in countries[country]) { //country has been stored -- check if this year has been stored
-                    countries[country][year]++; //year has been stored -- increment its count
-                }
-                else {
-                    countries[country][year] = 1; //year has not been stored -- initialize it
-                }
+            //create an object with a key for every year for the time span and a value of 0
+            for(i = beginYear; i <= endYear; i++) {
+                years[i] = 0;
             }
-            else {
-                countries[country] = {}; //country has not been stored -- initialize its map object
-                countries[country][year] = 1; //initialize the country counter
-            }
-        }
 
-        //iterate over the countries again to create the final nvd3.js-friendly object
-        for (country in countries) {
-            yearlyValues = []; //yearly values for this country
-            for (year in countries[country]) {
-                yearlyValues.push({ //push a new (x,y) pair for this year
-                    x : year,
-                    y : countries[country][year]
+            console.log("years", years);
+
+            //create an object with a key for every country and the years object for the value
+            for(i = 0; i < countries.length; i++) {
+                uniqueCountries[countries[i].name] = years;     //<-- need to make a copy of the years object
+            }
+
+            //iterate over the features array to set the count for every year
+            for(i = 0; i < features.length; i++) {
+                country = features[i].properties.closestCountry;
+                year = Date.parse(features[i].properties.occurredOnDate).getFullYear();
+                console.log(country, year, uniqueCountries[country]);
+                uniqueCountries[country][year]++;
+            }
+
+            console.log("uniqueCountries", uniqueCountries);
+
+            //iterate of the uniqueCountries to create the final nvd3 linechart-friendly data object
+            for(country in uniqueCountries) {
+                values = [];
+                for(year in uniqueCountries[country]) {
+                    value = {
+                        x: year,
+                        y: uniqueCountries[country][year]
+                    };
+                    //console.log(country, value);
                 }
-                );
+
             }
-            chartData.push({ //push a new (key, value) pair for this country
-                values : yearlyValues,
-                key : country
-            });
-        }
-        return chartData;
-    }
 
-    function getTickValues(beginDate, endDate) {
-        var i, beginYear, endYear, tickValues = [];
-        try {
-            beginYear = new Date(beginDate).getFullYear();
-            endYear = new Date(endDate).getFullYear();    
-        } catch(err) {
-            return tickValues;
-        }
 
+            // for (country in uniqueCountries) {
+            //     yearlyValues = []; //yearly values for this country
+            //     for (year in uniqueCountries[country]) {
+            //         yearlyValues.push({ //push a new (x,y) pair for this year
+            //             x : year,
+            //             y : uniqueCountries[country][year]
+            //         });
+            //     }
+            //     chartData.push({ //push a new (key, value) pair for this country
+            //         values : yearlyValues,
+            //         key : country
+            //     });
+            // }
+
+            console.log("chartData:", chartData);
+
+            return chartData;
+     }
+
+    function getTickValues(beginYear, endYear) {
+        var i, tickValues = [];
         if(beginYear == endYear) {
             tickValues.push(beginYear);
         } else {
@@ -135,12 +138,30 @@ mpmap.service('EventsPerYearModel', function ($rootScope)
                 tickValues.push(i);
             }    
         }
+        console.log("tickValues:", tickValues);
         return tickValues;
     }
     
-    return function (mapData, beginDate, endDate) {
-        model.data = getData(mapData);
-        model.options.chart.xAxis.tickValues = getTickValues(beginDate, endDate);
+    return function (mapData, countries, beginDate, endDate) {
+        var features, beginYear, endYear;
+        
+        try {
+            features = mapData.data.features;
+        } catch(err){
+            console.log(err);
+            return model;
+        }
+
+        try {
+            beginYear = beginDate.getFullYear();
+            endYear = endDate.getFullYear();
+        } catch(err) {
+            console.log(err);
+            return model;
+        }
+
+        model.data = getData(mapData, countries, beginYear, endYear);
+        model.options.chart.xAxis.tickValues = getTickValues(beginYear, endYear);
         return model;
     };
 

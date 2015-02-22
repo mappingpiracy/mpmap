@@ -89,12 +89,12 @@ mpmap.controller('MapController',
                 selectedYear : Date.today().getFullYear(),
                 beginDate :
                 {
-                    value : new Date(Date.today().getFullYear(), 0, 1).toString("yyyy-MM-dd"),
+                    value : new Date(Date.today().getFullYear(), 0, 1),
                     isOpen : false
                 },
                 endDate :
                 {
-                    value : new Date(Date.today().getFullYear(), 11, 31).toString("yyyy-MM-dd"),
+                    value : new Date(Date.today().getFullYear(), 11, 31),
                     isOpen : false
                 },
                 calendarOptions :
@@ -111,8 +111,8 @@ mpmap.controller('MapController',
                 },
                 update : function ()
                 {
-                    $scope.filterForm.fields.dateRange.beginDate.value = $scope.filterForm.fields.dateRange.selectedYear + "-01-01";
-                    $scope.filterForm.fields.dateRange.endDate.value = $scope.filterForm.fields.dateRange.selectedYear + "-12-31";
+                    $scope.filterForm.fields.dateRange.beginDate.value = new Date($scope.filterForm.fields.dateRange.selectedYear, 0, 1);
+                    $scope.filterForm.fields.dateRange.endDate.value = new Date($scope.filterForm.fields.dateRange.selectedYear, 11, 31);
                 }
             },
             locationInformation :
@@ -367,7 +367,15 @@ mpmap.controller('MapController',
         },
         getData : function ()
         {
+            var countries = [];
+            if($scope.filterForm.fields.locationInformation.closestCountry.selected.length > 0) {
+              countries = $scope.filterForm.fields.locationInformation.closestCountry.selected;
+            } else {
+              countries = $scope.filterForm.fields.locationInformation.closestCountry.all;
+            }
+            
             EventsPerYearModel($scope.map.geojson, 
+              countries,
               $scope.filterForm.fields.dateRange.beginDate.value, 
               $scope.filterForm.fields.dateRange.endDate.value);
         }
