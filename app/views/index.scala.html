@@ -35,18 +35,18 @@
     <!-- ***** CSS CUSTOM STYLES ***** -->
 
      <!-- CSS: Main styles-->
-    <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/global.css")">
+    <link rel="stylesheet" media="screen" href="@routes.Assets.at("shared/styles/GlobalStyle.css")">
     <!-- CSS: Map styles -->
-    <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/map.css")">
+    <link rel="stylesheet" media="screen" href="@routes.Assets.at("components/map/styles/MapStyle.css")">
     <!-- CSS: Analysis styles -->
-    <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/analysis.css")">
+    <link rel="stylesheet" media="screen" href="@routes.Assets.at("components/map/analysis/styles/AnalysisStyle.css")">
     
 
 </head>
 
 <body>
 
-<nav ng-include="'assets/partials/nav.html'"></nav>
+    <nav ng-include="'assets/shared/partials/NavigationPartial.html'"></nav>
 
     <main ng-view></main>
 
@@ -55,9 +55,8 @@
     <!-- JS: Angular -->
     <script type='text/javascript' src='@routes.WebJarAssets.at(WebJarAssets.locate("angular.min.js"))'></script>
     <script type='text/javascript' src='@routes.WebJarAssets.at(WebJarAssets.locate("angular-route.min.js"))'></script>
-    <script type='text/javascript' src='@routes.WebJarAssets.at(WebJarAssets.locate("angular-sanitize.min.js"))'></script>
 
-    <!-- JS: Angular Custom Directives -->
+    <!-- JS: Angular Directives -->
      <script src="@routes.Assets.at("javascripts/lib/angular-ui-layout.js")" type="text/javascript" defer="defer" ></script>
     <script src="@routes.Assets.at("javascripts/directives/ng-modal.min.js")" type="text/javascript" defer="defer"></script>
     <script type='text/javascript' src='@routes.WebJarAssets.at(WebJarAssets.locate("angular-leaflet-directive.min.js"))'></script>
@@ -73,32 +72,24 @@
     <script src="https://rawgit.com/novus/nvd3/v1.1.15-beta/nv.d3.min.js"></script>
     <script src="https://rawgit.com/krispo/angular-nvd3/master/dist/angular-nvd3.js"></script>
 
-    <!--<script type='text/javascript' src='@routes.WebJarAssets.at(WebJarAssets.locate("d3.js"))'></script>
-    <script src="@routes.Assets.at("javascripts/lib/nv.js")" type="text/javascript" defer="defer" ></script>
-    <script type='text/javascript' src='@routes.WebJarAssets.at(WebJarAssets.locate("angular-nvd3.js"))'></script>-->
-
     <!-- JS: Self-hosted libraries -->
-    <script src="@routes.Assets.at("javascripts/lib/date.js")" type="text/javascript" defer="defer" ></script>
     <script src="@routes.Assets.at("javascripts/lib/filesaver.min.js")" type="text/javascript" defer="defer"></script>
 
     <!-- *****  ANGULAR FRONT-END APPLICATION CODE***** -->
 
     <!-- JS: Angular App -->
-    <script src="@routes.Assets.at("javascripts/app.js")" type="text/javascript" defer="defer" ></script>
+    <script src="@routes.Assets.at("app.module.js")" type="text/javascript" defer="defer" ></script>
+    <script src="@routes.Assets.at("app.routes.js")" type="text/javascript" defer="defer" ></script>
     <!-- JS: Angular Services -->
-    <script src="@routes.Assets.at("javascripts/services/MapData.js")" type="text/javascript" defer="defer" ></script>
-    <script src="@routes.Assets.at("javascripts/services/ExportData.js")" type="text/javascript" defer="defer" ></script>
+    <script src="@routes.Assets.at("components/map/services/MapDataService.js")" type="text/javascript" defer="defer" ></script>
+    <script src="@routes.Assets.at("components/map/services/ExportDataService.js")" type="text/javascript" defer="defer" ></script>
 
     <!-- JS: Angular Controllers -->
-    <script src="@routes.Assets.at("javascripts/controllers/Map.js")" type="text/javascript" defer="defer" ></script>
-    <script src="@routes.Assets.at("javascripts/controllers/StaticPage.js")" type="text/javascript" defer="defer" ></script>
+    <script src="@routes.Assets.at("components/map/MapController.js")" type="text/javascript" defer="defer" ></script>
+    <script src="@routes.Assets.at("shared/controllers/StaticPageController.js")" type="text/javascript" defer="defer" ></script>
 
     <!-- JS: Angular Models -->
-    <script src="@routes.Assets.at("javascripts/models/analysis/EventsPerYearModel.js")" type="text/javascript" defer="defer" ></script>
-
-
+    <script src="@routes.Assets.at("components/map/analysis/models/EventsPerYearModel.js")" type="text/javascript" defer="defer" ></script>
 
 </body>
 </html>
-
-

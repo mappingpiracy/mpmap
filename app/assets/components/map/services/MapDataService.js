@@ -22,7 +22,7 @@ mpmap.service('MapData',
       */
       getYears: function() {
         var years = [];
-        for (var i = Date.today().getFullYear(); i > 1992; i--) years.push(i);
+        for (var i = new Date().getFullYear(); i > 1992; i--) years.push(i);
         return years;
       },
 

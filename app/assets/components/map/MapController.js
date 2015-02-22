@@ -72,19 +72,19 @@ mpmap.controller('MapController',
       fields: {
         dateRange: {
           years: [ /*getData*/ ],
-          selectedYear: Date.today().getFullYear(),
+          selectedYear: new Date().getFullYear(),
           beginDate: {
-            value: new Date(Date.today().getFullYear(), 0, 1),
+            value: new Date(new Date().getFullYear(), 0, 1),
             isOpen: false
           },
           endDate: {
-            value: new Date(Date.today().getFullYear(), 11, 31),
+            value: new Date(new Date().getFullYear(), 11, 31),
             isOpen: false
           },
           calendarOptions: {
             format: 'yyyy-MM-dd',
             minDate: '1993-01-01',
-            maxDate: Date.today().toString("yyyy-MM-dd"),
+            maxDate: new Date(),
             toggleOpen: function($event, dateObject) {
               $event.preventDefault();
               $event.stopPropagation();

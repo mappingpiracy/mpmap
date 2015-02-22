@@ -6,7 +6,28 @@
       <small>(Control the events displayed.)</small>
     </h3>
 
-    <div ng-include="'assets/partials/map/event-filter-buttons.html'"></div>
+    <div class="btn-group" role="group" aria-label="...">
+      <button type="button" class="btn btn-primary" ng-click="map.getData()">Filter Events</button>
+      <div class="btn-group" role="group">
+        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+          Export Events
+          <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu" role="menu">
+          <li><a href="" ng-click="export.events('csv')">Export in CSV Format</a></li>
+          <li><a href="" ng-click="export.events('geojson')">Export in GeoJSON Format</a></li>
+        </ul>
+      </div>
+      <div class="btn-group" role="group">
+        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+          Export Filters
+          <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu" role="menu">
+           <li><a href="" ng-click="export.filters('json')">Export in JSON Format</a></li>
+        </ul>
+      </div>
+    </div>
 
 </div>
 
@@ -257,8 +278,6 @@
         </div>
       </div>
     </div>
-
-    <div ng-include="'assets/partials/map/event-filter-buttons.html'"></div>
     
   </form>
 
