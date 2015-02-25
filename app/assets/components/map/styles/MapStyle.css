@@ -78,12 +78,56 @@
   background-color: LightBlue;
 }
 
+.dualmultiselect .btn {
+  margin: 10px;
+}
+
+.dualmultiselect .pool {
+  border: 1px solid #999;
+  border-radius: 4px;
+  padding: 10px;
+  margin: 5px;
+  height: 150px;
+  overflow-y: scroll;
+}
+
+.dualmultiselect .pool ul {
+  list-style: none;
+  padding-left: 0px;
+}
+
+.dualmultiselect .pool ul li {
+  width: 100%;
+  padding: 4px 8px 4px 4px;
+  border-bottom: 1px dotted #CFCFCF;
+}
+
+.dualmultiselect .pool ul li a:hover {
+  text-decoration: none;
+}
+
 .multi-select-list {
   border: 1px solid #999;
   border-radius: 5px;
   overflow-y: scroll;
   width: 100%;
   height: 150px;
+}
+
+.multi-select-list ul {
+  list-style: none;
+  padding-left: 0px;
+}
+
+.multi-select-list ul li {
+  width: 100%;
+  padding: 4px;
+  padding-left: 8px;
+  border-bottom: 1px dotted #CFCFCF;
+}
+
+.multi-select-list ul li a:hover {
+  text-decoration: none;
 }
 
 .multi-select-list ul {

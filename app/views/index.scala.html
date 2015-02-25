@@ -21,7 +21,7 @@
     <!-- CSS: NG-Modal -->
     <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/directives/ng-modal.css")">
     <!-- CSS: NV D3 -->
-    <link rel="stylesheet" href="https://rawgit.com/novus/nvd3/v1.1.15-beta/nv.d3.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/nvd3/1.7.0/nv.d3.min.css"/>
     <!-- Fonts: Lato, Oswald -->
     <link href='http://fonts.googleapis.com/css?family=Lato|Oswald:400' rel='stylesheet' type='text/css'>
 
@@ -60,6 +60,7 @@
      <script src="@routes.Assets.at("javascripts/lib/angular-ui-layout.js")" type="text/javascript" defer="defer" ></script>
     <script src="@routes.Assets.at("javascripts/directives/ng-modal.min.js")" type="text/javascript" defer="defer"></script>
     <script type='text/javascript' src='@routes.WebJarAssets.at(WebJarAssets.locate("angular-leaflet-directive.min.js"))'></script>
+    <script src="@routes.Assets.at("shared/directives/dualmultiselect.js")" type="text/javascript" defer="defer"></script>
 
     <!-- JS: jQuery and Bootstrap -->
     <script type='text/javascript' src='@routes.WebJarAssets.at(WebJarAssets.locate("ui-bootstrap-tpls.js"))'></script>
@@ -68,9 +69,9 @@
     <!-- JS: Mapping -->
     <script type='text/javascript' src='@routes.WebJarAssets.at(WebJarAssets.locate("leaflet.js"))'></script>
     <!-- JS: D3 -->
-    <script src="https://rawgit.com/mbostock/d3/master/d3.min.js"></script>
-    <script src="https://rawgit.com/novus/nvd3/v1.1.15-beta/nv.d3.min.js"></script>
-    <script src="https://rawgit.com/krispo/angular-nvd3/master/dist/angular-nvd3.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/nvd3/1.7.0/nv.d3.min.js"></script>
+    <script src="@routes.Assets.at("javascripts/lib/angular-nvd3.min.js")" type="text/javascript" defer="defer"></script>
 
     <!-- JS: Self-hosted libraries -->
     <script src="@routes.Assets.at("javascripts/lib/filesaver.min.js")" type="text/javascript" defer="defer"></script>
@@ -91,7 +92,9 @@
     <!-- JS: Angular Models -->
     <script src="@routes.Assets.at("components/map/analysis/models/EventsPerYearModel.js")" type="text/javascript" defer="defer" ></script>
     <script src="@routes.Assets.at("components/map/models/LeafletMapModel.js")" type="text/javascript" defer="defer" ></script>
+    <script src="@routes.Assets.at("components/map/models/FilterFormModel.js")" type="text/javascript" defer="defer" ></script>
     <script src="@routes.Assets.at("shared/models/GenericModalModel.js")" type="text/javascript" defer="defer" ></script>
+
 
 </body>
 </html>

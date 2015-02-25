@@ -52,7 +52,7 @@ mpmap.service('LeafletMapModel', function() {
 	};
 
 	return function(data) {
-		if (arguments.length) {
+		if (arguments.length === 1) {
 			model.geojson = {
 				data: data,
 				//pointToLayer: model.createMarker,

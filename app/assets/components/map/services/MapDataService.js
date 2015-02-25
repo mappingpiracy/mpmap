@@ -5,6 +5,7 @@ mpmap.service('MapDataService',
 
       getEvents: function(eventFilter, format) {
         eventFilter.format = format;
+        console.log(eventFilter);
         return $http.get('/mapdata/events', {
           params: eventFilter
         });
@@ -30,7 +31,7 @@ mpmap.service('MapDataService',
           return the list of vessel statuses - TODO: abstract this to an API call
       */
       getVesselStatus: function() {
-        return ["Anchored", "Berthed", "Moored", "Stationary", "Steaming", "Unspecified"];
+        return [{"id": "Anchored", "name": "Anchored"}, {"id": "Berthed", "name": "Berthed"}, {"id": "Moored", "name": "Moored"}, {"id": "Stationary", "name": "Stationary"}, {"id": "Berthed", "name": "Berthed"}, {"id": "Unspecified", "name": "Unspecified"}];
       },
 
       /*

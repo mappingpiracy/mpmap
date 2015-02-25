@@ -9,16 +9,11 @@ Alex Klibisz, 1/16/15
 mpmap.controller('MapController',
   function($scope, $location, $document, $modal,
     MapDataService, ExportDataService,
-    LeafletMapModel, EventsPerYearModel, GenericModalModel) {
-
+    LeafletMapModel, FilterFormModel, EventsPerYearModel, GenericModalModel) {
 
     $scope.initialize = function() {
       
-      //Todo: move filterform.getDate functionality into this function
-      if($scope.filterForm.loaded === false) {
-        $scope.filterForm.getData();
-        $scope.filterForm.loaded = true;
-      }
+      $scope.filterForm.getData();
 
       $scope.modal.open($scope.messages.events.loading, "");
       MapDataService.getEvents($scope.filterForm.getFilter(), 'geojson')
@@ -27,7 +22,7 @@ mpmap.controller('MapController',
           $scope.map = LeafletMapModel(data);
         })
         .error(function(data, status) {
-          $scope.modal.open($scope.message.events.error);
+          $scope.modal.open($scope.messages.events.error);
         })
         .then(function() {
           //reload the analysis data
@@ -72,139 +67,7 @@ mpmap.controller('MapController',
 
      ******************************************/
 
-    $scope.filterForm = {
-      loaded: false,
-      fields: {
-        dateRange: {
-          years: [ /*getData*/ ],
-          selectedYear: new Date().getFullYear(),
-          beginDate: {
-            value: new Date(new Date().getFullYear(), 0, 1),
-            isOpen: false
-          },
-          endDate: {
-            value: new Date(new Date().getFullYear(), 11, 31),
-            isOpen: false
-          },
-          calendarOptions: {
-            format: 'yyyy-MM-dd',
-            minDate: '1993-01-01',
-            maxDate: new Date(),
-            toggleOpen: function($event, dateObject) {
-              $event.preventDefault();
-              $event.stopPropagation();
-              dateObject.isOpen = !dateObject.isOpen;
-            }
-          },
-          update: function() {
-            $scope.filterForm.fields.dateRange.beginDate.value = new Date($scope.filterForm.fields.dateRange.selectedYear, 0, 1);
-            $scope.filterForm.fields.dateRange.endDate.value = new Date($scope.filterForm.fields.dateRange.selectedYear, 11, 31);
-          }
-        },
-        locationInformation: {
-          territorialWaterStatus: {
-            searchTerm: "",
-            all: [ /*getData*/ ],
-            selected: []
-          },
-          closestCountry: {
-            searchTerm: "",
-            all: [ /*getData*/ ],
-            selected: []
-          }
-        },
-        vesselInformation: {
-          vesselCountry: {
-            searchTerm: "",
-            all: [ /*getData*/ ],
-            selected: []
-          },
-          vesselStatus: {
-            all: [ /*getData*/ ],
-            selected: []
-          }
-        },
-        conflictInformation: {}
-      },
-      /*
-      - pushes the item at from[index] onto to
-      - used for filtering and selecting from large lists
-       */
-      multiSelectTransfer: function(from, to, index) {
-        to.push(from[index]);
-        from.splice(index, 1);
-      },
-      /*
-      - constructs the filter that will be passed to the API
-       */
-      getFilter: function() {
-        var finalFilter = {},
-            beginDate = $scope.filterForm.fields.dateRange.beginDate.value,
-            endDate = $scope.filterForm.fields.dateRange.endDate.value,
-            tempDate,
-            buffer = [];
-
-        tempDate = beginDate.getFullYear() + '-' + (beginDate.getMonth() + 1) + '-' + beginDate.getDate();
-        finalFilter.beginDate = tempDate.toString();
-
-        tempDate = endDate.getFullYear() + '-' + (endDate.getMonth() + 1) + '-' + endDate.getDate();
-        finalFilter.endDate = tempDate.toString();
-
-
-        angular.forEach($scope.filterForm.fields.locationInformation.territorialWaterStatus.selected, function(value, key) {
-          buffer.push(value.cowId);
-        });
-        finalFilter.territorialWaterStatus = buffer.join();
-
-        buffer = [];
-        angular.forEach($scope.filterForm.fields.locationInformation.closestCountry.selected, function(value, key) {
-          buffer.push(value.cowId);
-        });
-        finalFilter.closestCountry = buffer.join();
-
-        buffer = [];
-        angular.forEach($scope.filterForm.fields.vesselInformation.vesselCountry.selected, function(value, key) {
-          buffer.push(value.cowId);
-        });
-        finalFilter.vesselCountry = buffer.join();
-
-        buffer = [];
-        angular.forEach($scope.filterForm.fields.vesselInformation.vesselStatus.selected, function(value, key) {
-          buffer.push(value);
-        });
-        finalFilter.vesselStatus = buffer.join();
-
-        return finalFilter;
-      },
-      getData: function() {
-        /*
-        $scope.filterForm.fields.dateRange.years
-         */
-        $scope.filterForm.fields.dateRange.years = MapDataService.getYears();
-        /*
-        $scope.vesselStatus.all
-         */
-        $scope.filterForm.fields.vesselInformation.vesselStatus.all = MapDataService.getVesselStatus();
-        /*
-        $scope.filterForm.fields.locationInformation.territorialWaterStatus.all
-        $scope.filterForm.fields.locationInformation.closestCountry.all
-        $scope.filterForm.fields.vesselInformation.vesselCountry.all
-         */
-        MapDataService.getCountries()
-          .success(function(data, status) {
-            $scope.filterForm.fields.locationInformation.territorialWaterStatus.all = data;
-          });
-        MapDataService.getCountries()
-          .success(function(data, status) {
-            $scope.filterForm.fields.locationInformation.closestCountry.all = data;
-          });
-        MapDataService.getCountries()
-          .success(function(data, status) {
-            $scope.filterForm.fields.vesselInformation.vesselCountry.all = data;
-          });
-      }
-
-    };
+     $scope.filterForm = FilterFormModel();
 
     /******************************************
 
