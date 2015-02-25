@@ -136,7 +136,7 @@ mpmap.service('EventsPerYearModel', function($rootScope) {
     */
     return function(mapData, countries, beginDate, endDate) {
         var features, beginYear, endYear;
-
+        
         //not guaranteed to have all four arguments; exit gracefully
         if (arguments.length < 4) {
             return model;

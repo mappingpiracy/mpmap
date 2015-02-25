@@ -5,7 +5,6 @@ mpmap.service('MapDataService',
 
       getEvents: function(eventFilter, format) {
         eventFilter.format = format;
-        console.log(eventFilter);
         return $http.get('/mapdata/events', {
           params: eventFilter
         });

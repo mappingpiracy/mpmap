@@ -19,21 +19,18 @@ mpmap.service('FilterFormModel', function(MapDataService) {
 				selectedYear: new Date().getFullYear(),
 				beginDate: {
 					value: new Date(new Date().getFullYear(), 0, 1),
-					isOpen: false
+					opened: false,
+					format: 'MM/dd/yyyy'
 				},
 				endDate: {
 					value: new Date(new Date().getFullYear(), 11, 31),
-					isOpen: false
+					opened: false,
+					format: 'MM/dd/yyyy'
 				},
-				calendarOptions: {
-					format: 'yyyy-MM-dd',
-					minDate: new Date(1993, 0, 1),
-					maxDate: new Date(),
-					toggleOpen: function($event, dateObject) {
-						$event.preventDefault();
-						$event.stopPropagation();
-						dateObject.isOpen = !dateObject.isOpen;
-					}
+				openDatePicker: function($event, dp) {
+					$event.preventDefault();
+					$event.stopPropagation();
+					dp.opened = !dp.opened;
 				},
 				update: function() {
 					updateSelectedYear(year);
@@ -48,7 +45,7 @@ mpmap.service('FilterFormModel', function(MapDataService) {
 					helpMessage: '',
 					orderProperty: 'name',
 					items: [],
-					selected: [] 
+					selected: []
 				},
 				territorialWaterStatus: {
 					title: 'Territorial Water Status',
@@ -58,7 +55,7 @@ mpmap.service('FilterFormModel', function(MapDataService) {
 					helpMessage: '',
 					orderProperty: 'name',
 					items: [],
-					selected: [] 
+					selected: []
 				}
 			},
 			vesselInformation: {
@@ -70,7 +67,7 @@ mpmap.service('FilterFormModel', function(MapDataService) {
 					helpMessage: '',
 					orderProperty: 'name',
 					items: [],
-					selected: [] 
+					selected: []
 				},
 				vesselStatus: {
 					title: 'Vessel Status',
@@ -80,7 +77,7 @@ mpmap.service('FilterFormModel', function(MapDataService) {
 					helpMessage: '',
 					orderProperty: 'name',
 					items: [],
-					selected: [] 
+					selected: []
 				}
 			},
 			conflictInformation: {
@@ -110,16 +107,15 @@ mpmap.service('FilterFormModel', function(MapDataService) {
 		that will be passed to the MapData API.
 	*/
 	function getFilter() {
-		console.log("getFilter");
 		var finalFilter = {},
-		dateRange = model.fields.dateRange,
-		locationInformation = model.fields.locationInformation,
-		vesselInformation = model.fields.vesselInformation,
-		buffer = [];
+			//dateRange = model.fields.dateRange,
+			locationInformation = model.fields.locationInformation,
+			vesselInformation = model.fields.vesselInformation,
+			buffer = [];
 
 		//concatenate begin and end date strings
-		finalFilter.beginDate = (dateRange.beginDate.value.getFullYear() + '-' + (dateRange.beginDate.value.getMonth() + 1) + '-' + dateRange.beginDate.value.getDate()).toString();
-		finalFilter.endDate = (dateRange.endDate.value.getFullYear() + '-' + (dateRange.endDate.value.getMonth() + 1) + '-' + dateRange.endDate.value.getDate()).toString();
+		finalFilter.beginDate = (model.fields.dateRange.beginDate.value.getFullYear() + '-' + (model.fields.dateRange.beginDate.value.getMonth() + 1) + '-' + model.fields.dateRange.beginDate.value.getDate()).toString();
+		finalFilter.endDate = (model.fields.dateRange.endDate.value.getFullYear() + '-' + (model.fields.dateRange.endDate.value.getMonth() + 1) + '-' + model.fields.dateRange.endDate.value.getDate()).toString();
 
 		//push all of the selected cowIds for the four country fields to a buffer array.
 		//then join the array to a string to be included with the final filter.
@@ -134,7 +130,7 @@ mpmap.service('FilterFormModel', function(MapDataService) {
 			buffer.push(value.cowId);
 		});
 		finalFilter.territorialWaterStatus = buffer.join();
-		
+
 		buffer.length = 0;
 		angular.forEach(vesselInformation.vesselCountry.selected, function(value, key) {
 			buffer.push(value.cowId);
@@ -154,9 +150,7 @@ mpmap.service('FilterFormModel', function(MapDataService) {
 		Call the MapDataService to populate the form fields.
 	*/
 	function getData() {
-		console.log("getData");
-
-		if(model.loaded) {
+		if (model.loaded) {
 			return;
 		}
 
@@ -188,4 +182,14 @@ mpmap.service('FilterFormModel', function(MapDataService) {
 		return model;
 	};
 
+}).directive('datepickerPopup', function (){
+  //https://github.com/angular-ui/bootstrap/issues/2659
+  return {
+    restrict: 'EAC',
+    require: 'ngModel',
+    link: function(scope, element, attr, controller) {
+      //remove the default formatter from the input directive to prevent conflict
+      controller.$formatters.shift();
+    }
+  };
 });

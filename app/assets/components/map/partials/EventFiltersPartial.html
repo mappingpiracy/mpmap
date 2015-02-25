@@ -39,10 +39,13 @@
       <div class="panel-heading">Date Range</div>
       <div class="panel-body">
 
+        
         <div class="row">
           <div class="col-md-12">
             <label for="year">Year</label>
-            <select id="year" class="form-control" ng-model="filterForm.fields.dateRange.selectedYear" ng-change="filterForm.fields.dateRange.update()">
+            <select id="year" class="form-control"
+              ng-model="filterForm.fields.dateRange.selectedYear"
+              ng-change="filterForm.fields.dateRange.update()">
               <option ng-repeat="item in filterForm.fields.dateRange.years" value="{{item}}">{{item}}</option>
             </select>
           </div>
@@ -50,12 +53,19 @@
 
         <div class="row">
           <div class="col-md-12">
-            <label for="begin-date">Begin Date</label>
+            <label>Begin Date</label>
             <div class="input-group">
-              <input id="begin-date" type="text" class="form-control" datepicker-popup="{{filterForm.fields.dateRange.calendarOptions.format}}" ng-model="filterForm.fields.dateRange.beginDate.value" is-open="filterForm.fields.dateRange.beginDate.isOpen" min-date="filterForm.fields.dateRange.calendarOptions.minDate"
-              max-date="filterForm.fields.dateRange.calendarOptions.maxDate" ng-required="true" close-text="Close" />
+             <input type="text" class="form-control" 
+                ng-model="filterForm.fields.dateRange.beginDate.value" 
+                datepicker-popup="{{filterForm.fields.dateRange.beginDate.format}}" 
+                is-open="filterForm.fields.dateRange.beginDate.opened" 
+                datepicker-options="filterForm.fields.dateRange.beginDate.dateOptions"
+                ng-required="true" 
+                close-text="Close" />
               <span class="input-group-btn">
-                <button type="button" class="btn btn-primary" ng-click="filterForm.fields.dateRange.calendarOptions.toggleOpen($event, filterForm.fields.dateRange.beginDate)"><i class="glyphicon glyphicon-calendar"></i>&nbsp;</button>
+                <button type="button" class="btn btn-primary" 
+                ng-click="filterForm.fields.dateRange.openDatePicker($event, filterForm.fields.dateRange.beginDate)">
+                <i class="glyphicon glyphicon-calendar"></i></button>
               </span>
             </div>
           </div>
@@ -63,12 +73,18 @@
 
         <div class="row">
           <div class="col-md-12">
-            <label for="end-date">End Date</label>
+            <label>End Date</label>
             <div class="input-group">
-              <input id="end-date" type="text" class="form-control" datepicker-popup="{{filterForm.fields.dateRange.calendarOptions.format}}" ng-model="filterForm.fields.dateRange.endDate.value" is-open="filterForm.fields.dateRange.endDate.isOpen" min-date="filterForm.fields.dateRange.calendarOptions.minDate"
-              max-date="filterForm.fields.dateRange.calendarOptions.maxDate" ng-required="true" close-text="Close" />
+              <input type="text" class="form-control" 
+                ng-model="filterForm.fields.dateRange.endDate.value" 
+                datepicker-popup="{{filterForm.fields.dateRange.endDate.format}}" 
+                is-open="filterForm.fields.dateRange.endDate.opened" 
+                ng-required="true" 
+                close-text="Close" />
               <span class="input-group-btn">
-                <button type="button" class="btn btn-primary" ng-click="filterForm.fields.dateRange.calendarOptions.toggleOpen($event, filterForm.fields.dateRange.endDate)"><i class="glyphicon glyphicon-calendar"></i>&nbsp;</button>
+                <button type="button" class="btn btn-primary" 
+                ng-click="filterForm.fields.dateRange.openDatePicker($event, filterForm.fields.dateRange.endDate)">
+                <i class="glyphicon glyphicon-calendar"></i></button>
               </span>
             </div>
           </div>

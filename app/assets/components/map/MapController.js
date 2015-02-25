@@ -21,9 +21,10 @@ mpmap.controller('MapController',
     ******************************************/
 
     $scope.initialize = function() {
-      
-      $scope.filterForm.getData();
 
+      //Populate the filter form
+      $scope.filterForm.getData();
+      //Open a loading modal and get the map geojson data
       $scope.modal.open($scope.messages.events.loading, "");
       MapDataService.getEvents($scope.filterForm.getFilter(), 'geojson')
         .success(function(data, status) {
@@ -34,7 +35,7 @@ mpmap.controller('MapController',
           $scope.modal.open($scope.messages.events.error);
         })
         .then(function() {
-          //reload the analysis data
+          //get the analysis data
           $scope.analysis.getData();
           $scope.modal.close();
         });
@@ -67,7 +68,7 @@ mpmap.controller('MapController',
 
      ******************************************/
 
-     $scope.modal = GenericModalModel();
+    $scope.modal = GenericModalModel();
 
     /******************************************
 
@@ -76,7 +77,7 @@ mpmap.controller('MapController',
 
      ******************************************/
 
-     $scope.filterForm = FilterFormModel();
+    $scope.filterForm = FilterFormModel();
 
     /******************************************
 
