@@ -11,6 +11,15 @@ mpmap.controller('MapController',
     MapDataService, ExportDataService,
     LeafletMapModel, FilterFormModel, EventsPerYearModel, GenericModalModel) {
 
+    /******************************************
+    
+    Initialization function to pull in all
+    necessary data for the controller.
+
+    Called at the end of the controller.
+
+    ******************************************/
+
     $scope.initialize = function() {
       
       $scope.filterForm.getData();
