@@ -40,8 +40,8 @@ mpmap.service('FilterFormModel', function(MapDataService) {
 				closestCountry: {
 					title: 'Closest Country',
 					filterPlaceHolder: 'Start typing to filter the lists below.',
-					labelAll: 'All Items',
-					labelSelected: 'Selected Items',
+					labelAll: 'All',
+					labelSelected: 'Selected',
 					helpMessage: '',
 					orderProperty: 'name',
 					items: [],
@@ -50,8 +50,8 @@ mpmap.service('FilterFormModel', function(MapDataService) {
 				territorialWaterStatus: {
 					title: 'Territorial Water Status',
 					filterPlaceHolder: 'Start typing to filter the lists below.',
-					labelAll: 'All Items',
-					labelSelected: 'Selected Items',
+					labelAll: 'All',
+					labelSelected: 'Selected',
 					helpMessage: '',
 					orderProperty: 'name',
 					items: [],
@@ -62,8 +62,8 @@ mpmap.service('FilterFormModel', function(MapDataService) {
 				vesselCountry: {
 					title: 'Vessel Country',
 					filterPlaceHolder: 'Start typing to filter the lists below.',
-					labelAll: 'All Items',
-					labelSelected: 'Selected Items',
+					labelAll: 'All',
+					labelSelected: 'Selected',
 					helpMessage: '',
 					orderProperty: 'name',
 					items: [],
@@ -72,8 +72,8 @@ mpmap.service('FilterFormModel', function(MapDataService) {
 				vesselStatus: {
 					title: 'Vessel Status',
 					filterPlaceHolder: 'Start typing to filter the lists below.',
-					labelAll: 'All Items',
-					labelSelected: 'Selected Items',
+					labelAll: 'All',
+					labelSelected: 'Selected',
 					helpMessage: '',
 					orderProperty: 'name',
 					items: [],
