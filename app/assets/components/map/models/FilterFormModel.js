@@ -178,11 +178,11 @@ mpmap.service('FilterFormModel', function(MapDataService) {
 	}
 
 	return function() {
+		// var dateRange = model.fields.dateRange;
+		// dateRange.selectedYear = new Date(2013, 0, 1).getFullYear();
+		// dateRange.beginDate.value = new Date(dateRange.selectedYear, 0, 1);
+		// dateRange.endDate.value = new Date(dateRange.selectedYear, 11, 31);
 		getData();
-		var dateRange = model.fields.dateRange;
-		dateRange.selectedYear = new Date(2013, 0, 1).getFullYear();
-		dateRange.beginDate.value = new Date(dateRange.selectedYear, 0, 1);
-		dateRange.endDate.value = new Date(dateRange.selectedYear, 11, 31);
 		return model;
 	};
 
