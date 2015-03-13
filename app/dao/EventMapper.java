@@ -1,6 +1,5 @@
 package dao;
 
-import models.Country;
 import models.Event;
 import models.EventFilter;
 import org.apache.ibatis.annotations.Param;

@@ -5,7 +5,7 @@ public enum EventFilterType {
     BEGIN_DATE("beginDate"),
     END_DATE("endDate"),
     CLOSEST_COUNTRY("closestCountry"),
-    TERRITORIAL_WATER_STATUS("territorialWaterStatus"),
+    TERRITORIAL_WATER_STATUS("waterCountry"),
     VESSEL_COUNTRY("vesselCountry"),
     VESSEL_STATUS("vesselStatus");
 

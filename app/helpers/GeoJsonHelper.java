@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.fasterxml.jackson.databind.JsonNode;
 import models.Event;
+import models.Incident;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,10 +16,8 @@ import java.util.List;
  */
 public class GeoJsonHelper {
 
-    /*
-        Converts an event object to a GeoJson formatted feature.
-        TODO: create enums for the property names to make it typesafe.
-     */
+    protected JsonNodeFactory nodeFactory = new ObjectMapper().getNodeFactory();
+
     public static JsonNode eventToFeature(Event event) {
         JsonNodeFactory nodeFactory;
         nodeFactory = new ObjectMapper().getNodeFactory();

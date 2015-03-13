@@ -9,8 +9,7 @@ GET     /                           controllers.Application.index()
 GET     /mapdata                    controllers.MapData.index()
 GET     /mapdata/events             controllers.MapData.events(format:String?="json",beginDate:String,endDate:String,territorialWaterStatus:String ?= "",closestCountry:String ?= "",vesselCountry:String ?= "",vesselStatus:String ?= "")
 GET     /mapdata/countries          controllers.MapData.countries()
-
-GET     /analysis/1                 controllers.Analysis.eventsOverTime()
+GET     /mapdata/incidents          controllers.MapData.incidents(format:String?="json",beginDate:String,endDate:String,territorialWaterStatus:String ?= "",closestCountry:String ?= "",vesselCountry:String ?= "",vesselStatus:String ?= "")
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)

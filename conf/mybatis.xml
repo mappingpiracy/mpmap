@@ -10,6 +10,7 @@
         <typeAlias type="models.Event" alias="Event"/>
         <typeAlias type="models.EventFilter" alias="EventFilter"/>
         <typeAlias type="models.Country" alias="Country"/>
+        <typeAlias type="models.Incident" alias="Incident"/>
     </typeAliases>
 
     <environments default="development">
@@ -28,6 +29,7 @@
         <mapper resource="EventMapper.xml"/>
         <mapper resource="CountryMapper.xml"/>
         <mapper resource="AnalysisMapper.xml"/>
+        <mapper resource="IncidentMapper.xml"/>
     </mappers>
 
 </configuration>
