@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import helpers.JsonHelper;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -34,7 +35,16 @@ public class IncidentFilter {
         this.waterCountry = waterCountry;
         this.vesselCountry = vesselCountry;
         this.vesselStatus = vesselStatus;
-    };
+    }
+
+    public IncidentFilter(String beginDate, String endDate) {
+        this.beginDate = beginDate;
+        this.endDate = endDate;
+        this.closestCountry = new ArrayList<>();
+        this.waterCountry = new ArrayList<>();
+        this.vesselCountry = new ArrayList<>();
+        this.vesselStatus = new ArrayList<>();
+    }
 
     public String getBeginDate() {
         return beginDate;

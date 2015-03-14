@@ -78,6 +78,7 @@ public class MapData extends Controller {
         } else {
             return ok(toJson(incidents));
         }
+
     }
 
 

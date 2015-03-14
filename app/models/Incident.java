@@ -17,6 +17,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Timer;
 
+import static play.libs.Json.toJson;
+
 /**
  * Created by alex on 3/12/15.
  */
@@ -68,7 +70,15 @@ public class Incident {
     }
 
     public static List<Incident> getIncidents() {
-        return new ArrayList<Incident>();
+        List<Incident> incidents;
+
+        MybatisMapper mapper = new MybatisMapper();
+        SqlSession session = mapper.getSession();
+        IncidentMapper incidentMapper = session.getMapper(IncidentMapper.class);
+
+        incidents = incidentMapper.getIncidents();
+
+        return incidents;
     }
 
     public static List<Incident> getIncidents(IncidentFilter incidentFilter) {
@@ -104,14 +114,7 @@ public class Incident {
         geometry.put("coordinates", coordinates);
         feature.put("geometry", geometry);
 
-        properties.put("id", this.id);
-        properties.put("date", this.date.toString());
-        properties.put("timeOfDay", this.timeOfDay);
-        properties.put("closestCountry", this.closestCountry);
-        properties.put("waterCountry", this.waterCountry);
-        properties.put("vesselCountry", this.vesselCountry.toString());
-
-        feature.put("properties", properties);
+        feature.put("properties", toJson(this));
 
         return feature;
     }

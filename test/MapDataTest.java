@@ -26,10 +26,11 @@ import static org.fest.assertions.Assertions.*;
  */
 public class MapDataTest {
 
-    @Test
-    public void simpleCheck() {
-        int a = 1 + 1;
-        assertThat(a).isEqualTo(2);
-    }
+//    @Test
+//    public void simpleCheck() {
+//        int a = 1 + 1;
+//        System.out.println(a);
+//        assertThat(a).isEqualTo(2);
+//    }
 
 }

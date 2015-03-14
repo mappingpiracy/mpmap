@@ -11,6 +11,7 @@
         <typeAlias type="models.EventFilter" alias="EventFilter"/>
         <typeAlias type="models.Country" alias="Country"/>
         <typeAlias type="models.Incident" alias="Incident"/>
+        <typeAlias type="models.IncidentFilter" alias="IncidentFilter"/>
     </typeAliases>
 
     <environments default="development">

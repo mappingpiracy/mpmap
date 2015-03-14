@@ -6,89 +6,108 @@
 
     <resultMap id="IncidentResult" type="Incident">
         <id property='id' column='id'/>
-        <!--<result property="referenceId" column="reference_id"/>-->
-        <!--<result property="date" column="date" javaType="java.sql.Date"/>-->
-        <!--<result property="timeOfDay" column="time_day"/>-->
-        <!--<result property="type" column="type"/>-->
-        <!--<result property="action" column="action"/>-->
-        <!--<result property="latitude" column="latitude"/>-->
-        <!--<result property="longitude" column="longitude"/>-->
-        <!--<result property="closestCountry" column="closest_country"/>-->
-        <!--<result property="waterCountry" column="water_country"/>-->
-        <!--<result property="locationDescription" column="location_description"/>-->
-        <!--<result property="vesselName" column="vessel_name"/>-->
-        <!--<result property="vesselType" column="vessel_type"/>-->
-        <!--<result property="vesselCountry" column="vessel_country"/>-->
-        <!--<result property="vesselStatus" column="vessel_status"/>-->
-        <!--<result property="violenceDummy" column="violence_dummy"/>-->
+        <result property="referenceId" column="reference_id"/>
+        <result property="date" column="date" javaType="java.sql.Date"/>
+        <result property="timeOfDay" column="time_day"/>
+        <result property="type" column="type"/>
+        <result property="action" column="action"/>
+        <result property="latitude" column="latitude"/>
+        <result property="longitude" column="longitude"/>
+        <result property="closestCountry" column="closest_country"/>
+        <result property="waterCountry" column="water_country"/>
+        <result property="locationDescription" column="location_description"/>
+        <result property="vesselName" column="vessel_name"/>
+        <result property="vesselType" column="vessel_type"/>
+        <result property="vesselCountry" column="vessel_country"/>
+        <result property="vesselStatus" column="vessel_status"/>
+        <result property="violenceDummy" column="violence_dummy" javaType="java.lang.Boolean"/>
     </resultMap>
 
-    <!--<select id="getIncidentsWithFilter" resultType="Incident" resultMap="IncidentResult" parameterType="IncidentFilter">-->
-        <!--SELECT inc.id, inc.reference_id, to_char(inc.date, 'YYYY-MM-DD') AS date,-->
-        <!--inc.time_day, inc.type, inc.action, inc.latitude, inc.longitude,-->
-        <!--c1.name AS closest_country, c2.name AS water_country,-->
-        <!--inc.location_description, inc.vessel_name, inc.vessel_type,-->
-        <!---- combine all country names in the vessel_country_id array into one comma-separated string-->
-        <!--(SELECT string_agg(name, ',') FROM country where cow_id = ANY (inc.vessel_country_id)) AS vessel_country,-->
-        <!--inc.vessel_status,-->
-        <!--inc.violence_dummy-->
-        <!--FROM incident as inc-->
-        <!---- join for closest_country-->
-        <!--LEFT JOIN country AS c1-->
-        <!--ON c1.cow_id = inc.closest_country_id-->
-        <!---- join for water country-->
-        <!--LEFT JOIN country AS c2-->
-        <!--ON c2.cow_id = inc.water_country_id-->
+    <select id="getIncidentsWithFilter" resultType="Incident" resultMap="IncidentResult" parameterType="IncidentFilter">
+        SELECT inc.id,
+            inc.reference_id,
+            to_char(inc.date, 'YYYY-MM-DD') AS date,
+            inc.time_day,
+            inc.type,
+            inc.action,
+            inc.latitude,
+            inc.longitude,
+            c1.name AS closest_country,
+            c2.name AS water_country,
+            inc.location_description,
+            inc.vessel_name,
+            inc.vessel_type,
+            -- combine all country names in the vessel_country_id array into one comma-separated string
+            (SELECT string_agg(name, ',') FROM country where cow_id = ANY (inc.vessel_country_id)) AS vessel_country,
+            inc.vessel_status,
+            inc.violence_dummy
+        FROM incident as inc
+        -- join for closest_country
+        LEFT JOIN country AS c1
+            ON c1.cow_id = inc.closest_country_id
+        -- join for water country
+        LEFT JOIN country AS c2
+            ON c2.cow_id = inc.water_country_id
 
-        <!--<where>-->
-            <!--<if test="filter.beginDate != null and filter.endDate != null">-->
-                <!--inc.date &gt;= #{filter.beginDate}::timestamp AND inc.date &lt;= #{filter.endDate}::timestamp-->
-            <!--</if>-->
-            <!--<if test="filter.closestCountry != null">-->
-                <!--AND inc.closest_country_id IN-->
-                <!--<foreach item="id" index="index" collection="filter.closestCountry" open="(" separator="," close=")">-->
-                    <!--#{id}-->
-                <!--</foreach>-->
-            <!--</if>-->
-            <!--<if test="filter.territorialWaterStatus != null">-->
-                <!--AND inc.water_country_id IN-->
-                <!--<foreach item="id" index="index" collection="filter.territorialWaterStatus" open="(" separator="," close=")">-->
-                    <!--#{id}-->
-                <!--</foreach>-->
-            <!--</if>-->
-            <!--&lt;!&ndash;<if test="filter.vesselCountry != null">&ndash;&gt;-->
-                <!--&lt;!&ndash;AND ev.vessel_flag_country_id IN&ndash;&gt;-->
-                <!--&lt;!&ndash;<foreach item="id" index="index" collection="filter.vesselCountry" open="(" separator="," close=")">&ndash;&gt;-->
-                    <!--&lt;!&ndash;#{id}&ndash;&gt;-->
-                <!--&lt;!&ndash;</foreach>&ndash;&gt;-->
-            <!--&lt;!&ndash;</if>&ndash;&gt;-->
-            <!--<if test="filter.vesselStatus != null">-->
-                <!--AND inc.vessel_status IN-->
-                <!--<foreach item="id" index="index" collection="filter.vesselStatus" open="(" separator="," close=")">-->
-                    <!--#{id}-->
-                <!--</foreach>-->
-            <!--</if>-->
-        <!--</where>-->
-        <!--ORDER BY inc.date asc;-->
-    <!--</select>-->
+        <where>
+            <if test="filter.beginDate != null and filter.endDate != null">
+                inc.date &gt;= #{filter.beginDate}::timestamp AND inc.date &lt;= #{filter.endDate}::timestamp
+            </if>
+            <if test="filter.closestCountry != null">
+                AND inc.closest_country_id IN
+                <foreach item="id" index="index" collection="filter.closestCountry" open="(" separator="," close=")">
+                    #{id}
+                </foreach>
+            </if>
+            <if test="filter.waterCountry != null">
+                AND inc.water_country_id IN
+                <foreach item="id" index="index" collection="filter.waterCountry" open="(" separator="," close=")">
+                    #{id}
+                </foreach>
+            </if>
+            <if test="filter.vesselCountry != null">
+                AND ev.vessel_country_id &amp;&amp;
+                <foreach item="id" index="index" collection="filter.vesselCountry" open="ARRAY[" separator="," close="]::integer[]">
+                    #{id}
+                </foreach>
+            </if>
+            <if test="filter.vesselStatus != null">
+                AND inc.vessel_status IN
+                <foreach item="id" index="index" collection="filter.vesselStatus" open="(" separator="," close=")">
+                    #{id}
+                </foreach>
+            </if>
+        </where>
 
-    <!--<select id="getIncidents" resultType="Incident" resultMap="IncidentResult">-->
-        <!--SELECT inc.id, inc.reference_id, to_char(inc.date, 'YYYY-MM-DD') AS date,-->
-        <!--inc.time_day, inc.type, inc.action, inc.latitude, inc.longitude,-->
-        <!--c1.name AS closest_country, c2.name AS water_country,-->
-        <!--inc.location_description, inc.vessel_name, inc.vessel_type,-->
-        <!---- combine all country names in the vessel_country_id array into one comma-separated string-->
-        <!--(SELECT string_agg(name, ',') FROM country where cow_id = ANY (inc.vessel_country_id)) AS vessel_country,-->
-        <!--inc.vessel_status,-->
-        <!--inc.violence_dummy-->
-        <!--FROM incident as inc-->
-        <!---- join for closest_country-->
-        <!--LEFT JOIN country AS c1-->
-        <!--ON c1.cow_id = inc.closest_country_id-->
-        <!---- join for water country-->
-        <!--LEFT JOIN country AS c2-->
-        <!--ON c2.cow_id = inc.water_country_id-->
-        <!--ORDER BY inc.date asc;-->
-    <!--</select>-->
+        ORDER BY inc.date asc;
+    </select>
+
+    <select id="getIncidents" resultType="Incident" resultMap="IncidentResult">
+        SELECT inc.id,
+        inc.reference_id,
+        to_char(inc.date, 'YYYY-MM-DD') AS date,
+        inc.time_day,
+        inc.type,
+        inc.action,
+        inc.latitude,
+        inc.longitude,
+        c1.name AS closest_country,
+        c2.name AS water_country,
+        inc.location_description,
+        inc.vessel_name,
+        inc.vessel_type,
+        -- combine all country names in the vessel_country_id array into one comma-separated string
+        (SELECT string_agg(name, ',') FROM country where cow_id = ANY (inc.vessel_country_id)) AS vessel_country,
+        inc.vessel_status,
+        inc.violence_dummy
+        FROM incident as inc
+        -- join for closest_country
+        LEFT JOIN country AS c1
+        ON c1.cow_id = inc.closest_country_id
+        -- join for water country
+        LEFT JOIN country AS c2
+        ON c2.cow_id = inc.water_country_id
+        ORDER BY inc.date asc;
+    </select>
 
 </mapper>
