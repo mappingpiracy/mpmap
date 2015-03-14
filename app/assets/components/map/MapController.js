@@ -103,7 +103,7 @@ mpmap.controller('MapController',
         }
         //get the feature list from the geojson object, convert it to csv, then export
         else if (format == 'csv') {
-          ExportDataService.export(MapDataService.convert.geoJsonFeaturesToCSV($scope.map.geojson), format);
+          ExportDataService.export(ExportDataService.geoJsonFeaturesToCSV($scope.map.geojson), format);
         }
       },
       filters: function(format) {

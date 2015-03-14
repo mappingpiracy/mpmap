@@ -37,13 +37,17 @@ mpmap.service('LeafletMapModel', function() {
 		},
 		createPopup: function(feature, layer) {
 			popupContent = '<div class="popup-content"><ul>';
-			popupContent += '<li>Id:                        <strong>' + feature.properties.id + '</strong></li>';
-			popupContent += '<li>Date:                      <strong>' + feature.properties.date + '</strong></li>';
-			popupContent += '<li>Time of Day:                      <strong>' + feature.properties.timeOfDay + '</strong></li>';
-			popupContent += '<li>Closest Country:           <strong>' + feature.properties.closestCountry + '</strong></li>';
-			popupContent += '<li>Water Country:  <strong>' + feature.properties.waterCountry + '</strong></li>';
-			popupContent += '<li>Vessel Country:       <strong>' + feature.properties.vesselCountry + '</strong></li>';
-			popupContent += '<li>Vessel Status:             <strong>' + feature.properties.vesselStatus + '</strong></li>';
+			popupContent += '<li>Id: ' + feature.properties.id + '</li>';
+			popupContent += '<li>Date: ' + feature.properties.date + '</li>';
+			popupContent += '<li>Time of Day: ' + feature.properties.timeOfDay + '</li>';
+			popupContent += '<li>Latitude: ' + feature.properties.latitude + '</li>';
+			popupContent += '<li>Longitude: ' + feature.properties.longitude + '</li>';
+			popupContent += '<li>Closest Country: ' + feature.properties.closestCountry + '</li>';
+			popupContent += '<li>Water Country: ' + feature.properties.waterCountry + '</li>';
+			popupContent += '<li>Vessel Name: ' + feature.properties.vesselName + '</li>';
+			popupContent += '<li>Vessel Country: ' + feature.properties.vesselCountry + '</li>';
+			popupContent += '<li>Vessel Status: ' + feature.properties.vesselStatus + '</li>';
+			popupContent += '<li>Violence Dummy: ' + feature.properties.violenceDummy + '</li>';
 			popupContent += '</ul></div>';
 			layer.bindPopup(popupContent, {
 				maxWidth: 300

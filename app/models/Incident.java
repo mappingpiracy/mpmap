@@ -5,17 +5,13 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import dao.EventMapper;
 import dao.IncidentMapper;
 import dao.MybatisMapper;
 import org.apache.ibatis.session.SqlSession;
 
-import java.lang.reflect.Field;
-import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Timer;
 
 import static play.libs.Json.toJson;
 
@@ -29,7 +25,6 @@ public class Incident {
     protected Date date;
     protected String timeOfDay;
     protected String type;
-    protected String incidentType;
     protected String action;
     protected Double latitude;
     protected Double longitude;
@@ -54,7 +49,6 @@ public class Incident {
         this.date = date;
         this.timeOfDay = timeOfDay;
         this.type = type;
-        this.incidentType = incidentType;
         this.action = action;
         this.latitude = latitude;
         this.longitude = longitude;
@@ -174,14 +168,6 @@ public class Incident {
 
     public void setType(String type) {
         this.type = type;
-    }
-
-    public String getIncidentType() {
-        return incidentType;
-    }
-
-    public void setIncidentType(String incidentType) {
-        this.incidentType = incidentType;
     }
 
     public String getAction() {
