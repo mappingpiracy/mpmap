@@ -90,7 +90,7 @@ mpmap.service('EventsPerYearModel', function($rootScope) {
         //iterate over the features array to set the count for every year
         for (i = 0; i < features.length; i++) {
             country = features[i].properties.closestCountry;
-            year = new Date(features[i].properties.occurredOnDate).getFullYear();
+            year = new Date(features[i].properties.date).getFullYear();
             if (country in uniqueCountries) {
                 uniqueCountries[country][year]++;
             }
