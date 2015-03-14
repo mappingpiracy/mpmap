@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import controllers.MapData;
 import org.junit.*;
 
 import play.mvc.*;
@@ -26,11 +27,14 @@ import static org.fest.assertions.Assertions.*;
  */
 public class MapDataTest {
 
-//    @Test
-//    public void simpleCheck() {
-//        int a = 1 + 1;
-//        System.out.println(a);
-//        assertThat(a).isEqualTo(2);
-//    }
+    @Test
+    public void incidentsJsonTest() {
+
+    }
+
+    @Test
+    public void incidentsGeoJsonTest() {
+
+    }
 
 }

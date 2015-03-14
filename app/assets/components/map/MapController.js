@@ -26,7 +26,7 @@ mpmap.controller('MapController',
       $scope.filterForm.getData();
       //Open a loading modal and get the map geojson data
       $scope.modal.open($scope.messages.events.loading, "");
-      MapDataService.getEvents($scope.filterForm.getFilter(), 'geojson')
+      MapDataService.getIncidents($scope.filterForm.getFilter(), 'geojson')
         .success(function(data, status) {
           //call the map model constructor with the returned data
           $scope.map = LeafletMapModel(data);

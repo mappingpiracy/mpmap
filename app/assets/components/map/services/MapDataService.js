@@ -3,9 +3,9 @@ mpmap.service('MapDataService',
 
     var mapData = {
 
-      getEvents: function(eventFilter, format) {
+      getIncidents: function(eventFilter, format) {
         eventFilter.format = format;
-        return $http.get('/mapdata/events', {
+        return $http.get('/mapdata/incidents', {
           params: eventFilter
         });
       },

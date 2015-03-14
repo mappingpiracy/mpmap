@@ -1,25 +1,10 @@
-import java.time.Month;
 import java.util.*;
-import java.util.concurrent.SynchronousQueue;
 
-import com.fasterxml.jackson.databind.JsonNode;
 import models.Incident;
 import models.IncidentFilter;
 import org.joda.time.DateTime;
 import org.junit.*;
 
-import play.mvc.*;
-import play.test.*;
-import play.data.DynamicForm;
-import play.data.validation.ValidationError;
-import play.data.validation.Constraints.RequiredValidator;
-import play.i18n.Lang;
-import play.libs.F;
-import play.libs.F.*;
-import play.twirl.api.Content;
-import static play.libs.Json.toJson;
-
-import static play.test.Helpers.*;
 import static org.fest.assertions.Assertions.*;
 
 
@@ -32,8 +17,12 @@ public class IncidentTest {
     final Integer NUMBER_OF_INCIDENTS = 6341;
     final String DATE_MINIMUM = "1993-01-01";
     final String DATE_MAXIMUM = "2015-01-30";
-
-    Map<Integer, Integer> incidentsPerYear;;
+    final String DATE_UPPER_BOUND = "2009-12-31";
+    Map<Integer, Integer> incidentsPerYear;
+    Map<Integer, Integer> incidentsPerClosestCountry;      //date <= DATE_UPPER_BOUND
+    Map<Integer, Integer> incidentsPerWaterCountry;        //date <= DATE_UPPER_BOUND
+    Map<Integer, Integer> incidentsPerVesselCountry;
+    Map<Integer, Integer> incidentsPerVesselStatus;
 
     @Test
     public void getIncidentsTest() {
@@ -67,10 +56,50 @@ public class IncidentTest {
             count = incidentsPerYear.get(year);
             assertThat(incidents.size()).isEqualTo(count);
         }
+    }
+
+    @Test
+    /*
+    Test the closest country filter by checking incrementally against a predefined set of values.
+     */
+    public void closestCountryFilterTest() {
+        initializeIncidentsPerClosestCountry();
+        IncidentFilter incidentFilter = new IncidentFilter(DATE_MINIMUM, DATE_UPPER_BOUND);
+        List<Incident> incidents;
+        Integer count, correctCount;
+        List<Integer> countries = new ArrayList<>();
+        correctCount = 0;
+        for (Integer country : incidentsPerClosestCountry.keySet()) {
+            incidentFilter.setBeginDate(DATE_MINIMUM);
+            incidentFilter.setEndDate(DATE_UPPER_BOUND);
+
+            countries.add(country);
+            incidentFilter.setClosestCountry(countries);
+
+            count = incidentsPerClosestCountry.get(country);
+            correctCount += count;
+
+            incidents = Incident.getIncidents(incidentFilter);
+            assertThat(incidents.size()).isEqualTo(correctCount);
+        }
+    }
+
+    @Test
+    public void waterCountryFilterTest() {
 
     }
 
-    public void initializeIncidentsPerYear() {
+    @Test
+    public void vesselCountryFilterTest() {
+
+    }
+
+    @Test
+    public void vesselStatusFilterTest() {
+
+    }
+
+    protected void initializeIncidentsPerYear() {
         incidentsPerYear = new HashMap<>();
         incidentsPerYear.put(1993, 100);
         incidentsPerYear.put(1994, 90);
@@ -95,6 +124,13 @@ public class IncidentTest {
         incidentsPerYear.put(2013, 262);
         incidentsPerYear.put(2014, 248);
         incidentsPerYear.put(2015, 14);
+    }
+
+    protected void initializeIncidentsPerClosestCountry() {
+        incidentsPerClosestCountry = new HashMap<>();
+        incidentsPerClosestCountry.put(850, 1199);  //Indonesia
+        incidentsPerClosestCountry.put(679, 304);   //Malaysia
+        incidentsPerClosestCountry.put(820, 341);   //Bangladesh
     }
 
 }

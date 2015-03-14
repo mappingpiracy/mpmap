@@ -38,11 +38,11 @@ mpmap.service('LeafletMapModel', function() {
 		createPopup: function(feature, layer) {
 			popupContent = '<div class="popup-content"><ul>';
 			popupContent += '<li>Id:                        <strong>' + feature.properties.id + '</strong></li>';
-			popupContent += '<li>Date:                      <strong>' + feature.properties.occurredOnDate + '</strong></li>';
-			popupContent += '<li>Time:                      <strong>' + feature.properties.occurredOnTime + '</strong></li>';
+			popupContent += '<li>Date:                      <strong>' + feature.properties.date + '</strong></li>';
+			popupContent += '<li>Time of Day:                      <strong>' + feature.properties.timeOfDay + '</strong></li>';
 			popupContent += '<li>Closest Country:           <strong>' + feature.properties.closestCountry + '</strong></li>';
-			popupContent += '<li>Territorial Water Status:  <strong>' + feature.properties.territorialWaterStatus + '</strong></li>';
-			popupContent += '<li>Vessel Flag Country:       <strong>' + feature.properties.vesselFlagCountry + '</strong></li>';
+			popupContent += '<li>Water Country:  <strong>' + feature.properties.waterCountry + '</strong></li>';
+			popupContent += '<li>Vessel Country:       <strong>' + feature.properties.vesselCountry + '</strong></li>';
 			popupContent += '<li>Vessel Status:             <strong>' + feature.properties.vesselStatus + '</strong></li>';
 			popupContent += '</ul></div>';
 			layer.bindPopup(popupContent, {
