@@ -7,7 +7,6 @@ GET     /                           controllers.Application.index()
 
 # Mapdata index method -- doesn't really return anything yet.
 GET     /mapdata                    controllers.MapData.index()
-GET     /mapdata/events             controllers.MapData.events(format:String?="json",beginDate:String,endDate:String,territorialWaterStatus:String ?= "",closestCountry:String ?= "",vesselCountry:String ?= "",vesselStatus:String ?= "")
 GET     /mapdata/countries          controllers.MapData.countries()
 GET     /mapdata/incidents          controllers.MapData.incidents(format:String?="json",beginDate:String,endDate:String,territorialWaterStatus:String ?= "",closestCountry:String ?= "",vesselCountry:String ?= "",vesselStatus:String ?= "")
 
