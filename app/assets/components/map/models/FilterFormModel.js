@@ -169,8 +169,6 @@ mpmap.service('FilterFormModel', function(MapDataService) {
 		});
 		finalFilter.conflictAction = buffer.join();
 
-		console.log(finalFilter);
-
 		return finalFilter;
 	}
 

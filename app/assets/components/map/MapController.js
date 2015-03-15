@@ -96,7 +96,7 @@ mpmap.controller('MapController',
      ******************************************/
     $scope.export = {
 
-      events: function(format) {
+      incidents: function(format) {
         //export the geojson as is
         if (format == 'geojson') {
           ExportDataService.export($scope.map.geojson, format);
@@ -123,8 +123,19 @@ mpmap.controller('MapController',
         eventsPerYear: EventsPerYearModel()
       },
       getData: function() {
+        var countries = [], countryCount;
+        
+        if($scope.filterForm.fields.locationInformation.closestCountry.selected.length > 0) {
+          countries = $scope.filterForm.fields.locationInformation.closestCountry.selected;
+          countryCount = countries.length;
+        } else {
+          countries = $scope.filterForm.fields.locationInformation.closestCountry.items;
+          countryCount = 10;
+        }
+
         EventsPerYearModel($scope.map.geojson,
-          $scope.filterForm.fields.locationInformation.closestCountry.selected,
+          countries,
+          countryCount,
           $scope.filterForm.fields.dateRange.beginDate.value,
           $scope.filterForm.fields.dateRange.endDate.value);
       }

@@ -49,14 +49,20 @@ mpmap.service('EventsPerYearModel', function($rootScope) {
     };
 
     /*
-    Create an nvD3 line chart-friendly representation of the passed mapData
-    2-step process:
-    - Create an object functioning as a 2-dimensional map with
+    Create an nvD3 line chart-friendly representation of the passed mapData.
+    Returns 'returnSize' countries to be displayed on the graph.
+    3-step process:
+    1) Construct an object uniqueCountries functioning as a map with
         - key: country name
         - val:
             - key: year
             - val: number of events
-    - Transcribe this map object to the chartData array matching the form:
+    2) Transfer the keys (country names) from the uniqueCountries to an array, sortedCountries.
+    Sort the country names by the sum of their incidents in descending order
+    using the .sort(function() {...}) custom sort
+    3) Iterate over the first 'returnSize' elements of this array, retrieving the country's value
+    from the uniqueCountries object to get the sum of incidents for that country. 
+    Transcribe this object to the chartData array matching the form:
         Array: [
             Object: {
                 key: country name,
@@ -70,13 +76,13 @@ mpmap.service('EventsPerYearModel', function($rootScope) {
         ]
      */
 
-    function getData(features, countries, beginYear, endYear) {
+    function getData(features, countries, returnSize, beginYear, endYear) {
         var years = {},
             uniqueCountries = {},
+            sortedCountries = [],
             chartData = [],
             values = [],
             country, year, i, j;
-
 
         //create an object with a key for every country and the years object for the value
         for (i = 0; i < countries.length; i++) {
@@ -91,13 +97,27 @@ mpmap.service('EventsPerYearModel', function($rootScope) {
         for (i = 0; i < features.length; i++) {
             country = features[i].properties.closestCountry;
             year = new Date(features[i].properties.date).getFullYear();
-            if (country in uniqueCountries) {
+            if (country in uniqueCountries && year in uniqueCountries[country]) {
                 uniqueCountries[country][year]++;
             }
         }
 
+        //sort countries by sum of incidents in descending order into array sortedCountries
+        sortedCountries = Object.keys(uniqueCountries);
+        sortedCountries.sort(function(a, b) {
+            var y, aYears, bYears, aCount = 0, bCount = 0;
+            aYears = uniqueCountries[a];
+            bYears = uniqueCountries[b];
+            for(y in aYears) aCount += aYears[y];
+            for(y in bYears) bCount += bYears[y];
+            if(aCount < bCount) return 1;
+            if(aCount > bCount) return -1;
+            return 0;
+        });
+
         //iterate of the uniqueCountries to create the final nvd3 linechart-friendly data object
-        for (country in uniqueCountries) {
+        for (i = 0; i < returnSize; i++) {
+            country = sortedCountries[i];
             values = [];
             for (year in uniqueCountries[country]) {
                 values.push({
@@ -134,7 +154,7 @@ mpmap.service('EventsPerYearModel', function($rootScope) {
         - set the xaxis tick values according to the passed begin and end years
         - return the model
     */
-    return function(mapData, countries, beginDate, endDate) {
+    return function(mapData, countries, returnSize, beginDate, endDate) {
         var features, beginYear, endYear;
         
         //not guaranteed to have all four arguments; exit gracefully
@@ -159,7 +179,7 @@ mpmap.service('EventsPerYearModel', function($rootScope) {
             return model;
         }
 
-        model.data = getData(features, countries, beginYear, endYear);  
+        model.data = getData(features, countries, returnSize, beginYear, endYear);  
         model.options.chart.xAxis.tickValues = getTickValues(beginYear, endYear);
         return model;
     };
