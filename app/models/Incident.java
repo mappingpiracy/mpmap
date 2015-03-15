@@ -19,7 +19,6 @@ import static play.libs.Json.toJson;
  * Created by alex on 3/12/15.
  */
 public class Incident {
-
     protected Integer id;
     protected Integer referenceId;
     protected Date date;
@@ -36,11 +35,12 @@ public class Incident {
     protected String vesselCountry;
     protected String vesselStatus;
     protected Boolean violenceDummy;
+    protected static MybatisMapper mybatisMapper = MybatisMapper.getInstance();
 
     public Incident() {}
 
     public Incident(Integer id, Integer referenceId, Date date, String timeOfDay, String type,
-                    String incidentType, String action, Double latitude, Double longitude,
+                    String action, Double latitude, Double longitude,
                     String closestCountry, String waterCountry, String locationDescription,
                     String vesselName, String vesselType, String vesselCountry,
                     String vesselStatus, Boolean violenceDummy) {
@@ -65,19 +65,21 @@ public class Incident {
 
     public static List<Incident> getIncidents() {
         List<Incident> incidents;
-
-        MybatisMapper mapper = new MybatisMapper();
-        SqlSession session = mapper.getSession();
+        SqlSession session = mybatisMapper.getSqlSession();
         IncidentMapper incidentMapper = session.getMapper(IncidentMapper.class);
 
-        incidents = incidentMapper.getIncidents();
+        try {
+            incidents = incidentMapper.getIncidents();
+        } finally {
+            session.close();
+        }
+
 
         return incidents;
     }
 
     public static List<Incident> getIncidents(IncidentFilter incidentFilter) {
-        MybatisMapper mapper = new MybatisMapper();
-        SqlSession session = mapper.getSession();
+        SqlSession session = mybatisMapper.getSqlSession();
         IncidentMapper incidentMapper = session.getMapper(IncidentMapper.class);
 
         List<Incident> incidents = new ArrayList<>();

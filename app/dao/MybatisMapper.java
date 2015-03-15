@@ -4,29 +4,32 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
+import java.io.IOException;
 import java.io.InputStream;
 /**
  * Created by alex on 12/22/14.
  */
 public class MybatisMapper {
-    protected String resource = "mybatis.xml";
-    protected InputStream inputStream;
-    protected SqlSessionFactory sqlSessionFactory;
-//    protected SqlSession session;
+    protected final static String CONFIG_FILE = "mybatis.xml";
+    protected static MybatisMapper instance = null;
+    protected static SqlSessionFactory sqlSessionFactory = null;
 
-    public MybatisMapper() {
+    protected MybatisMapper() {    // to avoid instantiation
         try {
-            this.inputStream = Resources.getResourceAsStream(resource);
-            this.sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
-        } catch (Exception e) {
+            InputStream inputStream = Resources.getResourceAsStream(CONFIG_FILE);
+            sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+        } catch(IOException e) {
             e.printStackTrace();
-            return;
         }
     }
-    public SqlSession getSession() {
+
+    public static MybatisMapper getInstance() {
+        if(instance == null) instance = new MybatisMapper();
+        return instance;
+    }
+
+    public SqlSession getSqlSession() {
         return sqlSessionFactory.openSession();
     }
-    public void closeSession() {
-//        this.session.close();
-    }
+
 }
