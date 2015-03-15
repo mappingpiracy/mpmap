@@ -1,0 +1,3 @@
+mpmap.service('IncidentStatisticsModel', function() {
+
+});

@@ -28,11 +28,11 @@ mpmap.service('LeafletMapModel', function() {
 		createMarker: function(feature, latlng) {
 			return L.circleMarker(latlng, {
 				radius: 7,
-				fillColor: "#ff7800",
+				fillColor: "#ff0000",
 				color: "#000",
 				weight: 1,
 				opacity: 1,
-				fillOpacity: 0.8
+				fillOpacity: 0.6
 			});
 		},
 		createPopup: function(feature, layer) {
@@ -63,7 +63,7 @@ mpmap.service('LeafletMapModel', function() {
 		if (arguments.length === 1) {
 			model.geojson = {
 				data: data,
-				//pointToLayer: model.createMarker,
+				pointToLayer: model.createMarker,
 				onEachFeature: model.createPopup
 			};
 		}

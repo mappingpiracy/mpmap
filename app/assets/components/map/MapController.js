@@ -68,7 +68,7 @@ mpmap.controller('MapController',
 
      ******************************************/
 
-    $scope.modal = GenericModalModel();
+    $scope.modal = new GenericModalModel();
 
     /******************************************
 
@@ -77,7 +77,7 @@ mpmap.controller('MapController',
 
      ******************************************/
 
-    $scope.filterForm = FilterFormModel();
+    $scope.filterForm = new FilterFormModel();
 
     /******************************************
 
@@ -86,7 +86,7 @@ mpmap.controller('MapController',
 
      ******************************************/
 
-    $scope.map = LeafletMapModel();
+    $scope.map = new LeafletMapModel();
 
     /******************************************
 
