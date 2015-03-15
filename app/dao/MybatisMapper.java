@@ -26,12 +26,12 @@ public class MybatisMapper {
         } catch(IOException e) {
             e.printStackTrace();
         }
-        System.out.println("MybatisMapper instantiated");
     }
 
     public static MybatisMapper getInstance() {
-        if(instance == null) instance = new MybatisMapper();
-        return instance;
+        if(MybatisMapper.instance == null) MybatisMapper.instance = new MybatisMapper();
+        org.apache.ibatis.logging.LogFactory.useSlf4jLogging();
+        return MybatisMapper.instance;
     }
 
     public static MybatisMapper getInstance(MybatisEnvironment environment) {

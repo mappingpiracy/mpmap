@@ -8,6 +8,7 @@ import org.joda.time.DateTime;
 import org.junit.*;
 
 import static org.fest.assertions.Assertions.*;
+import static play.libs.Json.toJson;
 
 
 /**
@@ -24,22 +25,27 @@ public class IncidentTest {
     Map<Integer, Integer> incidentsPerClosestCountry;      //date <= DATE_UPPER_BOUND
     Map<Integer, Integer> incidentsPerWaterCountry;        //date <= DATE_UPPER_BOUND
     Map<Integer, Integer> incidentsPerVesselCountry;
-    Map<Integer, Integer> incidentsPerVesselStatus;
-    MybatisMapper mybatisMapper = MybatisMapper.getInstance(MybatisEnvironment.TESTING);
+    Map<String, Integer> incidentsPerVesselStatus;
+    Map<String, Integer> incidentsPerType;
+    Map<String, Integer> incidentsPerAction;
+
+    static {
+        MybatisMapper mybatisMapper = MybatisMapper.getInstance(MybatisEnvironment.TESTING);
+    }
 
     @Test
     public void getIncidentsTest() {
+        System.out.println("getIncidentsTest");
         List<Incident> incidents;
         incidents = Incident.getIncidents();
-        System.out.println(incidents.size());
         assertThat(incidents.size()).isEqualTo(NUMBER_OF_INCIDENTS);
     }
 
     @Test
     public void getIncidentsWithFilterTest() {
+        System.out.println("getIncidentsWithFilterTest");
         IncidentFilter incidentFilter = new IncidentFilter(DATE_MINIMUM, DATE_MAXIMUM);
         List<Incident> incidents = Incident.getIncidents(incidentFilter);
-        System.out.println(incidents.size());
         assertThat(incidents.size()).isEqualTo(NUMBER_OF_INCIDENTS);
     }
 
@@ -48,7 +54,8 @@ public class IncidentTest {
      */
     @Test
     public void dateFilterTest() {
-        initializeIncidentsPerYear();
+        System.out.println("dateFilterTest");
+        setIncidentsPerYear();
         IncidentFilter incidentFilter = new IncidentFilter(DATE_MINIMUM, DATE_MAXIMUM);
         List<Incident> incidents;
         Integer count;
@@ -66,7 +73,8 @@ public class IncidentTest {
     Test the closest country filter by checking incrementally against a predefined set of values.
      */
     public void closestCountryFilterTest() {
-        initializeIncidentsPerClosestCountry();
+        System.out.println("closestCountryFilterTest");
+        setIncidentsPerClosestCountry();
         IncidentFilter incidentFilter = new IncidentFilter(DATE_MINIMUM, DATE_UPPER_BOUND);
         List<Incident> incidents;
         Integer count, correctCount;
@@ -89,36 +97,96 @@ public class IncidentTest {
 
     @Test
     public void waterCountryFilterTest() {
+        System.out.println("waterCountryFilterTest");
+        setIncidentsPerWaterCountry();
+        IncidentFilter incidentFilter = new IncidentFilter(DATE_MINIMUM, DATE_UPPER_BOUND);
+        List<Incident> incidents;
+        List<Integer> waterCountries;
+        Integer count;
+        for(Integer waterCountry : incidentsPerWaterCountry.keySet()) {
+            waterCountries = new ArrayList<>();
+            waterCountries.add(waterCountry);
+            incidentFilter.setWaterCountry(waterCountries);
+            incidents = Incident.getIncidents(incidentFilter);
+            count = incidentsPerWaterCountry.get(waterCountry);
+            assertThat(incidents.size()).isEqualTo(count);
+        }
 
     }
 
     @Test
     public void vesselCountryFilterTest() {
-
+        System.out.println("vesselCountryFilterTest");
+        setIncidentsPerVesselCountry();
+        IncidentFilter incidentFilter = new IncidentFilter(DATE_MINIMUM, DATE_UPPER_BOUND);
+        List<Incident> incidents;
+        List<Integer> vesselCountries;
+        Integer count;
+        for(Integer vesselCountry : incidentsPerVesselCountry.keySet()) {
+            vesselCountries = new ArrayList<>();
+            vesselCountries.add(vesselCountry);
+            incidentFilter.setVesselCountry(vesselCountries);
+            incidents = Incident.getIncidents(incidentFilter);
+            count = incidentsPerVesselCountry.get(vesselCountry);
+            assertThat(incidents.size()).isEqualTo(count);
+        }
     }
 
     @Test
     public void vesselStatusFilterTest() {
-
+        System.out.println("vesselStatusFilterTes");
+        setIncidentsPerVesselStatus();
+        IncidentFilter incidentFilter = new IncidentFilter(DATE_MINIMUM, DATE_UPPER_BOUND);
+        List<Incident> incidents;
+        List<String> vesselStatuses;
+        Integer count;
+        for(String vesselStatus : incidentsPerVesselStatus.keySet()) {
+            vesselStatuses = new ArrayList<>();
+            vesselStatuses.add(vesselStatus);
+            incidentFilter.setVesselStatus(vesselStatuses);
+            incidents = Incident.getIncidents(incidentFilter);
+            count = incidentsPerVesselStatus.get(vesselStatus);
+            assertThat(incidents.size()).isEqualTo(count);
+        }
     }
 
     @Test
-    public void conflictActionFilterTest() {
-
+    public void typeFilterTest() {
+        System.out.println("typeFilterTest");
+        setIncidentsPerType();
+        IncidentFilter incidentFilter = new IncidentFilter(DATE_MINIMUM, DATE_UPPER_BOUND);
+        List<Incident> incidents;
+        List<String> types;
+        Integer count;
+        for (String type : incidentsPerType.keySet()) {
+            types = new ArrayList<>();
+            types.add(type);
+            incidentFilter.setType(types);
+            incidents = Incident.getIncidents(incidentFilter);
+            count = incidentsPerType.get(type);
+            assertThat(incidents.size()).isEqualTo(count);
+        }
     }
 
     @Test
-    public void conflictTypeFilterTest() {
-        IncidentFilter incidentFilter = new IncidentFilter(DATE_MINIMUM, DATE_MAXIMUM);
-        List<String> conflictType = new ArrayList<>();
-        conflictType.add("Actual");
-        incidentFilter.setConflictType(conflictType);
-        List<Incident> incidents = Incident.getIncidents(incidentFilter);
-        System.out.println(incidents.size());
-        assertThat(incidents.size()).isEqualTo(4374);
+    public void actionFilterTest() {
+        System.out.println("actionFilterTest");
+        setIncidentsPerAction();
+        IncidentFilter  incidentFilter = new IncidentFilter(DATE_MINIMUM, DATE_UPPER_BOUND);
+        List<Incident> incidents;
+        List<String> types = new ArrayList<>();
+        Integer count;
+        for (String type : incidentsPerAction.keySet()) {
+            types.clear();
+            types.add(type);
+            incidentFilter.setAction(types);
+            incidents = Incident.getIncidents(incidentFilter);
+            count = incidentsPerAction.get(type);
+            assertThat(incidents.size()).isEqualTo(count);
+        }
     }
 
-    protected void initializeIncidentsPerYear() {
+    protected void setIncidentsPerYear() {
         incidentsPerYear = new HashMap<>();
         incidentsPerYear.put(1993, 100);
         incidentsPerYear.put(1994, 90);
@@ -145,11 +213,54 @@ public class IncidentTest {
         incidentsPerYear.put(2015, 14);
     }
 
-    protected void initializeIncidentsPerClosestCountry() {
+    protected void setIncidentsPerClosestCountry() {
         incidentsPerClosestCountry = new HashMap<>();
         incidentsPerClosestCountry.put(850, 1199);  //Indonesia
         incidentsPerClosestCountry.put(679, 304);   //Malaysia
         incidentsPerClosestCountry.put(820, 341);   //Bangladesh
     }
+
+    protected void setIncidentsPerType() {
+        incidentsPerType = new HashMap<>();
+        incidentsPerType.put("Actual", 3267);
+        incidentsPerType.put("Attempted", 1253);
+    }
+
+    protected void setIncidentsPerAction() {
+        incidentsPerAction = new HashMap<>();
+        incidentsPerAction.put("Boarded", 2939);
+        incidentsPerAction.put("Detaining", 1);
+        incidentsPerAction.put("Missing", 12);
+        incidentsPerAction.put("Fired Upon", 104);
+        incidentsPerAction.put("Hijacked", 309);
+    }
+
+    protected void setIncidentsPerVesselStatus() {
+        incidentsPerVesselStatus = new HashMap<>();
+        incidentsPerVesselStatus.put("Anchored", 1984);
+        incidentsPerVesselStatus.put("Berthed", 452);
+        incidentsPerVesselStatus.put("Stationary", 1);
+        incidentsPerVesselStatus.put("Steaming", 1765);
+    }
+
+    public void setIncidentsPerVesselCountry() {
+        incidentsPerVesselCountry = new HashMap<>();
+        incidentsPerVesselCountry.put(95, 686);
+        incidentsPerVesselCountry.put(0, 439);
+        incidentsPerVesselCountry.put(830, 378);
+        incidentsPerVesselCountry.put(450, 315);
+        incidentsPerVesselCountry.put(352, 240);
+    }
+
+    public void setIncidentsPerWaterCountry() {
+        incidentsPerWaterCountry = new HashMap<>();
+        incidentsPerWaterCountry.put(850, 1199);
+        incidentsPerWaterCountry.put(771, 349);
+        incidentsPerWaterCountry.put(820, 342);
+        incidentsPerWaterCountry.put(679, 304);
+        incidentsPerWaterCountry.put(475, 268);
+    }
+
+
 
 }

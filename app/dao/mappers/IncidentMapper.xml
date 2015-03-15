@@ -77,20 +77,19 @@
                     #{id}
                 </foreach>
             </if>
-            <if test="filter.conflictType != null">
+            <if test="filter.type != null">
                 AND inc.type IN
-                <foreach item="id" index="index" collection="filter.conflictType" open="(" separator="," close=")">
+                <foreach item="id" index="index" collection="filter.type" open="(" separator="," close=")">
                     #{id}
                 </foreach>
             </if>
-            <if test="filter.conflictAction != null">
+            <if test="filter.action != null">
                 AND inc.action IN
-                <foreach item="id" index="index" collection="filter.conflictAction" open="(" separator="," close=")">
+                <foreach item="id" index="index" collection="filter.action" open="(" separator="," close=")">
                     #{id}
                 </foreach>
             </if>
         </where>
-
         ORDER BY inc.date asc;
     </select>
 

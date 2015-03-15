@@ -1,9 +1,5 @@
 package models;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.node.ArrayNode;
-import helpers.JsonHelper;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,8 +13,8 @@ public class IncidentFilter {
     protected List<Integer> waterCountry = new ArrayList<>();
     protected List<Integer> vesselCountry = new ArrayList<>();
     protected List<String> vesselStatus = new ArrayList<>();
-    protected List<String> conflictType = new ArrayList<>();
-    protected List<String> conflictAction = new ArrayList<>();
+    protected List<String> type = new ArrayList<>();
+    protected List<String> action = new ArrayList<>();
 
     public IncidentFilter(String beginDate, String endDate, List<Integer> closestCountry, List<Integer> waterCountry, List<Integer> vesselCountry, List<String> vesselStatus, List<String> conflictType, List<String> conflictAction) {
         this.beginDate = beginDate;
@@ -27,8 +23,8 @@ public class IncidentFilter {
         this.waterCountry = waterCountry;
         this.vesselCountry = vesselCountry;
         this.vesselStatus = vesselStatus;
-        this.conflictType = conflictType;
-        this.conflictAction = conflictAction;
+        this.type = conflictType;
+        this.action = conflictAction;
     }
 
     public IncidentFilter(String beginDate, String endDate) {
@@ -53,11 +49,7 @@ public class IncidentFilter {
     }
 
     public List<Integer> getWaterCountry() {
-        if(waterCountry.isEmpty()) {
-            return null;
-        } else {
-            return waterCountry;
-        }
+        return (waterCountry.isEmpty()) ? null : waterCountry;
     }
 
     public void setWaterCountry(List<Integer> waterCountry) {
@@ -65,11 +57,7 @@ public class IncidentFilter {
     }
 
     public List<Integer> getClosestCountry() {
-        if(closestCountry.isEmpty()) {
-            return null;
-        } else {
-            return closestCountry;
-        }
+        return (closestCountry.isEmpty()) ? null : closestCountry;
     }
 
     public void setClosestCountry(List<Integer> closestCountry) {
@@ -77,11 +65,7 @@ public class IncidentFilter {
     }
 
     public List<Integer> getVesselCountry() {
-        if(vesselCountry.isEmpty()) {
-            return null;
-        } else {
-            return vesselCountry;
-        }
+        return (vesselCountry.isEmpty()) ? null : vesselCountry;
     }
 
     public void setVesselCountry(List<Integer> vesselCountry) {
@@ -89,38 +73,26 @@ public class IncidentFilter {
     }
 
     public List<String> getVesselStatus() {
-        if(vesselStatus.isEmpty()){
-            return null;
-        } else {
-            return vesselStatus;
-        }
+        return (vesselStatus.isEmpty()) ? null : vesselStatus;
     }
 
     public void setVesselStatus(List<String> vesselStatus) {
         this.vesselStatus = vesselStatus;
     }
 
-    public List<String> getConflictType() {
-        if(conflictType.isEmpty()) {
-            return null;
-        } else {
-            return conflictType;
-        }
+    public List<String> getType() {
+        return (type.isEmpty()) ? null : type;
     }
 
-    public void setConflictType(List<String> conflictType) {
-        this.conflictType = conflictType;
+    public void setType(List<String> type) {
+        this.type = type;
     }
 
-    public List<String> getConflictAction() {
-        if(conflictAction.isEmpty()) {
-            return null;
-        } else {
-            return conflictAction;
-        }
+    public List<String> getAction() {
+        return (action.isEmpty()) ? null : action;
     }
 
-    public void setConflictAction(List<String> conflictAction) {
-        this.conflictAction = conflictAction;
+    public void setAction(List<String> action) {
+        this.action = action;
     }
 }

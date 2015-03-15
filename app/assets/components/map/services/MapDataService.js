@@ -3,10 +3,11 @@ mpmap.service('MapDataService',
 
     var mapData = {
 
-      getIncidents: function(eventFilter, format) {
-        eventFilter.format = format;
+      getIncidents: function(filter, format) {
+        filter.format = format;
+        console.log("API call with filter: ", filter);
         return $http.get('/mapdata/incidents', {
-          params: eventFilter
+          params: filter
         });
       },
 

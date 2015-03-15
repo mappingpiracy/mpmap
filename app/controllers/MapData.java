@@ -30,20 +30,20 @@ public class MapData extends Controller {
     public static Result incidents(String format,      // json || geojson
                                 String beginDate,
                                 String endDate,
-                                String territorialWaterStatus,
+                                String waterCountry,
                                 String closestCountry,
                                 String vesselCountry,
                                 String vesselStatus,
-                                String conflictType,
-                                String conflictAction) {
+                                String type,
+                                String action) {
         List<Incident> incidents;
         IncidentFilter incidentFilter = new IncidentFilter(beginDate, endDate,
-                ListHelper.commaStringToIntegerList(territorialWaterStatus),    //  String -> List<Integer>
+                ListHelper.commaStringToIntegerList(waterCountry),    //  String -> List<Integer>
                 ListHelper.commaStringToIntegerList(closestCountry),            //  String -> List<Integer>
                 ListHelper.commaStringToIntegerList(vesselCountry),             //  String -> List<Integer>
                 ListHelper.commaStringToStringList(vesselStatus),               //  String -> List<String>
-                ListHelper.commaStringToStringList(conflictType),
-                ListHelper.commaStringToStringList(conflictAction));
+                ListHelper.commaStringToStringList(type),
+                ListHelper.commaStringToStringList(action));
         incidents = Incident.getIncidents(incidentFilter);
 
         if(format.equals("geojson")) {

@@ -47,7 +47,7 @@ mpmap.service('FilterFormModel', function(MapDataService) {
 					items: [],
 					selected: []
 				},
-				territorialWaterStatus: {
+				waterCountry: {
 					title: 'Territorial Water Status',
 					filterPlaceHolder: 'Start typing to filter the lists below.',
 					labelAll: 'All',
@@ -81,7 +81,7 @@ mpmap.service('FilterFormModel', function(MapDataService) {
 				}
 			},
 			conflictInformation: {
-				conflictType: {
+				type: {
 					title: 'Incident Type',
 					filterPlaceHolder: 'Start typing to filter the lists below.',
 					labelAll: 'All',
@@ -91,7 +91,7 @@ mpmap.service('FilterFormModel', function(MapDataService) {
 					items: [],
 					selected: []
 				}, 
-				conflictAction: {
+				action: {
 					title: 'Incident Action',
 					filterPlaceHolder: 'Start typing to filter the lists below.',
 					labelAll: 'All',
@@ -146,10 +146,10 @@ mpmap.service('FilterFormModel', function(MapDataService) {
 		finalFilter.closestCountry = buffer.join();
 
 		buffer.length = 0;
-		angular.forEach(locationInformation.territorialWaterStatus.selected, function(value, key) {
+		angular.forEach(locationInformation.waterCountry.selected, function(value, key) {
 			buffer.push(value.cowId);
 		});
-		finalFilter.territorialWaterStatus = buffer.join();
+		finalFilter.waterCountry = buffer.join();
 
 		buffer.length = 0;
 		angular.forEach(vesselInformation.vesselCountry.selected, function(value, key) {
@@ -158,16 +158,16 @@ mpmap.service('FilterFormModel', function(MapDataService) {
 		finalFilter.vesselCountry = buffer.join();
 
 		buffer.length = 0;
-		angular.forEach(conflictInformation.conflictType.selected, function(value, key) {
+		angular.forEach(conflictInformation.type.selected, function(value, key) {
 			buffer.push(value.id);
 		});
-		finalFilter.conflictType = buffer.join();
+		finalFilter.type = buffer.join();
 
 		buffer.length = 0;
-		angular.forEach(conflictInformation.conflictAction.selected, function(value, key) {
+		angular.forEach(conflictInformation.action.selected, function(value, key) {
 			buffer.push(value.id);
 		});
-		finalFilter.conflictAction = buffer.join();
+		finalFilter.action = buffer.join();
 
 		return finalFilter;
 	}
@@ -190,16 +190,16 @@ mpmap.service('FilterFormModel', function(MapDataService) {
 			});
 		MapDataService.getCountries()
 			.success(function(data) {
-				model.fields.locationInformation.territorialWaterStatus.items = data;
+				model.fields.locationInformation.waterCountry.items = data;
 			});
 		MapDataService.getCountries()
 			.success(function(data) {
 				model.fields.vesselInformation.vesselCountry.items = data;
 			});
 		//get conflict types
-		model.fields.conflictInformation.conflictType.items = MapDataService.getConflictType();
+		model.fields.conflictInformation.type.items = MapDataService.getConflictType();
 		//get conflict actions
-		model.fields.conflictInformation.conflictAction.items = MapDataService.getConflictAction();
+		model.fields.conflictInformation.action.items = MapDataService.getConflictAction();
 		model.loaded = true;
 	}
 
