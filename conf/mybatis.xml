@@ -22,6 +22,15 @@
                 <property name="password" value="${prod.pass}"/>
             </dataSource>
         </environment>
+        <environment id="testing">
+            <transactionManager type="JDBC"/>
+            <dataSource type="POOLED">
+                <property name="driver" value="org.postgresql.Driver"/>
+                <property name="url" value="${test.url}"/>
+                <property name="username" value="${test.user}"/>
+                <property name="password" value="${test.pass}"/>
+            </dataSource>
+        </environment>
     </environments>
 
     <mappers>

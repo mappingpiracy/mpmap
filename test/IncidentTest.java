@@ -1,5 +1,6 @@
 import java.util.*;
 
+import dao.MybatisMapper;
 import models.Incident;
 import models.IncidentFilter;
 import org.joda.time.DateTime;
@@ -23,6 +24,7 @@ public class IncidentTest {
     Map<Integer, Integer> incidentsPerWaterCountry;        //date <= DATE_UPPER_BOUND
     Map<Integer, Integer> incidentsPerVesselCountry;
     Map<Integer, Integer> incidentsPerVesselStatus;
+    MybatisMapper mybatisMapper = MybatisMapper.getInstance("testing");
 
     @Test
     public void getIncidentsTest() {
