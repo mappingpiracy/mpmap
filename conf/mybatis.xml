@@ -12,7 +12,7 @@
         <typeAlias type="models.IncidentFilter" alias="IncidentFilter"/>
     </typeAliases>
 
-    <environments default="production">
+    <environments default="${env.default}">
         <environment id="production">
             <transactionManager type="JDBC"/>
             <dataSource type="POOLED">

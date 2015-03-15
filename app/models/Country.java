@@ -15,7 +15,7 @@ public class Country {
     protected Integer cowId;
     protected String name;
     protected String abbreviation;
-    protected static MybatisMapper mybatisMapper = MybatisMapper.getInstance();
+    protected static MybatisMapper mybatisMapper;
 
     public Country() { }
 
@@ -52,6 +52,7 @@ public class Country {
     }
 
     public static List<Country> getCountries() {
+        Country.mybatisMapper = MybatisMapper.getInstance();
         SqlSession session = mybatisMapper.getSqlSession();
         CountryMapper countryMapper = session.getMapper(CountryMapper.class);
 

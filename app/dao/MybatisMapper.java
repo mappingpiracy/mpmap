@@ -26,6 +26,7 @@ public class MybatisMapper {
         } catch(IOException e) {
             e.printStackTrace();
         }
+        System.out.println("MybatisMapper instantiated");
     }
 
     public static MybatisMapper getInstance() {

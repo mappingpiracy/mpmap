@@ -35,7 +35,7 @@ public class Incident {
     protected String vesselCountry;
     protected String vesselStatus;
     protected Boolean violenceDummy;
-    protected static MybatisMapper mybatisMapper = MybatisMapper.getInstance();
+    protected static MybatisMapper mybatisMapper;
 
     public Incident() {}
 
@@ -64,9 +64,11 @@ public class Incident {
     }
 
     public static List<Incident> getIncidents() {
-        List<Incident> incidents;
+        Incident.mybatisMapper = MybatisMapper.getInstance();
         SqlSession session = mybatisMapper.getSqlSession();
         IncidentMapper incidentMapper = session.getMapper(IncidentMapper.class);
+
+        List<Incident> incidents;
 
         try {
             incidents = incidentMapper.getIncidents();
@@ -79,6 +81,7 @@ public class Incident {
     }
 
     public static List<Incident> getIncidents(IncidentFilter incidentFilter) {
+        Incident.mybatisMapper = MybatisMapper.getInstance();
         SqlSession session = mybatisMapper.getSqlSession();
         IncidentMapper incidentMapper = session.getMapper(IncidentMapper.class);
 
