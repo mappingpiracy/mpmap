@@ -18,7 +18,7 @@ mpmap.service('FilterFormModel', function(MapDataService) {
 				years: [],
 				selectedYear: new Date().getFullYear(),
 				beginDate: {
-					value: new Date(new Date().getFullYear(), 0, 1),
+					value: new Date(new Date().getFullYear() - 1, 0, 1),
 					opened: false,
 					format: 'MM/dd/yyyy'
 				},

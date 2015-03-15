@@ -9,7 +9,7 @@ Alex Klibisz, 1/16/15
 mpmap.controller('MapController',
   function($scope, $location, $document, $modal,
     MapDataService, ExportDataService,
-    LeafletMapModel, FilterFormModel, EventsPerYearModel, GenericModalModel) {
+    LeafletMapModel, FilterFormModel, IncidentsPerYearModel, GenericModalModel) {
 
     /******************************************
     
@@ -120,7 +120,7 @@ mpmap.controller('MapController',
 
     $scope.analysis = {
       models: {
-        eventsPerYear: EventsPerYearModel()
+        eventsPerYear: IncidentsPerYearModel()
       },
       getData: function() {
         var countries = [], countryCount;
@@ -133,7 +133,7 @@ mpmap.controller('MapController',
           countryCount = 10;
         }
 
-        EventsPerYearModel($scope.map.geojson,
+        IncidentsPerYearModel($scope.map.geojson,
           countries,
           countryCount,
           $scope.filterForm.fields.dateRange.beginDate.value,

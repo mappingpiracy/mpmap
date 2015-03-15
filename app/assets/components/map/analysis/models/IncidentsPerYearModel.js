@@ -1,6 +1,6 @@
 /******************************************
 
-EventsPerYearModel
+IncidentsPerYearModel
 
 Alex Klibisz, 2/18/15
 
@@ -10,7 +10,7 @@ It is initialized via the final return function with a passed list of events in 
 
 ******************************************/
 
-mpmap.service('EventsPerYearModel', function($rootScope) {
+mpmap.service('IncidentsPerYearModel', function($rootScope) {
     var model = {
         options: {
             chart: {
