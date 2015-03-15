@@ -7,14 +7,14 @@ public enum MybatisEnvironment {
     PRODUCTION("production"),
     TESTING("testing");
 
-    protected final String xmlName;
+    protected final String string;
 
-    MybatisEnvironment(String xmlName) {
-        this.xmlName = xmlName;
+    MybatisEnvironment(String string) {
+        this.string = string;
     }
 
     @Override
     public String toString() {
-        return this.xmlName;
+        return this.string;
     }
 }
