@@ -15,7 +15,7 @@ mpmap.service('IncidentsPerYearModel', function($rootScope) {
         options: {
             chart: {
                 type: 'lineChart',
-                height: 275,
+                height: 240,
                 margin: {
                     top: 20,
                     right: 60,

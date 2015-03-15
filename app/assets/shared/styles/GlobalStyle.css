@@ -10,6 +10,10 @@ h1,h2,h3,h4,h5,h6 {
   color: #73b5e5 !important;
 }
 
+.navbar a.emphasize {
+  color: #DFF0D8 !important;
+}
+
 main {
   margin-top: 50px;
 }

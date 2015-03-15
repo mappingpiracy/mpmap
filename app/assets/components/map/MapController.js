@@ -9,7 +9,7 @@ Alex Klibisz, 1/16/15
 mpmap.controller('MapController',
   function($scope, $location, $document, $modal,
     MapDataService, ExportDataService,
-    LeafletMapModel, FilterFormModel, IncidentsPerYearModel, GenericModalModel) {
+    LeafletMapModel, FilterFormModel, IncidentsPerYearModel, GenericModalModel, IncidentStatisticsModel) {
 
     /******************************************
     
@@ -37,7 +37,9 @@ mpmap.controller('MapController',
         .then(function() {
           //get the analysis data
           $scope.analysis.getData();
+          $scope.incidentStatistics = IncidentStatisticsModel($scope.map.geojson);
           $scope.modal.close();
+
         });
     };
 
@@ -110,6 +112,15 @@ mpmap.controller('MapController',
         ExportDataService.export($scope.filterForm.getFilter(), format);
       }
     };
+
+    /******************************************
+
+    Statistics object - contains all models
+    for the d3 and nv.d3 data visualizations.
+
+    ******************************************/    
+
+    $scope.incidentStatistics = new IncidentStatisticsModel();
 
     /******************************************
 
