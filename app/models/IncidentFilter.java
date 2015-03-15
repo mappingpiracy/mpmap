@@ -11,39 +11,29 @@ import java.util.List;
  * Created by alex on 3/13/15.
  */
 public class IncidentFilter {
-    protected EventFilterType eventFilterType;
     protected String beginDate;
     protected String endDate;
-    protected List<Integer> closestCountry;
-    protected List<Integer> waterCountry;
-    protected List<Integer> vesselCountry;
-    protected List<String> vesselStatus;
+    protected List<Integer> closestCountry = new ArrayList<>();
+    protected List<Integer> waterCountry = new ArrayList<>();
+    protected List<Integer> vesselCountry = new ArrayList<>();
+    protected List<String> vesselStatus = new ArrayList<>();
+    protected List<String> conflictType = new ArrayList<>();
+    protected List<String> conflictAction = new ArrayList<>();
 
-    public IncidentFilter(JsonNode jsonNode){
-        this.beginDate = jsonNode.get(eventFilterType.BEGIN_DATE.getJsName()).asText();
-        this.endDate = jsonNode.get(eventFilterType.END_DATE.getJsName()).asText();
-        this.closestCountry = JsonHelper.arrayNodeToIntegerList((ArrayNode) jsonNode.get(eventFilterType.CLOSEST_COUNTRY.getJsName()));
-        this.waterCountry = JsonHelper.arrayNodeToIntegerList((ArrayNode) jsonNode.get(eventFilterType.TERRITORIAL_WATER_STATUS.getJsName()));
-        this.vesselCountry = JsonHelper.arrayNodeToIntegerList((ArrayNode) jsonNode.get(eventFilterType.VESSEL_COUNTRY.getJsName()));
-        this.vesselStatus = JsonHelper.arrayNodeToStringList((ArrayNode) jsonNode.get(eventFilterType.VESSEL_STATUS.getJsName()));
-    }
-
-    public IncidentFilter(String beginDate, String endDate, List<Integer> closestCountry, List<Integer> waterCountry, List<Integer> vesselCountry, List<String> vesselStatus) {
+    public IncidentFilter(String beginDate, String endDate, List<Integer> closestCountry, List<Integer> waterCountry, List<Integer> vesselCountry, List<String> vesselStatus, List<String> conflictType, List<String> conflictAction) {
         this.beginDate = beginDate;
         this.endDate = endDate;
         this.closestCountry = closestCountry;
         this.waterCountry = waterCountry;
         this.vesselCountry = vesselCountry;
         this.vesselStatus = vesselStatus;
+        this.conflictType = conflictType;
+        this.conflictAction = conflictAction;
     }
 
     public IncidentFilter(String beginDate, String endDate) {
         this.beginDate = beginDate;
         this.endDate = endDate;
-        this.closestCountry = new ArrayList<>();
-        this.waterCountry = new ArrayList<>();
-        this.vesselCountry = new ArrayList<>();
-        this.vesselStatus = new ArrayList<>();
     }
 
     public String getBeginDate() {
@@ -110,4 +100,27 @@ public class IncidentFilter {
         this.vesselStatus = vesselStatus;
     }
 
+    public List<String> getConflictType() {
+        if(conflictType.isEmpty()) {
+            return null;
+        } else {
+            return conflictType;
+        }
+    }
+
+    public void setConflictType(List<String> conflictType) {
+        this.conflictType = conflictType;
+    }
+
+    public List<String> getConflictAction() {
+        if(conflictAction.isEmpty()) {
+            return null;
+        } else {
+            return conflictAction;
+        }
+    }
+
+    public void setConflictAction(List<String> conflictAction) {
+        this.conflictAction = conflictAction;
+    }
 }

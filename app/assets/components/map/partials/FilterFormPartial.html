@@ -1,16 +1,15 @@
 
 <div id="event-filter-top">
-
     <h3 class="section-header">
-      Event Filters
-      <small>(Control the events displayed.)</small>
+      Incident Filters
+      <small>(Control the incidents displayed.)</small>
     </h3>
 
     <div class="btn-group" role="group" aria-label="...">
-      <button type="button" class="btn btn-primary" ng-click="initialize()">Filter Events</button>
+      <button type="button" class="btn btn-primary" ng-click="initialize()">Filter Incidents</button>
       <div class="btn-group" role="group">
         <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-          Export Events
+          Export Incidents
           <span class="caret"></span>
         </button>
         <ul class="dropdown-menu" role="menu">
@@ -28,7 +27,6 @@
         </ul>
       </div>
     </div>
-
 </div>
 
 <div id="event-filter-scroll-wrapper" filter-form>
@@ -96,15 +94,10 @@
     <div class="panel panel-primary">
       <div class="panel-heading">Location Information</div>
       <div class="panel-body">
-
         <!-- Closest Country -->
-
         <dualmultiselect options="filterForm.fields.locationInformation.closestCountry"> </dualmultiselect>
-
         <!-- Territorial Water Status -->
-
         <dualmultiselect options="filterForm.fields.locationInformation.territorialWaterStatus"> </dualmultiselect>
-
       </div>
     </div>
 
@@ -112,17 +105,10 @@
     <div class="panel panel-primary">
       <div class="panel-heading">Vessel Information</div>
       <div class="panel-body">
-
         <!-- Vessel Country -->
-
         <dualmultiselect options="filterForm.fields.vesselInformation.vesselCountry"> </dualmultiselect>
-
         <!-- Vessel Status -->
         <dualmultiselect options="filterForm.fields.vesselInformation.vesselStatus"> </dualmultiselect>
-
-        <div class="col-md-12">
-          <label>Vessel Type</label>
-        </div>
       </div>
     </div>
 
@@ -130,26 +116,10 @@
     <div class="panel panel-primary">
       <div class="panel-heading">Conflict Information</div>
       <div class="panel-body">
-        <div class="alert alert-info">
-          <p>Our team is still processing data to enable these filters.</p>
-        </div>
-        <div class="form-group">
-          <div class="col-md-12">
-            <label>Conflict Type</label>
-          </div>
-          <div class="col-md-12">
-            <label>Assailant Count</label>
-          </div>
-          <div class="col-md-12">
-            <label>Assailant(s) Armed</label>
-          </div>
-          <div class="col-md-12">
-            <label>Violence</label>
-          </div>
-          <div class="col-md-12">
-            <label>Weapons</label>
-          </div>
-        </div>
+        <!-- Conflict Type -->
+        <dualmultiselect options="filterForm.fields.conflictInformation.conflictType"> </dualmultiselect>
+        <!-- Conflict Action -->
+        <dualmultiselect options="filterForm.fields.conflictInformation.conflictAction"> </dualmultiselect>
       </div>
     </div>
     

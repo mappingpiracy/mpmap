@@ -99,6 +99,22 @@ public class IncidentTest {
 
     }
 
+    @Test
+    public void conflictActionFilterTest() {
+
+    }
+
+    @Test
+    public void conflictTypeFilterTest() {
+        IncidentFilter incidentFilter = new IncidentFilter(DATE_MINIMUM, DATE_MAXIMUM);
+        List<String> conflictType = new ArrayList<>();
+        conflictType.add("Actual");
+        incidentFilter.setConflictType(conflictType);
+        List<Incident> incidents = Incident.getIncidents(incidentFilter);
+        System.out.println(incidents.size());
+        assertThat(incidents.size()).isEqualTo(4374);
+    }
+
     protected void initializeIncidentsPerYear() {
         incidentsPerYear = new HashMap<>();
         incidentsPerYear.put(1993, 100);

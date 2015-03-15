@@ -81,7 +81,26 @@ mpmap.service('FilterFormModel', function(MapDataService) {
 				}
 			},
 			conflictInformation: {
-
+				conflictType: {
+					title: 'Incident Type',
+					filterPlaceHolder: 'Start typing to filter the lists below.',
+					labelAll: 'All',
+					labelSelected: 'Selected',
+					helpMessage: '',
+					orderProperty: 'name',
+					items: [],
+					selected: []
+				}, 
+				conflictAction: {
+					title: 'Incident Action',
+					filterPlaceHolder: 'Start typing to filter the lists below.',
+					labelAll: 'All',
+					labelSelected: 'Selected',
+					helpMessage: '',
+					orderProperty: 'name',
+					items: [],
+					selected: []
+				}
 			}
 		},
 		getFilter: function() {
@@ -111,6 +130,7 @@ mpmap.service('FilterFormModel', function(MapDataService) {
 			//dateRange = model.fields.dateRange,
 			locationInformation = model.fields.locationInformation,
 			vesselInformation = model.fields.vesselInformation,
+			conflictInformation = model.fields.conflictInformation,
 			buffer = [];
 
 		//concatenate begin and end date strings
@@ -138,10 +158,18 @@ mpmap.service('FilterFormModel', function(MapDataService) {
 		finalFilter.vesselCountry = buffer.join();
 
 		buffer.length = 0;
-		angular.forEach(vesselInformation.vesselStatus.selected, function(value, key) {
+		angular.forEach(conflictInformation.conflictType.selected, function(value, key) {
 			buffer.push(value.id);
 		});
-		finalFilter.vesselStatus = buffer.join();
+		finalFilter.conflictType = buffer.join();
+
+		buffer.length = 0;
+		angular.forEach(conflictInformation.conflictAction.selected, function(value, key) {
+			buffer.push(value.id);
+		});
+		finalFilter.conflictAction = buffer.join();
+
+		console.log(finalFilter);
 
 		return finalFilter;
 	}
@@ -153,13 +181,10 @@ mpmap.service('FilterFormModel', function(MapDataService) {
 		if (model.loaded) {
 			return;
 		}
-
 		//get years
 		model.fields.dateRange.years = MapDataService.getYears();
-
 		//get vessel status options
 		model.fields.vesselInformation.vesselStatus.items = MapDataService.getVesselStatus();
-
 		//get countries (3 separate copies so they are changed individually)
 		MapDataService.getCountries()
 			.success(function(data) {
@@ -173,15 +198,14 @@ mpmap.service('FilterFormModel', function(MapDataService) {
 			.success(function(data) {
 				model.fields.vesselInformation.vesselCountry.items = data;
 			});
-
-		model.loaded = 1;
+		//get conflict types
+		model.fields.conflictInformation.conflictType.items = MapDataService.getConflictType();
+		//get conflict actions
+		model.fields.conflictInformation.conflictAction.items = MapDataService.getConflictAction();
+		model.loaded = true;
 	}
 
 	return function() {
-		// var dateRange = model.fields.dateRange;
-		// dateRange.selectedYear = new Date(2013, 0, 1).getFullYear();
-		// dateRange.beginDate.value = new Date(dateRange.selectedYear, 0, 1);
-		// dateRange.endDate.value = new Date(dateRange.selectedYear, 11, 31);
 		getData();
 		return model;
 	};

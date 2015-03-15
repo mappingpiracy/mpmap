@@ -66,7 +66,7 @@
                 </foreach>
             </if>
             <if test="filter.vesselCountry != null">
-                AND ev.vessel_country_id &amp;&amp;
+                AND inc.vessel_country_id &amp;&amp;
                 <foreach item="id" index="index" collection="filter.vesselCountry" open="ARRAY[" separator="," close="]::integer[]">
                     #{id}
                 </foreach>
@@ -74,6 +74,18 @@
             <if test="filter.vesselStatus != null">
                 AND inc.vessel_status IN
                 <foreach item="id" index="index" collection="filter.vesselStatus" open="(" separator="," close=")">
+                    #{id}
+                </foreach>
+            </if>
+            <if test="filter.conflictType != null">
+                AND inc.type IN
+                <foreach item="id" index="index" collection="filter.conflictType" open="(" separator="," close=")">
+                    #{id}
+                </foreach>
+            </if>
+            <if test="filter.conflictAction != null">
+                AND inc.action IN
+                <foreach item="id" index="index" collection="filter.conflictAction" open="(" separator="," close=")">
                     #{id}
                 </foreach>
             </if>

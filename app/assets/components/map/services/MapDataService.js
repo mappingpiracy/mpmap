@@ -31,7 +31,16 @@ mpmap.service('MapDataService',
       */
       getVesselStatus: function() {
         return [{"id": "Anchored", "name": "Anchored"}, {"id": "Berthed", "name": "Berthed"}, {"id": "Moored", "name": "Moored"}, {"id": "Stationary", "name": "Stationary"}, {"id": "Berthed", "name": "Berthed"}, {"id": "Unspecified", "name": "Unspecified"}];
+      },
+
+      getConflictType: function() {
+        return [{"id": "Actual", "name": "Actual"}, {"id": "Attempted", "name": "Attempted"}];
+      },
+
+      getConflictAction: function() {
+        return [{"id": "Boarded", "name": "Boarded"}, {"id": "Detaining", "name": "Detaining"}, {"id": "Missing", "name": "Missing"}, {"id": "Fired Upon", "name": "Fired Upon"}, {"id": "Hijacked", "name": "Hijacked"}];
       }
+
     };
 
     return mapData;

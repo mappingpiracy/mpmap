@@ -33,13 +33,17 @@ public class MapData extends Controller {
                                 String territorialWaterStatus,
                                 String closestCountry,
                                 String vesselCountry,
-                                String vesselStatus) {
+                                String vesselStatus,
+                                String conflictType,
+                                String conflictAction) {
         List<Incident> incidents;
         IncidentFilter incidentFilter = new IncidentFilter(beginDate, endDate,
                 ListHelper.commaStringToIntegerList(territorialWaterStatus),    //  String -> List<Integer>
                 ListHelper.commaStringToIntegerList(closestCountry),            //  String -> List<Integer>
                 ListHelper.commaStringToIntegerList(vesselCountry),             //  String -> List<Integer>
-                ListHelper.commaStringToStringList((vesselStatus)));            //  String -> List<String>
+                ListHelper.commaStringToStringList(vesselStatus),               //  String -> List<String>
+                ListHelper.commaStringToStringList(conflictType),
+                ListHelper.commaStringToStringList(conflictAction));
         incidents = Incident.getIncidents(incidentFilter);
 
         if(format.equals("geojson")) {
