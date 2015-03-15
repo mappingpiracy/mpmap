@@ -1,5 +1,6 @@
 import java.util.*;
 
+import dao.MybatisEnvironment;
 import dao.MybatisMapper;
 import models.Incident;
 import models.IncidentFilter;
@@ -24,7 +25,7 @@ public class IncidentTest {
     Map<Integer, Integer> incidentsPerWaterCountry;        //date <= DATE_UPPER_BOUND
     Map<Integer, Integer> incidentsPerVesselCountry;
     Map<Integer, Integer> incidentsPerVesselStatus;
-    MybatisMapper mybatisMapper = MybatisMapper.getInstance("testing");
+    MybatisMapper mybatisMapper = MybatisMapper.getInstance(MybatisEnvironment.TESTING);
 
     @Test
     public void getIncidentsTest() {

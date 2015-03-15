@@ -5,6 +5,8 @@ import java.util.Map;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import controllers.MapData;
+import dao.MybatisEnvironment;
+import dao.MybatisMapper;
 import org.junit.*;
 
 import play.mvc.*;
@@ -26,6 +28,8 @@ import static org.fest.assertions.Assertions.*;
  *
  */
 public class MapDataTest {
+
+    MybatisMapper mybatisMapper = MybatisMapper.getInstance(MybatisEnvironment.TESTING);
 
     @Test
     public void incidentsJsonTest() {

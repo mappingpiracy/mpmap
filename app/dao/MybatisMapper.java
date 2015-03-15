@@ -13,13 +13,13 @@ public class MybatisMapper {
     protected final static String CONFIG_FILE = "mybatis.xml";
     protected static MybatisMapper instance = null;
     protected static SqlSessionFactory sqlSessionFactory = null;
-    protected static String environment = null;
+    protected static MybatisEnvironment environment = null;
 
     protected MybatisMapper() {    // to avoid instantiation
         try {
             InputStream inputStream = Resources.getResourceAsStream(CONFIG_FILE);
             if(environment != null) {
-                sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream, environment);
+                sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream, environment.toString());
             } else {
                 sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
             }
@@ -33,7 +33,7 @@ public class MybatisMapper {
         return instance;
     }
 
-    public static MybatisMapper getInstance(String environment) {
+    public static MybatisMapper getInstance(MybatisEnvironment environment) {
         MybatisMapper.environment = environment;
         return getInstance();
     }
