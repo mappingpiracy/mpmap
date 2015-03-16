@@ -9,7 +9,7 @@ mpmap.service('ExportDataService', function($rootScope) {
       export: function(data, format) {
         var fileName, fileContents, fileType, blob;
 
-        fileName = 'mpmamp_export_events_' + new Date().toString('yyyy-MM-dd-HH:mm:ss') + '.' + format;
+        fileName = 'mpmap_export_' + new Date().toString('yyyy-MM-dd-HH:mm:ss') + '.' + format;
         
         if (format.indexOf('json') > -1) {
           fileContents = JSON.stringify(data);
