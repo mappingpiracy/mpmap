@@ -40,13 +40,12 @@
     <link rel="stylesheet" media="screen" href="@routes.Assets.at("components/map/styles/MapStyle.css")">
     <!-- CSS: Analysis styles -->
     <link rel="stylesheet" media="screen" href="@routes.Assets.at("components/map/analysis/styles/AnalysisStyle.css")">
-    
-
+   
 </head>
 
 <body>
 
-    <nav ng-include="'assets/shared/partials/NavigationPartial.html'"></nav>
+    <div ng-include="'assets/shared/partials/NavigationPartial.html'"></div>
 
     <main ng-view></main>
 
@@ -95,7 +94,6 @@
     <script src="@routes.Assets.at("components/map/models/FilterFormModel.js")" type="text/javascript" defer="defer" ></script>
     <script src="@routes.Assets.at("shared/models/GenericModalModel.js")" type="text/javascript" defer="defer" ></script>
     <script src="@routes.Assets.at("components/map/models/IncidentStatisticsModel.js")" type="text/javascript" defer="defer" ></script>
-
 
 </body>
 </html>

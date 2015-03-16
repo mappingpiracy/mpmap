@@ -24,6 +24,10 @@ main .wrapper {
   padding-top: 60px;
 }
 
+main .container {
+  max-width: 900px;
+}
+
 label.large {
   font-size: large;
   border-bottom: 1px solid #999;
