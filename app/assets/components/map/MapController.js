@@ -21,25 +21,23 @@ mpmap.controller('MapController',
     ******************************************/
 
     $scope.initialize = function() {
-
       //Populate the filter form
       $scope.filterForm.getData();
       //Open a loading modal and get the map geojson data
-      $scope.modal.open($scope.messages.events.loading, "");
+      $scope.modal.open($scope.messages.events.loading);
       MapDataService.getIncidents($scope.filterForm.getFilter(), 'geojson')
         .success(function(data, status) {
           //call the map model constructor with the returned data
-          $scope.map = LeafletMapModel(data);
+          LeafletMapModel(data);
+          IncidentStatisticsModel(data.features);
+          $scope.analysis.initialize();
         })
         .error(function(data, status) {
           $scope.modal.open($scope.messages.events.error);
         })
         .then(function() {
           //get the analysis data
-          $scope.analysis.getData();
-          $scope.incidentStatistics = IncidentStatisticsModel($scope.map.geojson);
           $scope.modal.close();
-
         });
     };
 
@@ -133,7 +131,7 @@ mpmap.controller('MapController',
       models: {
         eventsPerYear: IncidentsPerYearModel()
       },
-      getData: function() {
+      initialize: function() {
         var countries = [], countryCount;
         
         if($scope.filterForm.fields.locationInformation.closestCountry.selected.length > 0) {
