@@ -1,6 +1,6 @@
 #MPMAP Usage
 
-![Main Screenshot](./img/usage-001.png)
+<img src="./img/usage-001.png" height="300px" width="auto>
 
 ##Contents
 
@@ -8,6 +8,8 @@
 2. General Usage
 3. Usage Examples
 
+***
+***
 
 ##1. Functionality
 
@@ -17,6 +19,9 @@ MPMAP provides the following functionality:
 - Map the filtered incidents with informational popups.
 - Export the filtered incidents in CSV or GeoJSON format and the applied filters in JSON format.
 - Analyze the filtered incidents via a graph displaying incidents per year by closest country.
+
+***
+***
 
 ##2. General Usage
 
@@ -29,6 +34,9 @@ MPMAP is initialized with the last three calendar years of incident data, and an
 The MPMAP layout consists of three panes: Incident Filters, the map, and Incident Analysis. The gray bars separating these panes may be clicked and dragged to increase or decrease the size of each pane.
 
 <img src="./img/usage-008.png" height="400px" width="auto>
+
+***
+***
 
 ##3. Usage Examples
 
