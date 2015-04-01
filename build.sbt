@@ -2,7 +2,7 @@ import play.PlayJava
 
 name := """MPMAP"""
 
-version := "0.2"
+version := "0.3"
 
 lazy val root = (project in file(".")).enablePlugins(PlayJava)
 

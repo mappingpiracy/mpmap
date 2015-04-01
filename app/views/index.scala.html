@@ -34,12 +34,11 @@
 
     <!-- ***** CSS CUSTOM STYLES ***** -->
 
-     <!-- CSS: Main styles-->
-    <link rel="stylesheet" media="screen" href="@routes.Assets.at("shared/styles/GlobalStyle.css")">
-    <!-- CSS: Map styles -->
-    <link rel="stylesheet" media="screen" href="@routes.Assets.at("components/map/styles/MapStyle.css")">
-    <!-- CSS: Analysis styles -->
-    <link rel="stylesheet" media="screen" href="@routes.Assets.at("components/map/analysis/styles/AnalysisStyle.css")">
+    <!-- inject:css -->
+    <link rel="stylesheet" href="../assets/shared/styles/GlobalStyle.css">
+    <link rel="stylesheet" href="../assets/components/map/styles/MapStyle.css">
+    <link rel="stylesheet" href="../assets/components/map/analysis/styles/AnalysisStyle.css">
+    <!-- endinject -->
    
 </head>
 
@@ -54,19 +53,17 @@
     <!-- JS: Angular -->
     <script type='text/javascript' src='@routes.WebJarAssets.at(WebJarAssets.locate("angular.min.js"))'></script>
     <script type='text/javascript' src='@routes.WebJarAssets.at(WebJarAssets.locate("angular-route.min.js"))'></script>
-
     <!-- JS: Angular Directives -->
      <script src="@routes.Assets.at("javascripts/lib/angular-ui-layout.js")" type="text/javascript" defer="defer" ></script>
     <script src="@routes.Assets.at("javascripts/directives/ng-modal.min.js")" type="text/javascript" defer="defer"></script>
     <script type='text/javascript' src='@routes.WebJarAssets.at(WebJarAssets.locate("angular-leaflet-directive.min.js"))'></script>
     <script src="@routes.Assets.at("shared/directives/dualmultiselect.js")" type="text/javascript" defer="defer"></script>
-
     <!-- JS: jQuery and Bootstrap -->
-    <script type='text/javascript' src='@routes.WebJarAssets.at(WebJarAssets.locate("ui-bootstrap-tpls.js"))'></script>
-    <script type='text/javascript' src='@routes.WebJarAssets.at(WebJarAssets.locate("jquery.min.js"))'></script>
-    <script type='text/javascript' src='@routes.WebJarAssets.at(WebJarAssets.locate("bootstrap.min.js"))'></script>
+    <script src='@routes.WebJarAssets.at(WebJarAssets.locate("ui-bootstrap-tpls.js"))'></script>
+    <script src='@routes.WebJarAssets.at(WebJarAssets.locate("jquery.min.js"))'></script>
+    <script src='@routes.WebJarAssets.at(WebJarAssets.locate("bootstrap.min.js"))'></script>
     <!-- JS: Mapping -->
-    <script type='text/javascript' src='@routes.WebJarAssets.at(WebJarAssets.locate("leaflet.js"))'></script>
+    <script src='@routes.WebJarAssets.at(WebJarAssets.locate("leaflet.js"))'></script>
     <!-- JS: D3 -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/nvd3/1.7.0/nv.d3.min.js"></script>
@@ -77,23 +74,20 @@
 
     <!-- *****  ANGULAR FRONT-END APPLICATION CODE***** -->
 
-    <!-- JS: Angular App -->
-    <script src="@routes.Assets.at("app.module.js")" type="text/javascript" defer="defer" ></script>
-    <script src="@routes.Assets.at("app.routes.js")" type="text/javascript" defer="defer" ></script>
-    <!-- JS: Angular Services -->
-    <script src="@routes.Assets.at("components/map/services/MapDataService.js")" type="text/javascript" defer="defer" ></script>
-    <script src="@routes.Assets.at("components/map/services/ExportDataService.js")" type="text/javascript" defer="defer" ></script>
-
-    <!-- JS: Angular Controllers -->
-    <script src="@routes.Assets.at("components/map/MapController.js")" type="text/javascript" defer="defer" ></script>
-    <script src="@routes.Assets.at("shared/controllers/StaticPageController.js")" type="text/javascript" defer="defer" ></script>
-
-    <!-- JS: Angular Models -->
-    <script src="@routes.Assets.at("components/map/analysis/models/IncidentsPerYearModel.js")" type="text/javascript" defer="defer" ></script>
-    <script src="@routes.Assets.at("components/map/models/LeafletMapModel.js")" type="text/javascript" defer="defer" ></script>
-    <script src="@routes.Assets.at("components/map/models/FilterFormModel.js")" type="text/javascript" defer="defer" ></script>
-    <script src="@routes.Assets.at("shared/models/GenericModalModel.js")" type="text/javascript" defer="defer" ></script>
-    <script src="@routes.Assets.at("components/map/models/IncidentStatisticsModel.js")" type="text/javascript" defer="defer" ></script>
+    <!-- inject:js -->
+    <script src="../assets/app.module.js"></script>
+    <script src="../assets/app.routes.js"></script>
+    <script src="../assets/components/map/MapController.js"></script>
+    <script src="../assets/shared/controllers/StaticPageController.js"></script>
+    <script src="../assets/shared/directives/dualmultiselect.js"></script>
+    <script src="../assets/shared/models/GenericModalModel.js"></script>
+    <script src="../assets/components/map/models/FilterFormModel.js"></script>
+    <script src="../assets/components/map/models/IncidentStatisticsModel.js"></script>
+    <script src="../assets/components/map/models/LeafletMapModel.js"></script>
+    <script src="../assets/components/map/services/ExportDataService.js"></script>
+    <script src="../assets/components/map/services/MapDataService.js"></script>
+    <script src="../assets/components/map/analysis/models/IncidentsPerYearModel.js"></script>
+    <!-- endinject -->
 
 </body>
 </html>
