@@ -22,7 +22,7 @@ MPMAP provides the following functionality:
 
 ###a. Filter Incidents
 
-To filter the incidents, use the Incident Filters pane on the left of the screen. Scroll down to view all of the possible filters.
+To filter the incidents, use the Incident Filters pane on the left of the screen. Scroll down to view all of the possible filters. **Click *Apply Filters* to apply the filters you've selected.**
 
 <img src="./img/usage-002.png" height="360px" width="auto">
 
@@ -39,7 +39,7 @@ Once filtered, the incidents are rendered on the map as red, semi-transparent ci
 
 ###c. Export the Filtered Incidents and Applied Filters
 
-Once filtered, the incidents can be exported in **CSV or GeoJSON format**. The applied filters can be exported in **JSON format**.
+Once filtered, the incidents can be exported in **CSV or GeoJSON format**. The applied filters can be exported in **JSON format**. Click the *Export Incidents* or *Export Filters* buttons, and choose a format from the dropdown. Depending on your browser, the file will either be automatically downloaded, opened, or you will be prompted to save the file.
 
 <img src="./img/usage-005.png">
 
