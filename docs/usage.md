@@ -34,7 +34,7 @@ MPMAP is initialized with the last three calendar years of incident data, and an
 
 The MPMAP layout consists of three panes: Incident Filters, the map, and Incident Analysis. The gray bars separating these panes may be clicked and dragged to increase or decrease the size of each pane.
 
-<img src="./img/usage-008.png" height="400px" width="auto>
+<img src="./img/usage-008.png" height="400px" width="auto">
 
 ***
 ***
