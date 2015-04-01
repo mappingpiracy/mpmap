@@ -1,6 +1,6 @@
 #MPMAP Usage
 
-<img src="./img/usage-001.png" height="300px" width="auto>
+<img src="./img/usage-001.png" height="300px" width="auto">
 
 ##Contents
 
