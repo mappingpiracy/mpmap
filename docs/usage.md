@@ -5,7 +5,8 @@
 ##Contents
 
 1. Functionality
-2. Usage Examples
+2. General Usage
+3. Usage Examples
 
 
 ##1. Functionality
@@ -17,14 +18,23 @@ MPMAP provides the following functionality:
 - Export the filtered incidents in CSV or GeoJSON format and the applied filters in JSON format.
 - Analyze the filtered incidents via a graph displaying incidents per year by closest country.
 
+##2. General Usage
 
-##2. Usage Examples
+###a. Initial View
+
+MPMAP is initialized with the last three calendar years of incident data, and analysis of the incident per year values for the top ten countries in this timespan.
+
+###b. Layout
+
+The MPMAP layout consists of three panes: Incident Filters, the map, and Incident Analysis. The gray bars separating these panes may be clicked and dragged to increase or decrease the size of each pane.
+
+##3. Usage Examples
 
 ###a. Filter Incidents
 
 To filter the incidents, use the Incident Filters pane on the left of the screen. Scroll down to view all of the possible filters. **Click *Apply Filters* to apply the filters you've selected.**
 
-<img src="./img/usage-002.png" height="360px" width="auto">
+<img src="./img/usage-002.png" height="400px" width="auto">
 
 Location, vessel, and conflict filters are applied via a filtering mechanism that allows you to easily search and add multiple parameters. Simply start typing the name of your desired parameter, and click on it in the "All" field to use it as a search parameter.
 
@@ -46,4 +56,10 @@ Once filtered, the incidents can be exported in **CSV or GeoJSON format**. The a
 <img src="./img/usage-006.png">
 
 
-###d. Analyze the Filtered Incidents  
+###d. Analyze the Filtered Incidents
+
+If the **Closest Country filter** is not set, the incidents per year analysis graph is automatically rendered for the top ten countries in any given incident selection. Otherwise only the countries selected in the **Closest Country filter** are used for the analysis. 
+
+The graph may be hovered at yearly intervals to show exact figures for each country in that year.
+
+<img src="./img/usage-007.png">
