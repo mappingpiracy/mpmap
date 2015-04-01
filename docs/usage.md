@@ -4,13 +4,13 @@
 
 ##Contents
 
-1. Functionality
-2. General Usage
-3. Usage Examples
+[1. Functionality](#functionality)
+[2. General Usage](#general-usage)
+[3. Usage Examples](#usage-examples)
 
 ***
 ***
-
+<a name="functionality"></a>
 ##1. Functionality
 
 MPMAP provides the following functionality:
@@ -23,6 +23,7 @@ MPMAP provides the following functionality:
 ***
 ***
 
+<a name="general-usage"></a>
 ##2. General Usage
 
 ###a. Initial View
@@ -38,6 +39,7 @@ The MPMAP layout consists of three panes: Incident Filters, the map, and Inciden
 ***
 ***
 
+<a name="usage-examples"></a>
 ##3. Usage Examples
 
 ###a. Filter Incidents
