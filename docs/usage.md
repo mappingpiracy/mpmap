@@ -28,6 +28,8 @@ MPMAP is initialized with the last three calendar years of incident data, and an
 
 The MPMAP layout consists of three panes: Incident Filters, the map, and Incident Analysis. The gray bars separating these panes may be clicked and dragged to increase or decrease the size of each pane.
 
+<img src="./img/usage-008.png" height="400px" width="auto>
+
 ##3. Usage Examples
 
 ###a. Filter Incidents
@@ -39,7 +41,6 @@ To filter the incidents, use the Incident Filters pane on the left of the screen
 Location, vessel, and conflict filters are applied via a filtering mechanism that allows you to easily search and add multiple parameters. Simply start typing the name of your desired parameter, and click on it in the "All" field to use it as a search parameter.
 
 <img src="./img/usage-003.png">
-
 
 ###b. View the Filtered Incidents on the Map
 
@@ -54,7 +55,6 @@ Once filtered, the incidents can be exported in **CSV or GeoJSON format**. The a
 <img src="./img/usage-005.png">
 
 <img src="./img/usage-006.png">
-
 
 ###d. Analyze the Filtered Incidents
 
