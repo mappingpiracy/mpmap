@@ -26,6 +26,11 @@ To filter the incidents, use the Incident Filters pane on the left of the screen
 
 <img src="./img/usage-002.png" height="360px" width="auto">
 
+Location, vessel, and conflict filters are applied via a filtering mechanism that allows you to easily search and add multiple parameters. Simply start typing the name of your desired parameter, and click on it in the "All" field to use it as a search parameter.
+
+<img src="./img/usage-003.png">
+
+
 ###b. View the Filtered Incidents on the Map
 
 
