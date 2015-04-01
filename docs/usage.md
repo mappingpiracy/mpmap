@@ -24,7 +24,7 @@ MPMAP provides the following functionality:
 
 To filter the incidents, use the Incident Filters pane on the left of the screen. Scroll down to view all of the possible filters.
 
-![Filters 1](./img/usage-002.png =100x)
+<img src="./img/usage-002.png" height="200px" width="auto">
 
 ###b. View the Filtered Incidents on the Map
 
