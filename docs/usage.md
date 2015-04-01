@@ -4,9 +4,9 @@
 
 ##Contents
 
-[1. Functionality](#functionality)
-[2. General Usage](#general-usage)
-[3. Usage Examples](#usage-examples)
+###[1. Functionality](#functionality)  
+###[2. General Usage](#general-usage)  
+###[3. Usage Examples](#usage-examples)  
 
 ***
 ***
