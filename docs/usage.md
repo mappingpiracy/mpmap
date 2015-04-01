@@ -33,8 +33,17 @@ Location, vessel, and conflict filters are applied via a filtering mechanism tha
 
 ###b. View the Filtered Incidents on the Map
 
+Once filtered, the incidents are rendered on the map as red, semi-transparent circles. These can be clicked to reveal more information about the incident. The map can be dragged and zoomed to view the incidents in greater or lesser detail.
 
-###c. Export the Filtered Incidents
+<img src="./img/usage-004.png">
+
+###c. Export the Filtered Incidents and Applied Filters
+
+Once filtered, the incidents can be exported in **CSV or GeoJSON format**. The applied filters can be exported in **JSON format**.
+
+<img src="./img/usage-005.png">
+
+<img src="./img/usage-006.png">
 
 
 ###d. Analyze the Filtered Incidents  
