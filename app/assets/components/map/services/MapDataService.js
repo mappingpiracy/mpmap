@@ -31,7 +31,11 @@ mpmap.service('MapDataService',
           return the list of vessel statuses - TODO: abstract this to an API call
       */
       getVesselStatus: function() {
-        return [{"id": "Anchored", "name": "Anchored"}, {"id": "Berthed", "name": "Berthed"}, {"id": "Moored", "name": "Moored"}, {"id": "Stationary", "name": "Stationary"}, {"id": "Berthed", "name": "Berthed"}, {"id": "Unspecified", "name": "Unspecified"}];
+        return [{"id": "Anchored", "name": "Anchored"}, {"id": "Berthed", "name": "Berthed"}, {"id": "Moored", "name": "Moored"}, {"id": "Stationary", "name": "Stationary"}];
+      },
+
+      getVesselType: function() {
+        return [{"id": "Barge or Tug", "name": "Barge or Tug"}, {"id": "Carrier", "name": "Chemical Tanker"}, {"id": "Container Ship", "name": "Container Ship"}, {"id": "Fishing Boat", "name": "Fishing Boat, Trawler or Vessel"}, {"id": "General Cargo", "name": "Fishing Boat, Trawler or Vessel"}, {"id": "LNG, LPG, or Oil Tanker", "name": "LNG, LPG, or Oil Tanker"}, {"id": "Tanker or Produce Tanker", "name": "Tanker or Produce Tanker"}, {"id": "Yacht, Leisure Craft, or Passenger Ship", "name": "Yacht, Leisure Craft, or Passenger Ship"}];
       },
 
       getConflictType: function() {

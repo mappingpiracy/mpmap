@@ -8,7 +8,7 @@ GET     /                           controllers.Application.index()
 # Mapdata index method -- doesn't really return anything yet.
 GET     /mapdata                    controllers.MapData.index()
 GET     /mapdata/countries          controllers.MapData.countries()
-GET     /mapdata/incidents          controllers.MapData.incidents(format:String?="json",beginDate:String,endDate:String,waterCountry:String ?= "",closestCountry:String ?= "",vesselCountry:String ?= "",vesselStatus:String ?= "",Type:String ?= "",action:String ?= "")
+GET     /mapdata/incidents          controllers.MapData.incidents(format:String?="json",beginDate:String,endDate:String,waterCountry:String ?= "",closestCountry:String ?= "",vesselCountry:String ?= "",vesselType:String ?= "",vesselStatus:String ?= "",Type:String ?= "",action:String ?= "")
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)

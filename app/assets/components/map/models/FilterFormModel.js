@@ -78,6 +78,16 @@ mpmap.service('FilterFormModel', function(MapDataService) {
 					orderProperty: 'name',
 					items: [],
 					selected: []
+				},
+				vesselType: {
+					title: 'Vessel Type',
+					filterPlaceHolder: 'Start typing to filter the lists below.',
+					labelAll: 'All',
+					labelSelected: 'Selected',
+					helpMessage: '',
+					orderProperty: 'name',
+					items: [],
+					selected: []
 				}
 			},
 			conflictInformation: {
@@ -158,6 +168,18 @@ mpmap.service('FilterFormModel', function(MapDataService) {
 		finalFilter.vesselCountry = buffer.join();
 
 		buffer.length = 0;
+		angular.forEach(vesselInformation.vesselType.selected, function(value, key) {
+			buffer.push(value.id);
+		});
+		finalFilter.vesselType = buffer.join();
+
+		buffer.length = 0;
+		angular.forEach(vesselInformation.vesselStatus.selected, function(value, key) {
+			buffer.push(value.id);
+		});
+		finalFilter.vesselStatus = buffer.join();		
+
+		buffer.length = 0;
 		angular.forEach(conflictInformation.type.selected, function(value, key) {
 			buffer.push(value.id);
 		});
@@ -183,6 +205,8 @@ mpmap.service('FilterFormModel', function(MapDataService) {
 		model.fields.dateRange.years = MapDataService.getYears();
 		//get vessel status options
 		model.fields.vesselInformation.vesselStatus.items = MapDataService.getVesselStatus();
+		//get vessle type options
+		model.fields.vesselInformation.vesselType.items = MapDataService.getVesselType();
 		//get countries (3 separate copies so they are changed individually)
 		MapDataService.getCountries()
 			.success(function(data) {

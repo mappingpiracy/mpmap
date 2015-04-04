@@ -12,16 +12,18 @@ public class IncidentFilter {
     protected List<Integer> closestCountry = new ArrayList<>();
     protected List<Integer> waterCountry = new ArrayList<>();
     protected List<Integer> vesselCountry = new ArrayList<>();
+    protected List<String> vesselType = new ArrayList<>();
     protected List<String> vesselStatus = new ArrayList<>();
     protected List<String> type = new ArrayList<>();
     protected List<String> action = new ArrayList<>();
 
-    public IncidentFilter(String beginDate, String endDate, List<Integer> closestCountry, List<Integer> waterCountry, List<Integer> vesselCountry, List<String> vesselStatus, List<String> conflictType, List<String> conflictAction) {
+    public IncidentFilter(String beginDate, String endDate, List<Integer> closestCountry, List<Integer> waterCountry, List<Integer> vesselCountry, List<String> vesselType, List<String> vesselStatus, List<String> conflictType, List<String> conflictAction) {
         this.beginDate = beginDate;
         this.endDate = endDate;
         this.closestCountry = closestCountry;
         this.waterCountry = waterCountry;
         this.vesselCountry = vesselCountry;
+        this.vesselType = vesselType;
         this.vesselStatus = vesselStatus;
         this.type = conflictType;
         this.action = conflictAction;
@@ -70,6 +72,14 @@ public class IncidentFilter {
 
     public void setVesselCountry(List<Integer> vesselCountry) {
         this.vesselCountry = vesselCountry;
+    }
+
+    public List<String> getVesselType() {
+        return (vesselType.isEmpty()) ? null : vesselType;
+    }
+
+    public void setVesselType(List<String> vesselType) {
+        this.vesselType = vesselType;
     }
 
     public List<String> getVesselStatus() {

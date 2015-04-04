@@ -71,6 +71,12 @@
                     #{id}
                 </foreach>
             </if>
+            <if test="filter.vesselType != null">
+            AND inc.vessel_type IN
+            <foreach item="id" index="index" collection="filter.vesselType" open="(" separator="," close=")">
+                #{id}
+            </foreach>
+            </if>
             <if test="filter.vesselStatus != null">
                 AND inc.vessel_status IN
                 <foreach item="id" index="index" collection="filter.vesselStatus" open="(" separator="," close=")">

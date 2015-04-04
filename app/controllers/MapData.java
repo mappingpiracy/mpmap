@@ -33,15 +33,17 @@ public class MapData extends Controller {
                                 String waterCountry,
                                 String closestCountry,
                                 String vesselCountry,
+                                String vesselType,
                                 String vesselStatus,
                                 String type,
                                 String action) {
         List<Incident> incidents;
         IncidentFilter incidentFilter = new IncidentFilter(beginDate, endDate,
                 ListHelper.commaStringToIntegerList(waterCountry),    //  String -> List<Integer>
-                ListHelper.commaStringToIntegerList(closestCountry),            //  String -> List<Integer>
-                ListHelper.commaStringToIntegerList(vesselCountry),             //  String -> List<Integer>
-                ListHelper.commaStringToStringList(vesselStatus),               //  String -> List<String>
+                ListHelper.commaStringToIntegerList(closestCountry),  //  String -> List<Integer>
+                ListHelper.commaStringToIntegerList(vesselCountry),   //  String -> List<Integer>
+                ListHelper.commaStringToStringList(vesselType),       //  String -> List<String>
+                ListHelper.commaStringToStringList(vesselStatus),     //  String -> List<String>
                 ListHelper.commaStringToStringList(type),
                 ListHelper.commaStringToStringList(action));
         incidents = Incident.getIncidents(incidentFilter);

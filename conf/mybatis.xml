@@ -13,22 +13,31 @@
     </typeAliases>
 
     <environments default="${env.default}">
-        <environment id="production">
+        <environment id="aws_production">
             <transactionManager type="JDBC"/>
             <dataSource type="POOLED">
                 <property name="driver" value="org.postgresql.Driver"/>
-                <property name="url" value="${prod.url}"/>
-                <property name="username" value="${prod.user}"/>
-                <property name="password" value="${prod.pass}"/>
+                <property name="url" value="${aws_production.url}"/>
+                <property name="username" value="${aws_production.user}"/>
+                <property name="password" value="${aws_production.pass}"/>
             </dataSource>
         </environment>
-        <environment id="testing">
+        <environment id="aws_development">
             <transactionManager type="JDBC"/>
             <dataSource type="POOLED">
                 <property name="driver" value="org.postgresql.Driver"/>
-                <property name="url" value="${test.url}"/>
-                <property name="username" value="${test.user}"/>
-                <property name="password" value="${test.pass}"/>
+                <property name="url" value="${aws_development.url}"/>
+                <property name="username" value="${aws_development.user}"/>
+                <property name="password" value="${aws_development.pass}"/>
+            </dataSource>
+        </environment>
+        <environment id="local">
+            <transactionManager type="JDBC"/>
+            <dataSource type="POOLED">
+                <property name="driver" value="org.postgresql.Driver"/>
+                <property name="url" value="${local.url}"/>
+                <property name="username" value="${local.user}"/>
+                <property name="password" value="${local.pass}"/>
             </dataSource>
         </environment>
     </environments>
